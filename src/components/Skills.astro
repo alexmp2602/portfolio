@@ -1,0 +1,61 @@
+---
+import AstroIcon from "./icons/AstroIcon.astro";
+import React from "./icons/React.astro";
+import Next from "./icons/NextJS.astro";
+import Tailwind from "./icons/Tailwind.astro";
+import SkillsIcon from "./icons/Skills.astro";
+---
+
+<!-- Título de la sección -->
+<h2
+  class="flex items-center text-left mb-8 text-3xl font-semibold gap-x-3
+         text-gray-900 dark:text-white border-l-4 border-amber-600 dark:border-yellow-400 pl-4"
+>
+  <SkillsIcon
+    class="size-8 hover:scale-110 transition-transform duration-300"
+  />
+  Habilidades Técnicas
+</h2>
+
+<!-- Contenedor de habilidades -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+  <div
+    class="bg-neutral-100 dark:bg-neutral-950 rounded-xl shadow-xl p-6 flex flex-col items-center
+           hover:scale-105 hover:shadow-2xl transition-all duration-500 hover:bg-neutral-200 dark:hover:bg-neutral-900"
+  >
+    <AstroIcon class="size-16 mb-4" />
+    <span class="text-lg font-semibold text-sky-700 dark:text-white">
+      Astro
+    </span>
+  </div>
+
+  <div
+    class="bg-neutral-100 dark:bg-neutral-950 rounded-xl shadow-xl p-6 flex flex-col items-center
+           hover:scale-105 hover:shadow-2xl transition-all duration-500 hover:bg-neutral-200 dark:hover:bg-neutral-900"
+  >
+    <Next class="size-16 mb-4" />
+    <span class="text-lg font-semibold text-sky-700 dark:text-white">
+      Next.js
+    </span>
+  </div>
+
+  <div
+    class="bg-neutral-100 dark:bg-neutral-950 rounded-xl shadow-xl p-6 flex flex-col items-center
+           hover:scale-105 hover:shadow-2xl transition-all duration-500 hover:bg-neutral-200 dark:hover:bg-neutral-900"
+  >
+    <React class="size-16 mb-4" />
+    <span class="text-lg font-semibold text-sky-700 dark:text-white">
+      React
+    </span>
+  </div>
+
+  <div
+    class="bg-neutral-100 dark:bg-neutral-950 rounded-xl shadow-xl p-6 flex flex-col items-center
+           hover:scale-105 hover:shadow-2xl transition-all duration-500 hover:bg-neutral-200 dark:hover:bg-neutral-900"
+  >
+    <Tailwind class="size-16 mb-4" />
+    <span class="text-lg font-semibold text-sky-700 dark:text-white">
+      Tailwind
+    </span>
+  </div>
+</div>

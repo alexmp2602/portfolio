@@ -1,0 +1,33 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+  class="opacity-90 mt-16 mb-10 w-full mx-auto container lg:max-w-4xl md:max-w-2xl flex justify-center"
+>
+  <div
+    class="rounded-lg w-full max-w-screen-xl mx-auto md:flex md:items-center md:justify-between p-4"
+  >
+    <span class="text-sm sm:text-center text-slate-700 dark:text-gray-300">
+      © {currentYear}
+      <a
+        href="https://alexpereyra.dev/"
+        class="font-medium hover:underline text-sky-700 dark:text-yellow-400"
+      >
+        Alex Pereyra
+      </a>. Casi todos los derechos reservados
+    </span>
+
+    <ul class="flex flex-wrap items-center mt-3 text-sm font-medium sm:mt-0">
+      <li>
+        <a
+          id="contacto"
+          href="mailto:alexmp.2602@gmail.com"
+          class="hover:underline text-sky-700 dark:text-yellow-400"
+        >
+          Enviar Correo
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

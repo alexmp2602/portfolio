@@ -1,0 +1,64 @@
+---
+const personalImageAlt = "Foto de perfil de Alex Pereyra";
+---
+
+<section
+  class="relative flex flex-col items-center md:items-start md:flex-row gap-8 py-16 animate-fade-in"
+>
+  <!-- Imagen del perfil -->
+  <div class="flex-shrink-0 animate-fade-up animate-delay-100">
+    <img
+      src="/profile.jpg"
+      alt={personalImageAlt}
+      class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-lg 
+             ring-2 ring-sky-700 dark:ring-yellow-500 
+             transition-transform duration-300 hover:scale-105"
+    />
+  </div>
+
+  <!-- Información del Hero -->
+  <div class="max-w-2xl text-center md:text-left animate-fade-up animate-delay-200">
+    <!-- Badge -->
+    <span
+      class="inline-block mb-4 px-4 py-1 rounded-full text-sm font-medium 
+             bg-amber-100 text-amber-800 border border-amber-300
+             dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-300"
+    >
+      🚀 Disponible para nuevas oportunidades
+    </span>
+
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
+      Alex Pereyra
+    </h1>
+
+    <p class="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-balance">
+      <strong class="text-sky-700 dark:text-yellow-400">Desarrollador Frontend</strong> con
+      <strong class="text-sky-700 dark:text-yellow-400">más de 2 años de experiencia</strong> en la
+      creación de interfaces modernas, accesibles y escalables. Especializado en
+      <strong class="text-sky-700 dark:text-yellow-300">React, Next.js, Astro y Tailwind CSS</strong>.
+    </p>
+
+    <div class="flex justify-center md:justify-start gap-4 mt-4">
+      <a
+        href="#proyectos"
+        class="bg-amber-600 dark:bg-yellow-500 text-white px-6 py-2 rounded-lg font-semibold text-lg
+               hover:bg-amber-700 dark:hover:bg-yellow-600 
+               hover:shadow-lg hover:shadow-amber-400/30 dark:hover:shadow-yellow-400/30
+               transition-all duration-300"
+      >
+        Ver Proyectos
+      </a>
+      <a
+        href="mailto:alexmp.2602@gmail.com"
+        class="border border-amber-600 dark:border-yellow-500 
+               text-amber-700 dark:text-yellow-500 px-6 py-2 rounded-lg font-semibold text-lg
+               hover:bg-amber-100 dark:hover:bg-yellow-500 
+               hover:text-black dark:hover:text-black 
+               hover:shadow-lg hover:shadow-amber-300/30 dark:hover:shadow-yellow-400/20
+               transition-all duration-300"
+      >
+        Enviar Correo
+      </a>
+    </div>
+  </div>
+</section>

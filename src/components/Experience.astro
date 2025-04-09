@@ -1,0 +1,59 @@
+---
+import Briefcase from "./icons/Briefcase.astro";
+
+const EXPERIENCE = [
+  {
+    date: "Abr 2024 - Presente",
+    title: "Desarrollador Frontend",
+    company: "Freelance",
+    description:
+      "Diseño y desarrollo de aplicaciones web responsivas para clientes locales, utilizando tecnologías modernas y buenas prácticas de accesibilidad.",
+  },
+  {
+    date: "Mar 2022 - Presente",
+    title: "Profesor y Coordinador de Robótica",
+    company: "IABOT",
+    description:
+      "Dictado de clases de robótica y programación para niños y adolescentes, con enfoque en pensamiento lógico y resolución de problemas mediante tecnología.",
+  },
+  {
+    date: "Ago 2023 - Mar 2024",
+    title: "Desarrollador Frontend",
+    company: "Municipalidad de Mercedes Bs. As.",
+    description:
+      "Desarrollo de soluciones web para la gestión administrativa interna, enfocadas en usabilidad, accesibilidad y eficiencia operativa.",
+  },
+];
+---
+
+<!-- Título con Línea -->
+<h2
+  class="flex items-center text-center md:text-left mb-8 text-3xl font-semibold gap-x-3
+         text-gray-900 dark:text-white border-l-4 border-amber-600 dark:border-yellow-400 pl-4"
+>
+  <Briefcase class="size-8 hover:scale-105 transition-transform duration-300" />
+  Experiencia laboral
+</h2>
+
+<!-- Lista -->
+<ol class="relative mt-12 space-y-8">
+  {
+    EXPERIENCE.map((experience, index) => (
+      <li
+        class="relative border-l-4 border-amber-600 dark:border-yellow-400 pl-6"
+        aria-label={`Experiencia laboral: ${experience.title} en ${experience.company}, desde ${experience.date}`}
+      >
+        <p class="text-sm font-semibold text-amber-700 dark:text-yellow-500">
+          {experience.date}
+        </p>
+        <h3 class="text-lg font-semibold text-sky-700 dark:text-white">
+          {experience.title}
+        </h3>
+        <h4 class="text-slate-600 dark:text-gray-400">{experience.company}</h4>
+        <p class="text-slate-700 dark:text-gray-300 mt-2">
+          {experience.description}
+        </p>
+      </li>
+    ))
+  }
+</ol>
