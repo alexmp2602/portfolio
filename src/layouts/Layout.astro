@@ -1,0 +1,79 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex Pereyra | Frontend Developer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Dark mode init -->
+    <script>
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+
+  <body class="bg-light text-dark dark:bg-dark dark:text-light font-sans">
+    <slot />
+
+    <!-- Scripts globales -->
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Toggle Dark Mode
+        const btn = document.querySelector("[data-toggle-theme]");
+        if (btn) {
+          btn.addEventListener("click", () => {
+            const html = document.documentElement;
+            const isDark = html.classList.toggle("dark");
+            localStorage.theme = isDark ? "dark" : "light";
+          });
+        }
+
+        // Scroll reveal
+        const revealEls = document.querySelectorAll("[data-reveal]");
+        revealEls.forEach((el, index) => {
+          const observer = new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting) {
+                el.animate(
+                  {
+                    opacity: [0, 1],
+                    transform: ["translateY(50px)", "translateY(0)"],
+                  },
+                  {
+                    duration: 600,
+                    easing: "ease-out",
+                    delay: index * 150,
+                    fill: "forwards",
+                  }
+                );
+                observer.unobserve(el);
+              }
+            },
+            { threshold: 0.1 }
+          );
+          observer.observe(el);
+        });
+
+        // Navbar shadow
+        const nav = document.querySelector("[data-navbar]");
+        if (nav) {
+          window.addEventListener("scroll", () => {
+            nav.classList.toggle("shadow-md", window.scrollY > 10);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,47 +1,73 @@
-# Astro Starter Kit: Minimal
+# Portafolio – Alex Pereyra
 
-```sh
-npm create astro@latest -- --template minimal
+Este es mi portafolio personal como desarrollador frontend. Fue creado con [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com) y animaciones scroll con [Motion One](https://motion.dev). El objetivo es mostrar mis habilidades técnicas, proyectos destacados y facilitar el contacto profesional.
+
+---
+
+## 🚀 Tecnologías utilizadas
+
+- **Astro** – Framework web rápido, moderno y flexible
+- **Tailwind CSS** – Sistema de estilos basado en utilidades
+- **Motion One** – Animaciones fluidas al hacer scroll
+- **Vercel** – Deploy instantáneo y gratuito
+- **HTML5 & TypeScript Ready**
+
+---
+
+## ✨ Funcionalidades
+
+- ✅ Modo claro/oscuro con persistencia en localStorage  
+- ✅ Navbar fijo con efecto blur y sombra al hacer scroll  
+- ✅ Animaciones suaves de entrada por sección  
+- ✅ Cards de proyectos con detalles, tecnologías y enlaces  
+- ✅ Formulario de contacto listo para integrar con Formspree  
+
+---
+
+## 📁 Estructura del proyecto
+
+```
+src/
+├── components/
+│   ├── Navbar.astro
+│   ├── Hero.astro
+│   ├── About.astro
+│   ├── Projects.astro
+│   ├── ProjectCard.astro
+│   └── Contact.astro
+├── pages/
+│   └── index.astro
+├── scripts/
+│   └── reveal-on-scroll.js
+├── styles/
+│   └── global.css
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ⚙️ Instalación local
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+git clone https://github.com/alexmp2602/
+cd tu-repo
+npm install
+npm run dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🛠️ Deploy
 
-Any static assets, like images, can be placed in the `public/` directory.
+Deploy automático usando [Vercel](https://vercel.com). Solo tenés que importar el repo desde GitHub.
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## 📬 Contacto
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Podés escribirme a través del formulario o a [alexmp.2602@gmail.com](mailto:alexmp.2602@gmail.com).
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🧠 Licencia
+
+Este proyecto está bajo licencia MIT.
