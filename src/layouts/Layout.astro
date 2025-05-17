@@ -3,12 +3,36 @@ import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alex Pereyra | Frontend Developer</title>
+    <meta
+      name="description"
+      content="Portafolio de Alex Pereyra, desarrollador frontend con experiencia en React, Astro y Tailwind CSS."
+    />
+    <meta name="theme-color" content="#256340" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Alex Pereyra | Frontend Developer" />
+    <meta
+      property="og:description"
+      content="Explorá mi trabajo como desarrollador frontend y conocé mis proyectos."
+    />
+    <meta property="og:image" content="/opengraph.png" />
+    <meta property="og:url" content="https://www.alexpereyra.dev" />
+    <meta property="og:type" content="website" />
+
+    <!-- Tipografía: Inter (carga optimizada) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Dark mode init -->
     <script>
@@ -22,6 +46,16 @@ import "../styles/global.css";
         document.documentElement.classList.remove("dark");
       }
     </script>
+
+    <!-- Variables CSS globales -->
+    <style>
+      :root {
+        --color-primary: #256340;
+        --color-accent: #60a98f;
+        --color-light: #fafafa;
+        --color-dark: #1f1f1f;
+      }
+    </style>
   </head>
 
   <body class="bg-light text-dark dark:bg-dark dark:text-light font-sans">
@@ -30,17 +64,27 @@ import "../styles/global.css";
     <!-- Scripts globales -->
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
-        // Toggle Dark Mode
+        // Theme toggle
         const btn = document.querySelector("[data-toggle-theme]");
-        if (btn) {
+        const icon = document.getElementById("theme-icon");
+
+        function setIcon() {
+          const isDark = document.documentElement.classList.contains("dark");
+          if (icon) icon.textContent = isDark ? "☀️" : "🌙";
+        }
+
+        if (btn && icon) {
+          setIcon();
           btn.addEventListener("click", () => {
             const html = document.documentElement;
             const isDark = html.classList.toggle("dark");
             localStorage.theme = isDark ? "dark" : "light";
+            setIcon();
+            console.log("Modo cambiado", isDark ? "🌙 Dark" : "☀️ Light");
           });
         }
 
-        // Scroll reveal
+        // Scroll reveal animaciones
         const revealEls = document.querySelectorAll("[data-reveal]");
         revealEls.forEach((el, index) => {
           const observer = new IntersectionObserver(

@@ -46,26 +46,33 @@ const skills = {
 };
 ---
 
-<section
-  id="skills"
-  class="py-24 px-6 md:px-12 max-w-screen-xl mx-auto text-center space-y-12"
->
-  <h2 class="text-4xl md:text-5xl font-bold text-dark dark:text-light">
+<section id="skills" class="py-28 px-6 md:px-12 max-w-6xl mx-auto text-center">
+  <h2
+    class="text-4xl md:text-5xl font-extrabold text-dark dark:text-light mb-16"
+  >
     Tecnologías
   </h2>
 
-  <div class="space-y-16">
+  <div class="space-y-20">
     {
       Object.entries(skills).map(([group, techs]) => (
-        <div class="space-y-6" data-reveal>
-          <h3 class="text-xl font-semibold text-dark dark:text-light">
+        <div data-reveal>
+          <h3 class="text-lg md:text-xl font-semibold text-primary tracking-wide mb-6">
             {group}
           </h3>
+
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 place-items-center">
             {techs.map((skill) => (
-              <div class="flex flex-col items-center gap-2">
-                <img src={skill.icon} alt={skill.name} class="w-12 h-12" />
-                <span class="text-sm text-dark dark:text-light">
+              <div class="flex flex-col items-center gap-3 transition-transform hover:scale-105">
+                <div class="w-14 h-14 rounded-xl bg-light/70 dark:bg-dark/70 shadow-inner ring-1 ring-black/5 dark:ring-white/10 flex items-center justify-center">
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    class="w-7 h-7"
+                    loading="lazy"
+                  />
+                </div>
+                <span class="text-sm text-dark dark:text-light tracking-tight">
                   {skill.name}
                 </span>
               </div>
@@ -77,12 +84,13 @@ const skills = {
   </div>
 
   <div
-    class="text-sm text-dark/70 dark:text-light/60 max-w-2xl mx-auto leading-relaxed"
+    class="mt-20 text-sm text-dark/70 dark:text-light/60 max-w-3xl mx-auto leading-relaxed"
     data-reveal
   >
-    Desarrollo sitios web modernos utilizando tecnologías como Astro, Tailwind
-    CSS y React, enfocándome en rendimiento, accesibilidad y buenas prácticas.
-    Utilizo herramientas como Git y GitHub para mantener flujos de trabajo
-    organizados y colaborativos.
+    Trabajo con un stack moderno orientado a la eficiencia, calidad visual y
+    accesibilidad. Mi foco está en optimizar rendimiento, aplicar buenas
+    prácticas y crear experiencias que se adapten a cualquier dispositivo. Uso
+    herramientas colaborativas como GitHub y automatizaciones en entornos
+    reales.
   </div>
 </section>

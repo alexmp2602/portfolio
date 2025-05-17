@@ -11,12 +11,60 @@ import Footer from "../components/Footer.astro";
 
 <Layout>
   <Navbar />
-  <main class="pt-24">
-    <Hero />
-    <About />
-    <Skills />
-    <Projects />
-    <Contact />
+
+  <main
+    class="pt-24 scroll-smooth scroll-py-24 snap-y snap-mandatory"
+    aria-label="Contenido principal"
+  >
+    <!-- HERO: entrada llamativa -->
+    <section
+      class="snap-start relative isolate min-h-screen flex items-center justify-center px-6 py-20"
+      data-reveal
+    >
+      <div
+        class="absolute inset-0 -z-10 bg-gradient-to-br from-primary to-accent/30 opacity-20 blur-2xl rounded-xl"
+      >
+      </div>
+      <Hero />
+    </section>
+
+    <!-- SOBRE MÍ + SKILLS: bento grid -->
+    <section
+      class="snap-start grid grid-cols-1 lg:grid-cols-2 gap-6 px-6 py-16 max-w-7xl mx-auto"
+      data-reveal
+    >
+      <div
+        class="rounded-2xl bg-light/60 dark:bg-dark/60 shadow-lg backdrop-blur-xl p-8"
+      >
+        <About />
+      </div>
+
+      <div
+        class="rounded-2xl bg-light/60 dark:bg-dark/60 shadow-lg backdrop-blur-xl p-8"
+      >
+        <Skills />
+      </div>
+    </section>
+
+    <!-- PROYECTOS: cards + modular -->
+    <section
+      class="snap-start px-6 py-24 bg-light dark:bg-dark"
+      data-reveal
+      id="proyectos"
+    >
+      <div class="max-w-7xl mx-auto">
+        <Projects />
+      </div>
+    </section>
+
+    <!-- CONTACTO: llamada a la acción final -->
+    <section
+      class="snap-start relative px-6 py-24 flex items-center justify-center bg-accent/10 dark:bg-accent/20 backdrop-blur-lg"
+      data-reveal
+    >
+      <Contact />
+    </section>
   </main>
+
   <Footer />
 </Layout>

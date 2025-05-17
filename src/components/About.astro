@@ -5,15 +5,92 @@
 <section
   id="about"
   data-reveal
-  class="py-24 px-6 md:px-12 max-w-screen-md mx-auto text-center space-y-6"
+  class="relative py-28 px-6 md:px-12 max-w-5xl mx-auto text-center"
 >
-  <h2 class="text-4xl md:text-5xl font-bold text-dark dark:text-light">
+  <!-- Fondo visual blur -->
+  <div
+    class="absolute inset-0 -z-10 bg-gradient-to-tr from-primary/20 to-accent/20 blur-2xl opacity-30 rounded-xl"
+  >
+  </div>
+
+  <!-- Título -->
+  <h2
+    class="text-4xl md:text-5xl font-extrabold text-dark dark:text-light mb-10"
+  >
     Sobre mí
   </h2>
-  <p class="text-lg md:text-xl text-dark/80 dark:text-light/80 font-sans">
-    Soy Alex Pereyra, desarrollador frontend enfocado en construir experiencias
-    web modernas, accesibles y con buen rendimiento. Trabajo con tecnologías
-    como React, Astro y Tailwind CSS, combinando diseño limpio con animaciones
-    fluidas.
-  </p>
+
+  <!-- Avatar + descripción -->
+  <div class="flex flex-col md:flex-row items-center gap-10 text-left">
+    <img
+      src="/assets/profile/alex.webp"
+      alt="Alex Pereyra"
+      class="w-40 h-40 object-cover rounded-full border-4 border-primary shadow-lg"
+    />
+
+    <div class="space-y-6">
+      <p
+        class="text-base md:text-lg text-dark/80 dark:text-light/70 leading-relaxed"
+      >
+        Soy <strong>Alex Pereyra</strong>, desarrollador frontend argentino
+        apasionado por la
+        <span class="text-primary font-medium">web moderna</span>, el código
+        limpio y las experiencias accesibles. Combino mi background en robótica,
+        educación y tecnología para construir sitios elegantes y funcionales con
+        herramientas como <strong>React</strong>, <strong>Astro</strong> y <strong
+          >Tailwind CSS</strong
+        >.
+      </p>
+
+      <!-- Badges de perfil -->
+      <div class="flex flex-wrap gap-3 text-sm">
+        <span
+          class="bg-primary/10 text-primary px-4 py-2 rounded-full font-medium tracking-wide"
+          >💻 Autodidacta</span
+        >
+        <span
+          class="bg-primary/10 text-primary px-4 py-2 rounded-full font-medium tracking-wide"
+          >🚀 Performance first</span
+        >
+        <span
+          class="bg-primary/10 text-primary px-4 py-2 rounded-full font-medium tracking-wide"
+          >🌐 Remoto</span
+        >
+        <span
+          class="bg-primary/10 text-primary px-4 py-2 rounded-full font-medium tracking-wide"
+          >🧠 Detallista</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Línea temporal (compacta) -->
+  <div
+    class="mt-16 border-l-2 border-primary/30 pl-6 space-y-8 text-left max-w-3xl mx-auto"
+  >
+    <div>
+      <p class="text-sm text-primary font-bold">2021</p>
+      <p class="text-dark dark:text-light">
+        Inicio en robótica educativa y primeros proyectos reales.
+      </p>
+    </div>
+    <div>
+      <p class="text-sm text-primary font-bold">2022</p>
+      <p class="text-dark dark:text-light">
+        Primeros sitios web freelance. Comienzo de formación en frontend.
+      </p>
+    </div>
+    <div>
+      <p class="text-sm text-primary font-bold">2024</p>
+      <p class="text-dark dark:text-light">
+        Ingreso como developer en Hogarth. Consolidación como profesional.
+      </p>
+    </div>
+    <div>
+      <p class="text-sm text-primary font-bold">2025</p>
+      <p class="text-dark dark:text-light">
+        Portafolio personal actualizado y nuevos desafíos en tecnología.
+      </p>
+    </div>
+  </div>
 </section>

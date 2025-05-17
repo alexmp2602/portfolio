@@ -1,23 +1,64 @@
----
-
----
-
 <section
+  id="hero"
+  class="relative isolate overflow-hidden py-32 px-6 md:px-12 max-w-7xl mx-auto text-center"
   data-reveal
-  class="py-32 text-center px-6 md:px-12 max-w-screen-xl mx-auto"
 >
-  <h1 class="text-5xl md:text-7xl font-bold text-dark dark:text-light">
+  <!-- Fondo blur degradado -->
+  <div
+    class="absolute inset-0 -z-10 bg-gradient-to-br from-primary/40 to-accent/20 opacity-30 blur-2xl"
+  >
+  </div>
+
+  <!-- Título principal -->
+  <h1
+    class="text-4xl md:text-6xl font-extrabold tracking-tight text-dark dark:text-light leading-tight"
+  >
     Alex Pereyra
   </h1>
-  <p class="text-xl md:text-2xl mt-6 text-dark dark:text-light">
-    Frontend Developer enfocado en experiencias modernas y accesibles.
+
+  <!-- Subtítulo -->
+  <p
+    class="mt-6 text-lg md:text-2xl text-dark/80 dark:text-light/70 max-w-2xl mx-auto"
+  >
+    Desarrollador Frontend enfocado en crear interfaces limpias, modernas y
+    accesibles usando tecnologías actuales.
   </p>
+
+  <!-- CTA botón -->
   <div class="mt-10">
     <a
       href="#about"
-      class="bg-primary text-white px-6 py-3 rounded-full hover:bg-accent transition"
+      class="inline-block bg-primary text-white px-8 py-3 rounded-full text-base font-medium shadow-lg hover:bg-accent transition"
     >
-      Ver más
+      Conocé más sobre mí
     </a>
+  </div>
+
+  <!-- Estadísticas tipo bento -->
+  <div class="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+    <div
+      class="rounded-xl bg-light/60 dark:bg-dark/60 shadow-md backdrop-blur-md p-6"
+    >
+      <p class="text-4xl font-bold text-primary">10+</p>
+      <p class="text-sm text-dark/70 dark:text-light/60">
+        Proyectos publicados
+      </p>
+    </div>
+    <div
+      class="rounded-xl bg-light/60 dark:bg-dark/60 shadow-md backdrop-blur-md p-6"
+    >
+      <p class="text-4xl font-bold text-primary">3+</p>
+      <p class="text-sm text-dark/70 dark:text-light/60">
+        Años de experiencia real
+      </p>
+    </div>
+    <div
+      class="rounded-xl bg-light/60 dark:bg-dark/60 shadow-md backdrop-blur-md p-6"
+    >
+      <p class="text-4xl font-bold text-primary">200+</p>
+      <p class="text-sm text-dark/70 dark:text-light/60">
+        Horas invertidas en formación
+      </p>
+    </div>
   </div>
 </section>
