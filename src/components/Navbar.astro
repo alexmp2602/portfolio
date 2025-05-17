@@ -1,10 +1,10 @@
 ---
-
+import { useState } from "react"; // si usas React, si no lo adaptamos sin React
 ---
 
 <nav
   data-navbar
-  class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/60 dark:bg-dark/60 border-b border-gray-200 dark:border-gray-700 transition-shadow"
+  class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/60 dark:bg-dark/60 border-b border-neutral-200 dark:border-neutral-700 transition-shadow"
 >
   <div
     class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between"
@@ -17,35 +17,128 @@
       Alex Pereyra
     </a>
 
-    <!-- Navegación -->
-    <div class="flex items-center gap-5 sm:gap-8 text-sm sm:text-base">
+    <!-- Menú escritorio -->
+    <div
+      class="hidden md:flex items-center gap-5 sm:gap-8 text-sm sm:text-base"
+    >
       <a
         href="#about"
-        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition"
+        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
       >
         Sobre mí
       </a>
       <a
         href="#projects"
-        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition"
+        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
       >
         Proyectos
       </a>
       <a
         href="#contact"
-        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition"
+        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
       >
         Contacto
       </a>
 
-      <!-- Botón modo oscuro -->
+      <!-- Botón modo claro/oscuro -->
       <button
         data-toggle-theme
-        class="ml-3 p-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark text-dark dark:text-light hover:ring-2 hover:ring-primary dark:hover:ring-accent transition"
+        class="ml-3 p-2 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark text-dark dark:text-light hover:ring-2 hover:ring-primary dark:hover:ring-accent transition"
         aria-label="Cambiar entre modo claro y oscuro"
       >
         <span id="theme-icon" class="text-sm">🌙</span>
       </button>
     </div>
+
+    <!-- Botón hamburguesa móvil -->
+    <button
+      id="menu-btn"
+      aria-label="Abrir menú"
+      class="md:hidden p-2 rounded-md text-dark dark:text-light hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg
+        class="w-6 h-6"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
   </div>
+
+  <!-- Menú móvil -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-white/90 dark:bg-dark/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-700"
+  >
+    <div class="flex flex-col px-6 py-4 space-y-4 text-center">
+      <a
+        href="#about"
+        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
+      >
+        Sobre mí
+      </a>
+      <a
+        href="#projects"
+        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
+      >
+        Proyectos
+      </a>
+      <a
+        href="#contact"
+        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
+      >
+        Contacto
+      </a>
+      <button
+        data-toggle-theme
+        class="mx-auto mt-4 p-2 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark text-dark dark:text-light hover:ring-2 hover:ring-primary dark:hover:ring-accent transition"
+        aria-label="Cambiar entre modo claro y oscuro"
+      >
+        <span id="theme-icon-mobile" class="text-sm">🌙</span>
+      </button>
+    </div>
+  </div>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const themeBtn = document.querySelector("[data-toggle-theme]");
+      const themeIcon = document.getElementById("theme-icon");
+      const themeIconMobile = document.getElementById("theme-icon-mobile");
+
+      // Toggle menú móvil
+      menuBtn.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("hidden");
+        menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      // Toggle tema para ambos iconos
+      function setIcon(isDark) {
+        if (themeIcon) themeIcon.textContent = isDark ? "☀️" : "🌙";
+        if (themeIconMobile) themeIconMobile.textContent = isDark ? "☀️" : "🌙";
+      }
+
+      if (themeBtn) {
+        setIcon(document.documentElement.classList.contains("dark"));
+        themeBtn.addEventListener("click", () => {
+          const html = document.documentElement;
+          const isDark = html.classList.toggle("dark");
+          localStorage.theme = isDark ? "dark" : "light";
+          setIcon(isDark);
+          console.log("Modo cambiado", isDark ? "🌙 Dark" : "☀️ Light");
+        });
+      }
+    });
+  </script>
 </nav>

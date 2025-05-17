@@ -1,16 +1,28 @@
 ---
-import PageWideLayout from "../../layouts/PageWideLayout.astro";
-import LabCard from "../../components/LabCard.astro";
+import Layout from "../../layouts/Layout.astro";
+import NavbarLab from "../../components/NavbarLab.astro";
 import { experiments } from "../../data/experiments";
+import LabCard from "../../components/LabCard.astro";
 ---
 
-<PageWideLayout
-  title="Laboratorio Creativo"
-  description="Exploro ideas, animaciones, prototipos visuales y pruebas de código que no siempre terminan en proyectos formales, pero muestran cómo experimento y aprendo en el proceso."
-  fallbackLabel="← Volver al inicio"
-  fallbackHref="/"
->
-  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-    {experiments.map((exp) => <LabCard {...exp} />)}
-  </div>
-</PageWideLayout>
+<Layout>
+  <NavbarLab />
+  <section class="py-20 px-6 md:px-12 max-w-6xl mx-auto">
+    <div class="glass-box text-center mb-12 p-8" data-reveal>
+      <h1 class="text-4xl md:text-5xl font-bold text-dark dark:text-white mb-4">
+        Laboratorio
+      </h1>
+      <p
+        class="text-base md:text-lg text-dark dark:text-light max-w-2xl mx-auto leading-relaxed"
+      >
+        Experimentos visuales, pruebas con animaciones y pequeñas piezas
+        interactivas. Este es mi espacio para jugar, aprender y seguir creciendo
+        como desarrollador frontend.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {experiments.map((exp) => <LabCard key={exp.slug} {...exp} />)}
+    </div>
+  </section>
+</Layout>

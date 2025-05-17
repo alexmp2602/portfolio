@@ -1,3 +1,6 @@
+const colors = require("tailwindcss/colors");
+
+/** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class",
   content: [
@@ -12,9 +15,15 @@ export default {
     extend: {
       colors: {
         primary: "#256340",
-        dark: "#1F1F1F",
-        light: "#FAFAFA",
         accent: "#60A98F",
+        light: ({ opacityVariable, opacityValue }) =>
+          opacityValue !== undefined
+            ? `rgba(250, 250, 250, ${opacityValue})`
+            : `rgb(250 250 250 / var(${opacityVariable}, 1))`,
+        dark: ({ opacityVariable, opacityValue }) =>
+          opacityValue !== undefined
+            ? `rgba(31, 31, 31, ${opacityValue})`
+            : `rgb(31 31 31 / var(${opacityVariable}, 1))`,
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

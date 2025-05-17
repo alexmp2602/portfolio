@@ -1,0 +1,33 @@
+---
+import { experiments } from "../data/experiments";
+import LabCard from "./LabCard.astro";
+---
+
+<section id="lab" class="py-24 px-6 max-w-7xl mx-auto" data-reveal>
+  <h2
+    class="text-4xl md:text-5xl font-extrabold text-center mb-16 text-dark dark:text-light"
+  >
+    Laboratorio Creativo 🧪
+  </h2>
+
+  <div
+    class="glass-box max-w-3xl mx-auto p-8 mb-12 text-center text-dark dark:text-light"
+    data-reveal
+  >
+    <p class="text-lg md:text-xl leading-relaxed">
+      Exploro ideas, animaciones, prototipos visuales y pruebas de código que no
+      siempre terminan en proyectos formales, pero muestran cómo experimento y
+      aprendo en el proceso.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+    {experiments.slice(0, 6).map((exp) => <LabCard {...exp} />)}
+  </div>
+
+  <div class="mt-12 text-center">
+    <a href="/lab" class="btn-primary rounded-full">
+      Ver todos los experimentos
+    </a>
+  </div>
+</section>

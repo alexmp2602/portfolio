@@ -1,24 +1,14 @@
----
-import PageStatic from "../layouts/PageStatic.astro";
----
+<div class="text-center space-y-6">
+  <p class="text-lg text-dark/80 dark:text-light/70">
+    Tu mensaje fue enviado correctamente. Te voy a responder a la brevedad.
+  </p>
 
-<PageStatic
-  title="¡Gracias por tu mensaje!"
-  fallbackLabel="← Volver al inicio"
-  fallbackHref="/"
->
-  <div class="text-center space-y-6">
-    <p class="text-lg text-dark/80 dark:text-light/70">
-      Tu mensaje fue enviado correctamente. Te voy a responder a la brevedad.
-    </p>
-
-    <div class="pt-6">
-      <a
-        href="/"
-        class="inline-block bg-primary hover:bg-accent text-white font-semibold px-6 py-3 rounded-full transition-shadow shadow-md hover:shadow-lg"
-      >
-        Volver al sitio
-      </a>
-    </div>
+  <div class="pt-6">
+    <a
+      href="/"
+      class="inline-block bg-primary hover:bg-accent text-white font-semibold px-6 py-3 rounded-full transition-shadow shadow-md hover:shadow-lg"
+    >
+      Volver al sitio
+    </a>
   </div>
-</PageStatic>
+</div>

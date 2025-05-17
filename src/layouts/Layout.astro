@@ -8,6 +8,8 @@ import "../styles/global.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alex Pereyra | Frontend Developer</title>
+
+    <!-- Meta descripción -->
     <meta
       name="description"
       content="Portafolio de Alex Pereyra, desarrollador frontend con experiencia en React, Astro y Tailwind CSS."
@@ -26,7 +28,7 @@ import "../styles/global.css";
     <meta property="og:url" content="https://www.alexpereyra.dev" />
     <meta property="og:type" content="website" />
 
-    <!-- Tipografía: Inter (carga optimizada) -->
+    <!-- Tipografía Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -64,7 +66,7 @@ import "../styles/global.css";
     <!-- Scripts globales -->
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
-        // Theme toggle
+        // Toggle de tema (modo claro/oscuro)
         const btn = document.querySelector("[data-toggle-theme]");
         const icon = document.getElementById("theme-icon");
 
@@ -84,33 +86,35 @@ import "../styles/global.css";
           });
         }
 
-        // Scroll reveal animaciones
-        const revealEls = document.querySelectorAll("[data-reveal]");
-        revealEls.forEach((el, index) => {
-          const observer = new IntersectionObserver(
-            ([entry]) => {
-              if (entry.isIntersecting) {
-                el.animate(
-                  {
-                    opacity: [0, 1],
-                    transform: ["translateY(50px)", "translateY(0)"],
-                  },
-                  {
-                    duration: 600,
-                    easing: "ease-out",
-                    delay: index * 150,
-                    fill: "forwards",
-                  }
-                );
-                observer.unobserve(el);
-              }
-            },
-            { threshold: 0.1 }
-          );
-          observer.observe(el);
-        });
+        // Animaciones scroll reveal (si no hay reducción de movimiento)
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          const revealEls = document.querySelectorAll("[data-reveal]");
+          revealEls.forEach((el, index) => {
+            const observer = new IntersectionObserver(
+              ([entry]) => {
+                if (entry.isIntersecting) {
+                  el.animate(
+                    {
+                      opacity: [0, 1],
+                      transform: ["translateY(50px)", "translateY(0)"],
+                    },
+                    {
+                      duration: 600,
+                      easing: "ease-out",
+                      delay: index * 150,
+                      fill: "forwards",
+                    }
+                  );
+                  observer.unobserve(el);
+                }
+              },
+              { threshold: 0.1 }
+            );
+            observer.observe(el);
+          });
+        }
 
-        // Navbar shadow
+        // Sombra para navbar
         const nav = document.querySelector("[data-navbar]");
         if (nav) {
           window.addEventListener("scroll", () => {

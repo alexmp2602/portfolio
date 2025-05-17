@@ -1,6 +1,6 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
-import { projects } from "../data/projects"; // asegurate de que la ruta sea correcta
+import { projects } from "../data/projects";
 ---
 
 <section
@@ -18,7 +18,7 @@ import { projects } from "../data/projects"; // asegurate de que la ruta sea cor
     {
       projects.map((p) => (
         <div
-          class="rounded-2xl overflow-hidden bg-light/60 dark:bg-dark/60 shadow-xl ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-md hover:scale-[1.02] transition-transform duration-300"
+          class="glass-card rounded-2xl overflow-hidden backdrop-blur-md shadow-md hover:scale-[1.02] hover:shadow-lg transition-transform duration-300"
           data-reveal
         >
           <ProjectCard {...p} />
