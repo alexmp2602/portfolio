@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cursor animado con GSAP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #1f1f1f;
+        color: #fafafa;
+        font-family: sans-serif;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+        z-index: 1;
+      }
+
+      .cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(96, 169, 143, 0.9);
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: difference;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mové el mouse 👇</h1>
+    <div class="cursor"></div>
+
+    <script>
+      const cursor = document.querySelector(".cursor");
+
+      window.addEventListener("mousemove", (e) => {
+        gsap.to(cursor, {
+          x: e.clientX,
+          y: e.clientY,
+          ease: "power2.out",
+          duration: 0.2,
+        });
+      });
+    </script>
+  </body>
+</html>

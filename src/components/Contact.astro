@@ -1,43 +1,32 @@
----
-
----
-
-<section
-  id="contact"
-  data-reveal
-  class="relative py-32 px-6 md:px-12 max-w-4xl mx-auto text-center"
->
+<section data-reveal class="relative text-center space-y-12 max-w-4xl mx-auto">
   <!-- Fondo con blur suave -->
   <div
     class="absolute inset-0 -z-10 bg-gradient-to-tl from-primary/20 to-accent/20 blur-2xl opacity-30 rounded-xl"
   >
   </div>
 
-  <!-- Título -->
-  <h2
-    class="text-4xl md:text-5xl font-extrabold text-dark dark:text-light mb-6"
-  >
-    ¿Trabajamos juntos?
-  </h2>
-
   <!-- Subtítulo -->
   <p
-    class="text-base md:text-lg text-dark/80 dark:text-light/70 max-w-xl mx-auto mb-12"
+    class="text-base md:text-lg text-dark/80 dark:text-light/70 max-w-xl mx-auto"
   >
     Estoy disponible para colaborar en proyectos web, desarrollos personalizados
     o ideas creativas. Completá el formulario y te respondo lo antes posible.
   </p>
 
-  <!-- Formulario con tarjeta -->
+  <!-- Formulario -->
   <div
-    class="bg-light/60 dark:bg-dark/60 backdrop-blur-lg rounded-2xl shadow-xl ring-1 ring-black/5 dark:ring-white/10 p-8 md:p-12"
+    class="bg-light/60 dark:bg-dark/60 backdrop-blur-lg rounded-2xl shadow-xl ring-1 ring-black/5 dark:ring-white/10 p-8 md:p-12 text-left"
   >
     <form
       action="https://formspree.io/f/xyzabcd"
       method="POST"
-      class="space-y-6 text-left"
+      class="space-y-6"
     >
-      <input type="hidden" name="form-name" value="contact" />
+      <input
+        type="hidden"
+        name="_redirect"
+        value="https://www.alexpereyra.dev/thanks"
+      />
       <div class="hidden">
         <label>
           Don’t fill this out: <input name="bot-field" />
@@ -45,9 +34,9 @@
       </div>
 
       <div>
-        <label class="block mb-1 text-sm font-medium text-dark dark:text-light"
-          >Nombre</label
-        >
+        <label class="block mb-1 text-sm font-medium text-dark dark:text-light">
+          Nombre
+        </label>
         <input
           type="text"
           name="name"
@@ -57,9 +46,9 @@
       </div>
 
       <div>
-        <label class="block mb-1 text-sm font-medium text-dark dark:text-light"
-          >Correo electrónico</label
-        >
+        <label class="block mb-1 text-sm font-medium text-dark dark:text-light">
+          Correo electrónico
+        </label>
         <input
           type="email"
           name="email"
@@ -69,9 +58,9 @@
       </div>
 
       <div>
-        <label class="block mb-1 text-sm font-medium text-dark dark:text-light"
-          >Mensaje</label
-        >
+        <label class="block mb-1 text-sm font-medium text-dark dark:text-light">
+          Mensaje
+        </label>
         <textarea
           name="message"
           required

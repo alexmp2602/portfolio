@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScrollTrigger Timeline</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: #1f1f1f;
+        color: #fafafa;
+      }
+
+      .spacer {
+        height: 100vh;
+      }
+
+      .pin-section {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        background: #256340;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .slide {
+        position: absolute;
+        opacity: 0;
+        transform: translateY(100px);
+        text-align: center;
+        max-width: 800px;
+      }
+
+      .slide img {
+        max-width: 300px;
+        margin-bottom: 1rem;
+      }
+
+      .slide h2 {
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="spacer"></div>
+
+    <section class="pin-section" id="pinned">
+      <div class="slide" id="step1">
+        <img src="https://cdn.simpleicons.org/astro/FF5D01" alt="Astro" />
+        <h2>Astro: Ultra rápido, basado en Islands</h2>
+      </div>
+      <div class="slide" id="step2">
+        <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" />
+        <h2>React: Componentes dinámicos y reutilizables</h2>
+      </div>
+      <div class="slide" id="step3">
+        <img
+          src="https://cdn.simpleicons.org/tailwindcss/06B6D4"
+          alt="Tailwind"
+        />
+        <h2>Tailwind CSS: Utilidades listas para producir</h2>
+      </div>
+    </section>
+
+    <div class="spacer"></div>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#pinned",
+          start: "top top",
+          end: "+=300%",
+          scrub: true,
+          pin: true,
+        },
+      });
+
+      tl.to("#step1", { opacity: 1, y: 0, duration: 1 })
+        .to("#step1", { opacity: 0, y: -100, duration: 1 }, "+=1")
+        .to("#step2", { opacity: 1, y: 0, duration: 1 })
+        .to("#step2", { opacity: 0, y: -100, duration: 1 }, "+=1")
+        .to("#step3", { opacity: 1, y: 0, duration: 1 });
+    </script>
+  </body>
+</html>

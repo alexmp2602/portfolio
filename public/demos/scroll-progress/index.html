@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Progress</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        line-height: 1.6;
+        background: #fafafa;
+        color: #1f1f1f;
+      }
+
+      /* Progress bar */
+      .progress-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 6px;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.05);
+        z-index: 9999;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #60a98f;
+        transform-origin: left center;
+        transition: width 0.1s ease-out;
+      }
+
+      main {
+        padding: 4rem 2rem;
+        max-width: 800px;
+        margin: auto;
+      }
+
+      h1 {
+        margin-bottom: 2rem;
+        font-size: 2rem;
+      }
+
+      p {
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-container">
+      <div class="progress-bar" id="progress"></div>
+    </div>
+
+    <main>
+      <h1>Scroll Progress Demo</h1>
+      <p>
+        Este experimento muestra una barra de progreso arriba mientras hacés
+        scroll.
+      </p>
+      ${`
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      `.repeat(60)}
+    </main>
+
+    <script>
+      const progressBar = document.getElementById("progress");
+
+      window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${scrollPercent}%`;
+      });
+    </script>
+  </body>
+</html>

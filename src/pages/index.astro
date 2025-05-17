@@ -7,6 +7,8 @@ import Skills from "../components/Skills.astro";
 import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import LabCard from "../components/LabCard.astro";
+import { experiments } from "../data/experiments";
 ---
 
 <Layout>
@@ -16,7 +18,7 @@ import Footer from "../components/Footer.astro";
     class="pt-24 scroll-smooth scroll-py-24 snap-y snap-mandatory"
     aria-label="Contenido principal"
   >
-    <!-- HERO: entrada llamativa -->
+    <!-- HERO -->
     <section
       class="snap-start relative isolate min-h-screen flex items-center justify-center px-6 py-20"
       data-reveal
@@ -28,7 +30,7 @@ import Footer from "../components/Footer.astro";
       <Hero />
     </section>
 
-    <!-- SOBRE MÍ + SKILLS: bento grid -->
+    <!-- SOBRE MÍ + SKILLS -->
     <section
       class="snap-start grid grid-cols-1 lg:grid-cols-2 gap-6 px-6 py-16 max-w-7xl mx-auto"
       data-reveal
@@ -38,7 +40,6 @@ import Footer from "../components/Footer.astro";
       >
         <About />
       </div>
-
       <div
         class="rounded-2xl bg-light/60 dark:bg-dark/60 shadow-lg backdrop-blur-xl p-8"
       >
@@ -46,7 +47,7 @@ import Footer from "../components/Footer.astro";
       </div>
     </section>
 
-    <!-- PROYECTOS: cards + modular -->
+    <!-- PROYECTOS -->
     <section
       class="snap-start px-6 py-24 bg-light dark:bg-dark"
       data-reveal
@@ -57,12 +58,46 @@ import Footer from "../components/Footer.astro";
       </div>
     </section>
 
-    <!-- CONTACTO: llamada a la acción final -->
+    <!-- CONTACTO -->
     <section
       class="snap-start relative px-6 py-24 flex items-center justify-center bg-accent/10 dark:bg-accent/20 backdrop-blur-lg"
       data-reveal
     >
       <Contact />
+    </section>
+
+    <!-- LABORATORIO -->
+    <section
+      class="snap-start px-6 py-24 max-w-7xl mx-auto"
+      data-reveal
+      id="lab"
+    >
+      <h2
+        class="text-4xl md:text-5xl font-extrabold text-center mb-16 text-dark dark:text-light"
+      >
+        Laboratorio Creativo 🧪
+      </h2>
+
+      <p
+        class="text-center text-dark/70 dark:text-light/60 max-w-2xl mx-auto mb-12"
+      >
+        Exploro ideas, animaciones, prototipos visuales y pruebas de código que
+        no siempre terminan en proyectos formales, pero muestran cómo
+        experimento y aprendo en el proceso.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+        {experiments.slice(0, 6).map((exp) => <LabCard {...exp} />)}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href="/lab"
+          class="inline-block px-6 py-3 rounded-full bg-primary text-white hover:bg-accent transition"
+        >
+          Ver todos los experimentos
+        </a>
+      </div>
     </section>
   </main>
 

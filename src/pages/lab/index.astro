@@ -1,0 +1,16 @@
+---
+import PageWideLayout from "../../layouts/PageWideLayout.astro";
+import LabCard from "../../components/LabCard.astro";
+import { experiments } from "../../data/experiments";
+---
+
+<PageWideLayout
+  title="Laboratorio Creativo"
+  description="Exploro ideas, animaciones, prototipos visuales y pruebas de código que no siempre terminan en proyectos formales, pero muestran cómo experimento y aprendo en el proceso."
+  fallbackLabel="← Volver al inicio"
+  fallbackHref="/"
+>
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+    {experiments.map((exp) => <LabCard {...exp} />)}
+  </div>
+</PageWideLayout>

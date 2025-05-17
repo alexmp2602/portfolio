@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parallax Scroll</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        color: #fafafa;
+        background: #1f1f1f;
+      }
+
+      .section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4rem 2rem;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .parallax {
+        background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      .bg-dark {
+        background: #1f1f1f;
+        color: #fafafa;
+      }
+
+      .bg-accent {
+        background: #60a98f;
+        color: #1f1f1f;
+      }
+
+      .layer {
+        transform: translateY(var(--offset, 0));
+        transition: transform 0.2s ease-out;
+        will-change: transform;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="section bg-dark">
+      <div class="layer" style="--offset: 0px">Parallax Scroll Demo 👇</div>
+    </section>
+
+    <section class="section parallax">
+      <div class="layer" style="--offset: 0px">Fondo Fijo con Efecto</div>
+    </section>
+
+    <section class="section bg-accent">
+      <div class="layer" style="--offset: 0px">Contenido más abajo</div>
+    </section>
+
+    <script>
+      const layers = document.querySelectorAll(".layer");
+
+      window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        layers.forEach((layer, i) => {
+          const speed = 0.25 + i * 0.05;
+          const offset = scrollY * speed;
+          layer.style.setProperty("--offset", `${offset}px`);
+        });
+      });
+    </script>
+  </body>
+</html>

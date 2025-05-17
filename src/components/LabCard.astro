@@ -1,0 +1,61 @@
+---
+interface LabCardProps {
+  slug: string;
+  title: string;
+  description: string;
+  tech: string[];
+  preview: string;
+  demo?: string;
+}
+
+const { slug, title, description, tech, preview, demo } =
+  Astro.props as LabCardProps;
+---
+
+<a
+  href={`/lab/${slug}`}
+  class="group bg-light/60 dark:bg-dark/60 backdrop-blur-md rounded-xl overflow-hidden shadow-md ring-1 ring-black/5 dark:ring-white/10 transition-transform hover:scale-[1.02]"
+>
+  <!-- Vista previa -->
+  <div class="relative h-48 overflow-hidden">
+    {
+      demo ? (
+        <>
+          <iframe
+            src={demo}
+            title={`Vista previa de ${title}`}
+            class="absolute top-0 left-0 pointer-events-none group-hover:pointer-events-auto"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin"
+            style="transform: scale(0.3); transform-origin: top left; width: 1000px; height: 1000px;"
+          />
+
+          <div class="absolute inset-0 rounded-t-xl bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-sm font-medium backdrop-blur-sm">
+            🔎 Vista previa interactiva
+          </div>
+        </>
+      ) : (
+        <img
+          src={preview}
+          alt={title}
+          class="h-48 w-full object-cover rounded-t-xl"
+        />
+      )
+    }
+  </div>
+
+  <!-- Contenido -->
+  <div class="p-5 space-y-2">
+    <h3 class="text-lg font-semibold text-dark dark:text-light">{title}</h3>
+    <p class="text-sm text-dark/70 dark:text-light/60">{description}</p>
+    <div class="flex flex-wrap gap-2 pt-1">
+      {
+        tech.map((t) => (
+          <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium tracking-wide">
+            {t}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</a>
