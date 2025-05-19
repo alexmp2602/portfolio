@@ -5,34 +5,34 @@ html {
   font-family: "Inter", sans-serif;
 }
 
-/* === Utilidades personalizadas para diseño 2025–2026 === */
+/* === Utilidades personalizadas Alex Pereyra — Diseño 2025–2026 === */
 
-/* Glassbox reusable */
+/* Contenedor general para secciones */
+.section-container {
+  max-width: 72rem; /* 1152px */
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+@media (min-width: 768px) {
+  .section-container {
+    padding-inline: 3rem;
+  }
+}
+
+/* === Cards de vidrio y profundidad sutil === */
 .glass-box {
   background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(4px);
+  border-radius: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
 }
-
-/* Glass-card reutilizable para tarjetas (proyectos, laboratorio, etc.) */
 .glass-card {
   background-color: rgba(250, 250, 250, 0.6);
   backdrop-filter: blur(8px);
+  border-radius: 1rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -4px rgba(0, 0, 0, 0.05);
-  border-radius: 1rem;
-}
-
-/* Sombra uniforme para cards */
-.uniform-shadow {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
-}
-
-.uniform-shadow:hover {
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,25 +44,18 @@ html {
   }
 }
 
-/* Container reutilizable para secciones */
-.section-container {
-  max-width: 72rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+/* === Cards con sombra progresiva === */
+.uniform-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+.uniform-shadow:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 768px) {
-  .section-container {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-}
-
-/* Hover para tarjetas */
+/* === Hover animado universal para tarjetas === */
 .card-hover {
-  transition: all 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .card-hover:hover {
   transform: scale(1.015);
@@ -70,16 +63,16 @@ html {
     0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 
-/* Botón primario */
+/* === Botón principal === */
 .btn-primary {
   display: inline-block;
   background-color: #256340;
-  color: #fff;
+  color: #ffffff;
   font-weight: 600;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
 }
 .btn-primary:hover {
   transform: scale(1.05);
@@ -87,11 +80,11 @@ html {
 @media (prefers-color-scheme: dark) {
   .btn-primary {
     background-color: #60a98f;
-    color: #000;
+    color: #000000;
   }
 }
 
-/* Botón con borde */
+/* === Botón contorno/acento === */
 .btn-outline {
   display: inline-block;
   border: 2px solid #256340;
@@ -99,7 +92,7 @@ html {
   font-weight: 600;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 .btn-outline:hover {
   transform: scale(1.05);
@@ -111,3 +104,31 @@ html {
   }
 }
 
+.nav-link {
+  color: #22223b;
+  transition-property: color;
+  transition-duration: 150ms;
+}
+.dark .nav-link {
+  color: #f8f8f2;
+}
+.nav-link:hover {
+  color: #256340;
+}
+.dark .nav-link:hover {
+  color: #60a98f;
+}
+
+@keyframes fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-slide {
+  animation: fade-slide 0.3s ease-out both;
+}

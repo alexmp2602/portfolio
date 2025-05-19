@@ -3,21 +3,30 @@ const { title, description, slug, image } = Astro.props;
 ---
 
 <article
-  class="reveal-card bg-white/70 dark:bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden shadow-md transition-transform hover:scale-[1.015] hover:shadow-lg flex flex-col"
+  class="glass-card rounded-2xl overflow-hidden shadow-subtle transition-transform duration-300 hover:scale-[1.015] group"
   data-reveal
 >
-  <a href={`/projects/${slug}`} class="block flex-grow h-full">
+  <a
+    href={`/projects/${slug}`}
+    class="block h-full"
+    aria-label={`Ver proyecto ${title}`}
+  >
     <img
       src={image}
-      alt={`Imagen del proyecto ${title}`}
-      class="w-full h-48 object-cover rounded-t-2xl"
+      alt={`Captura del proyecto ${title}`}
+      class="w-full aspect-video object-cover group-hover:opacity-90 transition-opacity duration-300"
       loading="lazy"
     />
-    <div class="p-5 flex flex-col flex-grow">
-      <h3 class="text-xl font-semibold text-dark dark:text-white mb-2">
+
+    <div
+      class="p-6 bg-white/90 dark:bg-dark/60 backdrop-blur-sm text-dark dark:text-light"
+    >
+      <h3
+        class="text-lg font-bold mb-2 group-hover:text-primary dark:group-hover:text-accent transition-colors"
+      >
         {title}
       </h3>
-      <p class="text-sm text-neutral-700 dark:text-neutral-300 flex-grow">
+      <p class="text-sm text-dark/80 dark:text-light/70 leading-relaxed">
         {description}
       </p>
     </div>

@@ -2,8 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import SkillsBento from "../components/SkillsBento.astro";
+import AboutSkills from "../components/AboutSkills.astro";
 import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
@@ -12,13 +11,18 @@ import LabSection from "../components/LabSection.astro";
 
 <Layout>
   <Navbar />
-  <main aria-label="Contenido principal" class="scroll-smooth">
+
+  <main
+    id="main-content"
+    aria-label="Contenido principal"
+    class="scroll-smooth"
+  >
     <Hero />
-    <About />
-    <SkillsBento />
+    <AboutSkills />
     <Projects />
     <Contact />
     <LabSection />
   </main>
+
   <Footer />
 </Layout>

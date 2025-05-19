@@ -9,10 +9,10 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alex Pereyra | Frontend Developer</title>
 
-    <!-- Meta descripción -->
+    <!-- Meta -->
     <meta
       name="description"
-      content="Portafolio de Alex Pereyra, desarrollador frontend con experiencia en React, Astro y Tailwind CSS."
+      content="Portafolio de Alex Pereyra, desarrollador frontend especializado en Astro, React y Tailwind CSS."
     />
     <meta name="theme-color" content="#256340" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -36,7 +36,7 @@ import "../styles/global.css";
       rel="stylesheet"
     />
 
-    <!-- Dark mode init -->
+    <!-- Preferencia de tema -->
     <script>
       if (
         localStorage.theme === "dark" ||
@@ -49,7 +49,7 @@ import "../styles/global.css";
       }
     </script>
 
-    <!-- Variables CSS globales -->
+    <!-- Variables CSS base -->
     <style>
       :root {
         --color-primary: #256340;
@@ -60,13 +60,17 @@ import "../styles/global.css";
     </style>
   </head>
 
-  <body class="bg-light text-dark dark:bg-dark dark:text-light font-sans">
-    <slot />
+  <body
+    class="bg-light text-dark dark:bg-dark dark:text-light font-sans antialiased selection:bg-accent/30 selection:text-dark"
+  >
+    <main id="content" class="relative z-10">
+      <slot />
+    </main>
 
     <!-- Scripts globales -->
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
-        // Toggle de tema (modo claro/oscuro)
+        // Toggle de tema
         const btn = document.querySelector("[data-toggle-theme]");
         const icon = document.getElementById("theme-icon");
 
@@ -82,11 +86,10 @@ import "../styles/global.css";
             const isDark = html.classList.toggle("dark");
             localStorage.theme = isDark ? "dark" : "light";
             setIcon();
-            console.log("Modo cambiado", isDark ? "🌙 Dark" : "☀️ Light");
           });
         }
 
-        // Animaciones scroll reveal (si no hay reducción de movimiento)
+        // Reveal animado si no hay preferencia por movimiento reducido
         if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           const revealEls = document.querySelectorAll("[data-reveal]");
           revealEls.forEach((el, index) => {
@@ -114,7 +117,7 @@ import "../styles/global.css";
           });
         }
 
-        // Sombra para navbar
+        // Sombra al hacer scroll
         const nav = document.querySelector("[data-navbar]");
         if (nav) {
           window.addEventListener("scroll", () => {

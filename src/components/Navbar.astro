@@ -1,7 +1,8 @@
 ---
-import { useState } from "react"; // si usas React, si no lo adaptamos sin React
+
 ---
 
+// No usás React, así que elimino useState
 <nav
   data-navbar
   class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/60 dark:bg-dark/60 border-b border-neutral-200 dark:border-neutral-700 transition-shadow"
@@ -9,7 +10,7 @@ import { useState } from "react"; // si usas React, si no lo adaptamos sin React
   <div
     class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between"
   >
-    <!-- Logo / Marca personal -->
+    <!-- Marca -->
     <a
       href="/"
       class="text-lg sm:text-xl font-extrabold tracking-tight text-dark dark:text-light"
@@ -17,30 +18,15 @@ import { useState } from "react"; // si usas React, si no lo adaptamos sin React
       Alex Pereyra
     </a>
 
-    <!-- Menú escritorio -->
+    <!-- Navegación desktop -->
     <div
       class="hidden md:flex items-center gap-5 sm:gap-8 text-sm sm:text-base"
     >
-      <a
-        href="#about"
-        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
-      >
-        Sobre mí
-      </a>
-      <a
-        href="#projects"
-        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
-      >
-        Proyectos
-      </a>
-      <a
-        href="#contact"
-        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
-      >
-        Contacto
-      </a>
+      <a href="#about" class="nav-link">Sobre mí</a>
+      <a href="#projects" class="nav-link">Proyectos</a>
+      <a href="#contact" class="nav-link">Contacto</a>
 
-      <!-- Botón modo claro/oscuro -->
+      <!-- Modo oscuro/claro -->
       <button
         data-toggle-theme
         class="ml-3 p-2 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark text-dark dark:text-light hover:ring-2 hover:ring-primary dark:hover:ring-accent transition"
@@ -50,13 +36,13 @@ import { useState } from "react"; // si usas React, si no lo adaptamos sin React
       </button>
     </div>
 
-    <!-- Botón hamburguesa móvil -->
+    <!-- Botón menú móvil -->
     <button
       id="menu-btn"
       aria-label="Abrir menú"
-      class="md:hidden p-2 rounded-md text-dark dark:text-light hover:bg-gray-200 dark:hover:bg-gray-700 transition"
       aria-expanded="false"
       aria-controls="mobile-menu"
+      class="md:hidden p-2 rounded-md text-dark dark:text-light hover:bg-gray-200 dark:hover:bg-gray-700 transition"
     >
       <svg
         class="w-6 h-6"
@@ -64,7 +50,6 @@ import { useState } from "react"; // si usas React, si no lo adaptamos sin React
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
-        aria-hidden="true"
       >
         <path
           stroke-linecap="round"
@@ -78,27 +63,13 @@ import { useState } from "react"; // si usas React, si no lo adaptamos sin React
   <!-- Menú móvil -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden bg-white/90 dark:bg-dark/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-700"
+    class="hidden md:hidden bg-white/90 dark:bg-dark/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 animate-fade-slide origin-top"
   >
     <div class="flex flex-col px-6 py-4 space-y-4 text-center">
-      <a
-        href="#about"
-        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
-      >
-        Sobre mí
-      </a>
-      <a
-        href="#projects"
-        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
-      >
-        Proyectos
-      </a>
-      <a
-        href="#contact"
-        class="text-dark dark:text-light hover:text-primary dark:hover:text-accent transition-colors"
-      >
-        Contacto
-      </a>
+      <a href="#about" class="nav-link">Sobre mí</a>
+      <a href="#projects" class="nav-link">Proyectos</a>
+      <a href="#contact" class="nav-link">Contacto</a>
+
       <button
         data-toggle-theme
         class="mx-auto mt-4 p-2 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark text-dark dark:text-light hover:ring-2 hover:ring-primary dark:hover:ring-accent transition"
@@ -113,32 +84,35 @@ import { useState } from "react"; // si usas React, si no lo adaptamos sin React
     document.addEventListener("DOMContentLoaded", () => {
       const menuBtn = document.getElementById("menu-btn");
       const mobileMenu = document.getElementById("mobile-menu");
-      const themeBtn = document.querySelector("[data-toggle-theme]");
-      const themeIcon = document.getElementById("theme-icon");
-      const themeIconMobile = document.getElementById("theme-icon-mobile");
+      const themeBtns = document.querySelectorAll("[data-toggle-theme]");
+      const themeIcons = [
+        document.getElementById("theme-icon"),
+        document.getElementById("theme-icon-mobile"),
+      ];
 
-      // Toggle menú móvil
+      // Toggle menú
       menuBtn.addEventListener("click", () => {
         const isOpen = mobileMenu.classList.toggle("hidden");
-        menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        menuBtn.setAttribute("aria-expanded", isOpen.toString());
       });
 
-      // Toggle tema para ambos iconos
-      function setIcon(isDark) {
-        if (themeIcon) themeIcon.textContent = isDark ? "☀️" : "🌙";
-        if (themeIconMobile) themeIconMobile.textContent = isDark ? "☀️" : "🌙";
+      // Toggle tema (modo claro/oscuro)
+      function updateIcons(isDark) {
+        themeIcons.forEach((icon) => {
+          if (icon) icon.textContent = isDark ? "☀️" : "🌙";
+        });
       }
 
-      if (themeBtn) {
-        setIcon(document.documentElement.classList.contains("dark"));
-        themeBtn.addEventListener("click", () => {
+      themeBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
           const html = document.documentElement;
           const isDark = html.classList.toggle("dark");
           localStorage.theme = isDark ? "dark" : "light";
-          setIcon(isDark);
-          console.log("Modo cambiado", isDark ? "🌙 Dark" : "☀️ Light");
+          updateIcons(isDark);
         });
-      }
+      });
+
+      updateIcons(document.documentElement.classList.contains("dark"));
     });
   </script>
 </nav>
