@@ -33,99 +33,102 @@ const related = projects
     current={project.title}
   />
 
-  <section class="pt-28 px-6 md:px-12 max-w-5xl mx-auto space-y-16">
-    <!-- Imagen principal -->
-    <div
-      data-reveal
-      class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-black/5 dark:ring-white/10"
-    >
-      <img
-        src={project.image}
-        alt={`Captura de ${project.title}`}
-        class="w-full object-cover max-h-[460px]"
-        loading="lazy"
-      />
-    </div>
-
-    <!-- Contenido principal -->
-    <div
-      data-reveal
-      class="bg-white/70 dark:bg-white/5 backdrop-blur-sm shadow-md rounded-2xl px-6 py-10 md:px-10 md:py-14 transition-all space-y-10"
-    >
-      <!-- Título y descripción -->
-      <div class="text-center space-y-6">
-        <h1
-          class="text-4xl md:text-5xl font-extrabold text-dark dark:text-white"
-        >
-          {project.title}
-        </h1>
-        <p
-          class="text-neutral-700 dark:text-neutral-300 text-base md:text-lg leading-relaxed"
-        >
-          {project.description}
-        </p>
+  <section class="page-bg pt-28 p-6 md:px-12 space-y-16">
+    <div class="max-w-5xl mx-auto space-y-16">
+      <!-- Imagen principal -->
+      <div
+        data-reveal
+        class="rounded-3xl overflow-hidden shadow-xl ring-1 ring-black/5 dark:ring-white/10"
+      >
+        <img
+          src={project.image}
+          alt={`Captura de ${project.title}`}
+          class="w-full object-cover max-h-[460px]"
+          loading="lazy"
+        />
       </div>
 
-      <!-- Tecnologías -->
-      {
-        project.tech && project.tech.length > 0 && (
-          <div class="flex flex-wrap justify-center gap-3">
-            {project.tech.map((tech) => (
-              <span class="text-sm bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 px-4 py-1.5 rounded-full font-medium tracking-wide shadow-sm">
-                {tech}
-              </span>
-            ))}
-          </div>
-        )
-      }
+      <!-- Contenido principal -->
+      <div
+        data-reveal
+        class="glass-box px-6 py-10 md:px-10 md:py-14 rounded-2xl shadow-xl backdrop-blur-md space-y-10"
+      >
+        <!-- Título y descripción -->
+        <div class="text-center space-y-6">
+          <h1
+            class="text-4xl md:text-5xl font-extrabold text-surface leading-tight"
+          >
+            {project.title}
+          </h1>
+          <p
+            class="text-base md:text-lg text-surface/70 max-w-3xl mx-auto leading-relaxed text-balance"
+          >
+            {project.description}
+          </p>
+        </div>
 
-      <!-- Highlights -->
-      {
-        project.highlights && project.highlights.length > 0 && (
-          <ul class="list-disc list-inside text-left text-neutral-700 dark:text-neutral-300 space-y-2 max-w-xl mx-auto">
-            {project.highlights.map((point) => (
-              <li>{point}</li>
-            ))}
-          </ul>
-        )
-      }
-
-      <!-- CTA -->
-      <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6">
+        <!-- Tecnologías -->
         {
-          project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg transition bg-primary text-white hover:bg-accent"
-            >
-              🌐 Ver sitio en vivo
-            </a>
+          project.tech?.length > 0 && (
+            <div class="flex flex-wrap justify-center gap-3">
+              {project.tech.map((tech) => (
+                <span class="text-sm bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 px-4 py-1.5 rounded-full font-medium tracking-wide shadow-sm">
+                  {tech}
+                </span>
+              ))}
+            </div>
           )
         }
 
+        <!-- Highlights -->
         {
-          project.repo && (
-            <a
-              href={project.repo}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold border-2 border-dark text-dark dark:border-light dark:text-light hover:bg-dark hover:text-white dark:hover:bg-light dark:hover:text-dark transition"
-            >
-              🛠️ Ver repositorio
-            </a>
-          )
+          Array.isArray(project.highlights) &&
+            project.highlights.length > 0 && (
+              <ul class="list-disc list-inside text-left text-surface/80 space-y-2 max-w-xl mx-auto text-base">
+                {project.highlights.map((point) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+            )
         }
-      </div>
 
-      <div class="text-center pt-4">
-        <a
-          href="/#projects"
-          class="text-sm text-neutral-500 dark:text-neutral-400 underline hover:text-primary transition"
-        >
-          ← Volver a proyectos
-        </a>
+        <!-- CTA -->
+        <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6">
+          {
+            project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary inline-flex items-center justify-center gap-2"
+              >
+                🌐 Ver sitio en vivo
+              </a>
+            )
+          }
+
+          {
+            project.repo && (
+              <a
+                href={project.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-outline inline-flex items-center justify-center gap-2"
+              >
+                🛠️ Ver repositorio
+              </a>
+            )
+          }
+        </div>
+
+        <div class="text-center pt-4">
+          <a
+            href="/#projects"
+            class="text-sm text-surface/60 underline hover:text-primary transition"
+          >
+            ← Volver a proyectos
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -133,14 +136,18 @@ const related = projects
   <!-- Proyectos relacionados -->
   <section
     data-reveal
-    class="mt-32 border-t border-neutral-200 dark:border-neutral-700 pt-16 px-6 md:px-12 max-w-5xl mx-auto space-y-12"
+    class="page-bg border-t border-surface-muted dark:border-surface-muted pt-24 p-6 md:px-12"
   >
-    <h2 class="text-2xl font-bold text-dark dark:text-white text-center">
-      También te puede interesar
-    </h2>
+    <div class="max-w-5xl mx-auto space-y-6">
+      <h2
+        class="text-2xl md:text-3xl font-extrabold font-display text-center text-surface text-balance leading-snug"
+      >
+        También te puede interesar
+      </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {related.map((p) => <ProjectCard {...p} />)}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {related.map((p) => <ProjectCard {...p} />)}
+      </div>
     </div>
   </section>
 </Layout>

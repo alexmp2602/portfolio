@@ -1,0 +1,11 @@
+---
+const size = Astro.props.size ?? "w-6 h-6";
+---
+
+<button
+  data-toggle-theme
+  class={`theme-toggle p-2 rounded-full border border-black/10 dark:border-white/20 bg-light dark:bg-dark text-surface hover:ring-2 hover:ring-primary dark:hover:ring-accent transition`}
+  aria-label="Cambiar entre modo claro y oscuro"
+>
+  <div class={`theme-icon ${size} flex items-center justify-center`}></div>
+</button>

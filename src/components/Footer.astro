@@ -6,44 +6,48 @@ import IconEmail from "./icons/IconEmail.astro";
 const year = new Date().getFullYear();
 ---
 
-<footer
-  class="glass-box mt-32 px-6 py-12 max-w-7xl mx-auto border-t border-neutral-200 dark:border-neutral-700 text-center text-sm text-dark/70 dark:text-light/50 space-y-6"
->
-  <div class="flex justify-center gap-6 text-xl">
-    <a
-      href="https://github.com/alexmp2602"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="hover:text-primary transition"
-      aria-label="GitHub"
-    >
-      <IconGitHub />
-    </a>
-    <a
-      href="https://www.linkedin.com/in/alex-pereyra-dev/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="hover:text-primary transition"
-      aria-label="LinkedIn"
-    >
-      <IconLinkedIn />
-    </a>
-    <a
-      href="mailto:alexmp.2602@gmail.com"
-      class="hover:text-primary transition"
-      aria-label="Email"
-    >
-      <IconEmail />
-    </a>
-  </div>
+<footer class="page-bg p-6 pt-16">
+  <div
+    class="glass-box max-w-7xl mx-auto px-6 py-12 border-t border-black/10 dark:border-white/10 text-center text-sm text-surface-muted space-y-6"
+  >
+    <div class="flex justify-center gap-6 text-xl">
+      <a
+        href="https://github.com/alexmp2602"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-primary dark:hover:text-accent transition"
+        aria-label="GitHub"
+      >
+        <IconGitHub />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/alex-pereyra-dev/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-primary dark:hover:text-accent transition"
+        aria-label="LinkedIn"
+      >
+        <IconLinkedIn />
+      </a>
+      <a
+        href="mailto:alexmp.2602@gmail.com"
+        class="hover:text-primary dark:hover:text-accent transition"
+        aria-label="Email"
+      >
+        <IconEmail />
+      </a>
+    </div>
 
-  <p>© {year} Alex Pereyra. Todos los derechos reservados.</p>
-  <p class="text-dark dark:text-light">
-    Desarrollado con
-    <a href="https://astro.build" class="text-primary hover:underline">Astro</a>
-    +
-    <a href="https://tailwindcss.com" class="text-primary hover:underline"
-      >Tailwind CSS</a
-    >.
-  </p>
+    <p>© {year} Alex Pereyra. Todos los derechos reservados.</p>
+    <p>
+      Desarrollado con
+      <a href="https://astro.build" class="text-primary hover:underline"
+        >Astro</a
+      >
+      +
+      <a href="https://tailwindcss.com" class="text-primary hover:underline"
+        >Tailwind CSS</a
+      >.
+    </p>
+  </div>
 </footer>

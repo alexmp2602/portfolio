@@ -2,28 +2,21 @@ const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class",
+  darkMode: "class", // Modo oscuro manual vía clase .dark
   content: [
     "./src/**/*.{astro,html,js,jsx,ts,tsx}",
     "./components/**/*.{astro,html,js,jsx,ts,tsx}",
     "./layouts/**/*.{astro,html,js,jsx,ts,tsx}",
     "./pages/**/*.{astro,html,js,jsx,ts,tsx}",
     "./**/*.astro",
-    "./**/*.js",
   ],
   theme: {
     extend: {
       colors: {
-        primary: "#256340", // verde apagado sobrio
-        accent: "#60A98F", // menta cálido
-        light: ({ opacityVariable, opacityValue }) =>
-          opacityValue !== undefined
-            ? `rgba(250, 250, 250, ${opacityValue})`
-            : `rgb(250 250 250 / var(${opacityVariable}, 1))`,
-        dark: ({ opacityVariable, opacityValue }) =>
-          opacityValue !== undefined
-            ? `rgba(31, 31, 31, ${opacityValue})`
-            : `rgb(31 31 31 / var(${opacityVariable}, 1))`,
+        light: "#fafafa", // fondo claro
+        dark: "#1f1f1f", // fondo oscuro
+        primary: "#256340", // verde principal
+        accent: "#60A98F", // verde claro secundario
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
@@ -44,14 +37,14 @@ export default {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: theme("colors.dark"),
+            color: theme("colors.zinc.800"),
             a: { color: theme("colors.primary") },
             strong: { color: theme("colors.primary") },
           },
         },
         dark: {
           css: {
-            color: theme("colors.light"),
+            color: theme("colors.zinc.100"),
             a: { color: theme("colors.accent") },
             strong: { color: theme("colors.accent") },
           },

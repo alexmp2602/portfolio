@@ -1,22 +1,20 @@
 ---
-
+import ThemeToggle from "./ThemeToggle.astro";
 ---
 
-<nav
-  class="fixed top-0 left-0 w-full z-50 backdrop-blur bg-white/70 dark:bg-dark/70 border-b border-gray-200 dark:border-gray-800 transition-shadow"
->
-  <div
-    class="max-w-screen-xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between"
-  >
+<nav class="fixed top-2 inset-x-2 z-50 glass-box border-b border-black/5 dark:border-white/10">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+    <!-- Inicio -->
     <a
       href="/"
-      class="text-lg font-bold text-dark dark:text-light hover:text-primary transition"
+      class="text-sm sm:text-base font-medium text-surface hover:text-primary transition"
     >
-      Alex Pereyra
+      ← Inicio
     </a>
 
-    <span class="text-sm text-dark/50 dark:text-light/40 tracking-wide">
-      /lab
-    </span>
+    <!-- Ruta + toggle -->
+    <div class="flex items-center gap-4">
+      <ThemeToggle size="w-6 h-6" />
+    </div>
   </div>
 </nav>

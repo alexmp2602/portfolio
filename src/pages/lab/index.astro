@@ -7,22 +7,35 @@ import LabCard from "../../components/LabCard.astro";
 
 <Layout>
   <NavbarLab />
-  <section class="py-20 px-6 md:px-12 max-w-6xl mx-auto">
-    <div class="glass-box text-center mb-12 p-8" data-reveal>
-      <h1 class="text-4xl md:text-5xl font-bold text-dark dark:text-white mb-4">
-        Laboratorio
-      </h1>
-      <p
-        class="text-base md:text-lg text-dark dark:text-light max-w-2xl mx-auto leading-relaxed"
-      >
-        Experimentos visuales, pruebas con animaciones y pequeñas piezas
-        interactivas. Este es mi espacio para jugar, aprender y seguir creciendo
-        como desarrollador frontend.
-      </p>
-    </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {experiments.map((exp) => <LabCard key={exp.slug} {...exp} />)}
+  <section class="page-bg py-24 px-6 md:px-12">
+    <div class="max-w-6xl mx-auto">
+      <!-- Cabecera del laboratorio -->
+      <div
+        class="glass-box text-center mb-16 p-8 md:p-10 rounded-3xl shadow-lg"
+        data-reveal
+      >
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-surface mb-4 tracking-tight leading-tight"
+        >
+          Laboratorio
+        </h1>
+        <p
+          class="text-base md:text-lg text-surface/80 max-w-2xl mx-auto leading-relaxed text-balance"
+        >
+          Experimentos visuales, pruebas con animaciones y pequeñas piezas
+          interactivas. Este es mi espacio para jugar, aprender y seguir
+          creciendo como desarrollador frontend.
+        </p>
+      </div>
+
+      <!-- Tarjetas de experimentos -->
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        data-reveal
+      >
+        {experiments.map((exp) => <LabCard key={exp.slug} {...exp} />)}
+      </div>
     </div>
   </section>
 </Layout>

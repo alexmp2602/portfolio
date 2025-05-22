@@ -3,7 +3,10 @@ import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html
+  lang="es"
+  class="scroll-smooth bg-light text-dark dark:bg-dark dark:text-light transition-colors duration-500 font-sans antialiased"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,19 +39,6 @@ import "../styles/global.css";
       rel="stylesheet"
     />
 
-    <!-- Preferencia de tema -->
-    <script>
-      if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    </script>
-
     <!-- Variables CSS base -->
     <style>
       :root {
@@ -60,70 +50,42 @@ import "../styles/global.css";
     </style>
   </head>
 
-  <body
-    class="bg-light text-dark dark:bg-dark dark:text-light font-sans antialiased selection:bg-accent/30 selection:text-dark"
-  >
+  <body class="bg-light dark:bg-dark">
     <main id="content" class="relative z-10">
       <slot />
     </main>
 
     <!-- Scripts globales -->
-    <script is:inline>
+    <script type="module">
+      import { setupThemeToggle } from "/src/scripts/theme-toggle.js";
+      import { setupNavToggle } from "/src/scripts/nav-toggle.js";
+      import { setupScrollReveal } from "/src/scripts/scroll-reveal.js";
+      import { setupNavbarShadow } from "/src/scripts/navbar-shadow.js";
+
       document.addEventListener("DOMContentLoaded", () => {
-        // Toggle de tema
-        const btn = document.querySelector("[data-toggle-theme]");
-        const icon = document.getElementById("theme-icon");
+        setupThemeToggle();
+        setupNavToggle();
+        setupScrollReveal();
+        setupNavbarShadow();
+      });
 
-        function setIcon() {
-          const isDark = document.documentElement.classList.contains("dark");
-          if (icon) icon.textContent = isDark ? "☀️" : "🌙";
-        }
-
-        if (btn && icon) {
-          setIcon();
-          btn.addEventListener("click", () => {
-            const html = document.documentElement;
-            const isDark = html.classList.toggle("dark");
-            localStorage.theme = isDark ? "dark" : "light";
-            setIcon();
-          });
-        }
-
-        // Reveal animado si no hay preferencia por movimiento reducido
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          const revealEls = document.querySelectorAll("[data-reveal]");
-          revealEls.forEach((el, index) => {
-            const observer = new IntersectionObserver(
-              ([entry]) => {
-                if (entry.isIntersecting) {
-                  el.animate(
-                    {
-                      opacity: [0, 1],
-                      transform: ["translateY(50px)", "translateY(0)"],
-                    },
-                    {
-                      duration: 600,
-                      easing: "ease-out",
-                      delay: index * 150,
-                      fill: "forwards",
-                    }
-                  );
-                  observer.unobserve(el);
-                }
-              },
-              { threshold: 0.1 }
-            );
-            observer.observe(el);
-          });
-        }
-
-        // Sombra al hacer scroll
-        const nav = document.querySelector("[data-navbar]");
-        if (nav) {
-          window.addEventListener("scroll", () => {
-            nav.classList.toggle("shadow-md", window.scrollY > 10);
-          });
-        }
+      // Ajuste de <base> para iframes del laboratorio
+      document.querySelectorAll("iframe[sandbox]").forEach((iframe) => {
+        iframe.addEventListener("load", () => {
+          try {
+            const doc = iframe.contentDocument;
+            if (!doc?.head?.querySelector("base")) {
+              const base = doc.createElement("base");
+              base.href = iframe.src.substring(
+                0,
+                iframe.src.lastIndexOf("/") + 1
+              );
+              doc.head.prepend(base);
+            }
+          } catch (e) {
+            console.warn("No se pudo insertar <base> en iframe:", e);
+          }
+        });
       });
     </script>
   </body>

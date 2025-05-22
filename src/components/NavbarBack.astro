@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
+
 interface Crumb {
   href: string;
   label: string;
@@ -20,37 +22,48 @@ const {
 ---
 
 <nav
-  class="fixed top-0 left-0 w-full z-50 backdrop-blur bg-white/70 dark:bg-dark/70 border-b border-gray-200 dark:border-gray-800 transition-shadow"
+  class="fixed top-2 inset-x-2 z-50 glass-box border-b border-black/5 dark:border-white/10"
 >
   <div
-    class="max-w-screen-xl mx-auto px-6 md:px-12 py-4 flex items-center gap-2 text-sm text-dark/70 dark:text-light/50"
+    class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between"
   >
-    {
-      path.length > 0 ? (
-        <>
-          {path.map((crumb) => (
-            <>
-              <a
-                href={crumb.href}
-                class="hover:text-primary font-medium transition text-dark dark:text-light"
-              >
-                {crumb.label}
-              </a>
-              <span class="mx-1 select-none">/</span>
-            </>
-          ))}
-          <span class="text-dark/40 dark:text-light/30 truncate max-w-[50%]">
-            {current}
-          </span>
-        </>
-      ) : (
-        <a
-          href={fallbackHref}
-          class="text-dark dark:text-light font-medium hover:text-primary transition"
-        >
-          {fallbackLabel}
-        </a>
-      )
-    }
+    <!-- Breadcrumbs o fallback -->
+    <div
+      class="flex items-center gap-2 text-sm text-surface/70 overflow-x-auto"
+    >
+      {
+        path.length > 0 ? (
+          <>
+            {path.map(({ href, label }) => (
+              <>
+                <a
+                  href={href}
+                  class="text-surface hover:text-primary font-medium transition"
+                >
+                  {label}
+                </a>
+                <span class="select-none text-surface/40">/</span>
+              </>
+            ))}
+            <span
+              class="text-surface/50 truncate max-w-[50%] whitespace-nowrap overflow-hidden text-ellipsis"
+              aria-current="page"
+            >
+              {current}
+            </span>
+          </>
+        ) : (
+          <a
+            href={fallbackHref}
+            class="text-surface font-medium hover:text-primary transition"
+          >
+            {fallbackLabel}
+          </a>
+        )
+      }
+    </div>
+
+    <!-- Toggle de tema -->
+    <ThemeToggle size="w-6 h-6" />
   </div>
 </nav>

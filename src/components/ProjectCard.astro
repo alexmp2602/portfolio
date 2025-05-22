@@ -3,12 +3,12 @@ const { title, description, slug, image } = Astro.props;
 ---
 
 <article
-  class="glass-card rounded-2xl overflow-hidden shadow-subtle transition-transform duration-300 hover:scale-[1.015] group"
+  class="glass-card rounded-2xl overflow-hidden shadow-subtle transition-transform duration-300 hover:scale-[1.015] group h-full flex flex-col"
   data-reveal
 >
   <a
     href={`/projects/${slug}`}
-    class="block h-full"
+    class="flex flex-col justify-between h-full"
     aria-label={`Ver proyecto ${title}`}
   >
     <img
@@ -19,14 +19,14 @@ const { title, description, slug, image } = Astro.props;
     />
 
     <div
-      class="p-6 bg-white/90 dark:bg-dark/60 backdrop-blur-sm text-dark dark:text-light"
+      class="p-6 surface-muted backdrop-blur-sm transition-colors duration-300 flex flex-col flex-1"
     >
       <h3
-        class="text-lg font-bold mb-2 group-hover:text-primary dark:group-hover:text-accent transition-colors"
+        class="text-lg font-bold mb-2 text-surface group-hover:text-primary dark:group-hover:text-accent transition-colors"
       >
         {title}
       </h3>
-      <p class="text-sm text-dark/80 dark:text-light/70 leading-relaxed">
+      <p class="text-sm text-surface-muted leading-relaxed mt-auto">
         {description}
       </p>
     </div>

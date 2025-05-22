@@ -28,7 +28,7 @@ export const projects: Project[] = [
     slug: "iabot",
     title: "IABOT | Robótica con LEGO para Niños",
     description:
-      "Sitio institucional para IABOT, un espacio de aprendizaje con robótica educativa para niños. Desarrollado con Next.js y Tailwind CSS, con foco en claridad, escalabilidad y responsividad.",
+      "Sitio web institucional para IABOT, un espacio de aprendizaje con robótica educativa para niños. Desarrollado con Next.js y Tailwind CSS, con foco en claridad, escalabilidad y responsividad.",
     image: "/assets/projects/iabot.webp",
     tech: ["Next.js", "React", "Tailwind CSS"],
     link: "https://iabot.com.ar/",
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     slug: "gallinas-libres",
     title: "Gallinas Libres | Emprendimiento familiar",
     description:
-      "Landing page para emprendimiento local de huevos de gallinas libres. Creado con Astro y Tailwind CSS, optimizado para rendimiento, SEO y bajo peso.",
+      "Landing page para un emprendimiento local de huevos de gallinas libres. Creada con Astro y Tailwind CSS, optimizada para rendimiento, SEO y bajo peso.",
     image: "/assets/projects/gallinas.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://www.gallinaslibres.com/",
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     slug: "domus",
     title: "Domus | Estética Profesional",
     description:
-      "Sitio institucional para un emprendimiento de estética en crecimiento. Hecho con Astro y Tailwind, con diseño accesible y minimalista.",
+      "Sitio web institucional para un emprendimiento de estética en crecimiento. Desarrollado con Astro y Tailwind CSS, con un diseño accesible y minimalista adaptado al rubro.",
     image: "/assets/projects/domus.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://esteticadomus.com/",
@@ -67,9 +67,9 @@ export const projects: Project[] = [
     slug: "cerrajeria-apri",
     title: "Cerrajería APRI",
     description:
-      "Rediseño completo del sitio web institucional para una cerrajería 24 hs. Construido con Next.js y Tailwind CSS, priorizando SEO, accesibilidad y performance.",
+      "Sitio web para cerrajería 24 hs. Implementado con Astro y Tailwind CSS, con foco en SEO, accesibilidad y performance.",
     image: "/assets/projects/apri.webp",
-    tech: ["Next.js", "Tailwind CSS"],
+    tech: ["Astro", "Tailwind CSS"],
     link: "https://www.cerrajeriaapri24hs.com.ar/",
     highlights: [
       "Optimización para dispositivos móviles",
