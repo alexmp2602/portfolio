@@ -1,7 +1,7 @@
-import { setupThemeToggle } from "../src/scripts/theme-toggle.js";
-import { setupNavToggle } from "../src/scripts/nav-toggle.js";
-import { setupScrollReveal } from "../src/scripts/scroll-reveal.js";
-import { setupNavbarShadow } from "../src/scripts/navbar-shadow.js";
+import { setupThemeToggle } from "/scripts/theme-toggle.js";
+import { setupNavToggle } from "/scripts/nav-toggle.js";
+import { setupScrollReveal } from "/scripts/scroll-reveal.js";
+import { setupNavbarShadow } from "/scripts/navbar-shadow.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   setupThemeToggle();
