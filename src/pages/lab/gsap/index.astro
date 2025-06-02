@@ -1,0 +1,48 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import NavbarLab from "../../../components/NavbarLab.astro";
+import { experiments } from "../../../data/experiments";
+import LabCard from "../../../components/LabCard.astro";
+
+const gsapDemos = experiments.filter((exp) =>
+  [
+    "cursor-gsap",
+    "scroll-progress",
+    "sticky-scroll",
+    "scrolltrigger-timeline",
+  ].includes(exp.slug)
+);
+---
+
+<Layout>
+  <NavbarLab />
+
+  <section class="page-bg py-24 px-6" data-reveal>
+    <div class="max-w-7xl mx-auto">
+      <h1
+        class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-surface animate-fade-slide"
+      >
+        Demos de Animaciones con GSAP 🚀
+      </h1>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+        {
+          gsapDemos.map((exp, i) => (
+            <div
+              style={`animation-delay: ${i * 80}ms`}
+              class="motion-safe:animate-fade-slide-up"
+            >
+              <LabCard {...exp} />
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/lab" class="btn-primary rounded-full">
+          ← Volver al laboratorio
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

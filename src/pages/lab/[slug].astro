@@ -38,14 +38,44 @@ if (!experiment) {
         )
       }
 
-      <iframe
-        src={experiment.demo}
-        loading="lazy"
-        title={`Demo interactivo de ${experiment.title}`}
-        sandbox="allow-scripts allow-same-origin allow-popups"
-        frameborder="0"
-        class="w-full h-[600px] rounded-xl border border-black/10 dark:border-white/10 bg-white/90 dark:bg-dark/70 backdrop-blur-sm transition-all"
-      ></iframe>
+      {
+        experiment.image && (
+          <img
+            src={experiment.image}
+            alt={`Vista previa de ${experiment.title}`}
+            class="w-full rounded-xl mb-10 shadow-md object-cover max-h-[420px]"
+            loading="lazy"
+          />
+        )
+      }
+
+      {
+        experiment.demo ? (
+          experiment.demo.startsWith("/") ? (
+            <iframe
+              src={experiment.demo}
+              loading="lazy"
+              title={`Demo interactivo de ${experiment.title}`}
+              sandbox="allow-scripts allow-same-origin allow-popups"
+              frameborder="0"
+              class="w-full h-[600px] rounded-xl border border-black/10 dark:border-white/10 bg-white/90 dark:bg-dark/70 backdrop-blur-sm transition-all"
+            />
+          ) : (
+            <a
+              href={experiment.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary inline-block text-center mt-6"
+            >
+              🌐 Ver demo externo
+            </a>
+          )
+        ) : (
+          <p class="text-center text-surface-muted mt-10">
+            Este experimento no tiene una demo disponible.
+          </p>
+        )
+      }
 
       <div class="mt-10 text-center">
         <a href="/lab" class="btn-primary inline-block rounded-full">

@@ -11,20 +11,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "sigj",
-    title: "SIGJ | Gestión Judicial",
-    description:
-      "Aplicación moderna para la gestión digital de expedientes, documentación y agenda en entornos administrativos. Desarrollada con Next.js, React y Tailwind CSS, esta solución optimiza flujos de trabajo, automatiza procesos y mejora la accesibilidad a la información.",
-    image: "/assets/projects/sigj.webp",
-    tech: ["Next.js", "React", "Tailwind CSS"],
-    link: "https://sigj.vercel.app/",
-    highlights: [
-      "Interfaz responsive para entornos administrativos",
-      "Accesibilidad priorizada con etiquetas ARIA",
-      "Flujo de carga optimizado y control de estado",
-    ],
-  },
-  {
     slug: "iabot",
     title: "IABOT | Robótica con LEGO para Niños",
     description:

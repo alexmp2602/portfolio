@@ -1,6 +1,23 @@
 ---
-import { experiments } from "../data/experiments";
 import LabCard from "./LabCard.astro";
+
+// Solo mostramos SIGJ y el acceso a la carpeta GSAP
+const featuredDemos = [
+  {
+    slug: "sigj",
+    title: "SIGJ | Gestión Judicial",
+    description:
+      "Demo funcional de un sistema de gestión judicial moderno con interfaz clara y fluida.",
+    image: "/assets/lab/sigj.webp",
+  },
+  {
+    slug: "gsap",
+    title: "Animaciones con GSAP",
+    description:
+      "Colección de animaciones y efectos visuales interactivos con GSAP.",
+    image: "/assets/lab/gsap-cover.webp",
+  },
+];
 ---
 
 <section id="lab" class="page-bg py-24 px-6" data-reveal>
@@ -23,12 +40,12 @@ import LabCard from "./LabCard.astro";
 
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
       {
-        experiments.slice(0, 6).map((exp, i) => (
+        featuredDemos.map((demo, i) => (
           <div
-            style={`animation-delay: ${i * 80}ms`}
+            style={`animation-delay: ${i * 100}ms`}
             class="motion-safe:animate-fade-slide-up"
           >
-            <LabCard {...exp} />
+            <LabCard {...demo} />
           </div>
         ))
       }
