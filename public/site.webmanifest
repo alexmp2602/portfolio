@@ -9,9 +9,9 @@
     "lang": "es",
     "icons": [
         {
-            "src": "/favicon.svg",
+            "src": "/assets/logo/logo_oscuro_original.webp",
             "sizes": "any",
-            "type": "image/svg+xml"
+            "type": "image/webp"
         },
         {
             "src": "/icon-192.png",
