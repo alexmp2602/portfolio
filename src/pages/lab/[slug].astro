@@ -29,6 +29,7 @@ if (!experiment) {
       data-reveal
     >
       <article aria-labelledby="experiment-title">
+        <!-- Título -->
         <h1
           id="experiment-title"
           class="text-3xl md:text-5xl font-extrabold text-surface mb-6 leading-tight tracking-tight"
@@ -36,6 +37,7 @@ if (!experiment) {
           {experiment.title}
         </h1>
 
+        <!-- Descripción -->
         {
           experiment.description && (
             <p class="text-lg md:text-xl text-surface/80 leading-relaxed mb-10 text-balance">
@@ -44,6 +46,7 @@ if (!experiment) {
           )
         }
 
+        <!-- Imagen previa -->
         {
           experiment.image && (
             <img
@@ -56,13 +59,14 @@ if (!experiment) {
           )
         }
 
+        <!-- Demo interactiva -->
         {
           experiment.demo ? (
             experiment.demo.startsWith("/") ? (
               <iframe
                 src={experiment.demo}
-                loading="lazy"
                 title={`Demo interactivo de ${experiment.title}`}
+                loading="lazy"
                 sandbox="allow-scripts allow-same-origin allow-popups"
                 class="w-full h-[600px] rounded-xl border border-black/10 dark:border-white/10 bg-white/90 dark:bg-dark/70 backdrop-blur-sm transition-all"
               />
@@ -84,6 +88,7 @@ if (!experiment) {
           )
         }
 
+        <!-- Botón volver -->
         <div class="mt-10 text-center">
           <a
             href="/lab"

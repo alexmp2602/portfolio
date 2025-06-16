@@ -1,5 +1,5 @@
 ---
-const { title, description, slug, image } = Astro.props;
+const { title, description, slug, image, tags = [] } = Astro.props;
 ---
 
 <article
@@ -10,7 +10,7 @@ const { title, description, slug, image } = Astro.props;
 >
   <a
     href={`/projects/${slug}`}
-    class="flex flex-col justify-between h-full"
+    class="flex flex-col justify-between h-full outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-2xl"
     aria-label={`Ver proyecto ${title}`}
   >
     <img
@@ -23,20 +23,45 @@ const { title, description, slug, image } = Astro.props;
       height="360"
     />
 
-    <div
-      class="p-6 surface-muted backdrop-blur-sm transition-colors duration-300 flex flex-col flex-1"
-    >
+    <div class="p-6 surface-muted backdrop-blur-sm transition-colors duration-300 flex flex-col gap-4 flex-1">
       <h3
         id={`project-${slug}`}
-        class="text-lg font-bold mb-2 text-surface group-hover:text-primary dark:group-hover:text-accent transition-colors"
+        class="text-lg font-bold text-surface group-hover:text-primary dark:group-hover:text-accent transition-colors"
       >
         {title}
       </h3>
-      <p
-        class="text-sm text-surface-muted leading-relaxed mt-auto text-balance"
-      >
+
+      <p class="text-sm text-surface-muted leading-relaxed text-balance">
         {description}
       </p>
+
+      {tags.length > 0 && (
+        <ul class="flex flex-wrap gap-2 mt-auto pt-2">
+          {tags.map((tag: string) => (
+            <li
+              class="text-xs px-2 py-1 rounded-full bg-primary/10 dark:bg-accent/10 text-primary dark:text-accent border border-primary/20 dark:border-accent/20 font-medium transition-all duration-300 hover:scale-105 hover:bg-primary/20 dark:hover:bg-accent/20"
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <span
+        class="inline-flex items-center gap-1 text-sm text-primary dark:text-accent font-semibold mt-4 group-hover:underline transition-all duration-300"
+      >
+        Ver proyecto
+        <svg
+          class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </span>
     </div>
   </a>
 </article>

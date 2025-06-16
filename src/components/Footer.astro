@@ -6,11 +6,11 @@ import IconEmail from "./icons/IconEmail.astro";
 const year = new Date().getFullYear();
 ---
 
-<footer class="page-bg p-6 pt-16">
+<footer class="page-bg pt-24 pb-10 px-6" role="contentinfo">
   <div
     class="glass-box max-w-7xl mx-auto px-6 py-12 border-t border-black/10 dark:border-white/10 text-center text-sm text-surface-muted space-y-6"
   >
-    <!-- Íconos -->
+    <!-- Redes -->
     <div class="flex justify-center gap-6 text-xl">
       <a
         href="https://github.com/alexmp2602"
@@ -41,14 +41,13 @@ const year = new Date().getFullYear();
       </a>
     </div>
 
-    <!-- Copyright -->
+    <!-- Créditos -->
     <p class="text-surface-muted">
-      © {year} Alex Pereyra. Todos los derechos reservados.
+      © {year} Alex Pereyra — Todos los derechos reservados.
     </p>
 
-    <!-- Tech stack -->
-    <p>
-      Desarrollado con
+    <p class="text-surface-muted">
+      Hecho con
       <a
         href="https://astro.build"
         target="_blank"
@@ -65,7 +64,7 @@ const year = new Date().getFullYear();
         class="text-primary hover:underline"
       >
         Tailwind CSS
-      </a>.
+      </a>
     </p>
   </div>
 </footer>

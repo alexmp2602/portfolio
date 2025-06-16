@@ -1,17 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 @import "tailwindcss";
 
+/* === Variables globales === */
+:root {
+  --clr-bg-light: #f9fafb;
+  --clr-bg-dark: #1f1f1f;
+  --clr-primary: #256340;
+  --clr-accent: #60a98f;
+  --clr-text-dark: #1e293b;
+  --clr-text-light: #f4f4f5;
+}
+
+/* === Tipografía y comportamiento === */
 html {
   font-family: "Inter", sans-serif;
 }
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 }
 
-/* === Layout general === */
+/* === Layout === */
 .section-container {
   max-width: 72rem;
   margin-inline: auto;
@@ -23,23 +33,25 @@ html {
   }
 }
 
+/* === Componentes === */
 @layer components {
-  /* === Fondo general === */
+  /* Fondo general */
   .page-bg {
     @apply transition-colors duration-500;
-    background-color: #fafafa;
+    background-color: var(--clr-bg-light);
   }
   .dark .page-bg {
-    background-color: #1f1f1f;
+    background-color: var(--clr-bg-dark);
   }
 
-  /* === Texto adaptado al fondo === */
+  /* Texto adaptativo */
   .text-surface {
-    color: #1e293b;
+    color: var(--clr-text-dark);
   }
   .dark .text-surface {
-    color: #f4f4f5;
+    color: var(--clr-text-light);
   }
+
   .text-surface-muted {
     color: rgba(30, 41, 59, 0.7);
   }
@@ -47,30 +59,31 @@ html {
     color: rgba(244, 244, 245, 0.6);
   }
 
-  /* === Bloques con glassmorphism === */
+  /* Glassmorphism */
   .glass-box,
   .glass-card {
     @apply backdrop-blur-sm rounded-2xl transition-colors;
-    color: #1e293b;
     background-color: rgba(255, 255, 255, 0.65);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    color: var(--clr-text-dark);
     border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
   }
   .dark .glass-box,
   .dark .glass-card {
-    color: #f4f4f5;
-    background-color: rgba(24, 24, 27, 0.6);
+    background-color: rgba(36, 36, 40, 0.65);
+    color: var(--clr-text-light);
     border: 1px solid rgba(255, 255, 255, 0.05);
   }
+
   .glass-card {
     @apply shadow-lg backdrop-blur-md;
-    background-color: rgba(250, 250, 250, 0.6);
+    background-color: rgba(250, 250, 250, 0.7);
   }
   .dark .glass-card {
     background-color: rgba(31, 31, 31, 0.5);
   }
 
-  /* === Fondos y elevación === */
+  /* Superficies */
   .surface-muted {
     background-color: #f4f4f5;
   }
@@ -95,7 +108,7 @@ html {
     background-color: rgba(0, 0, 0, 0.6);
   }
 
-  /* === Sombras y animaciones === */
+  /* Sombras y hover */
   .uniform-shadow {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.3s ease;
@@ -113,34 +126,48 @@ html {
       0 4px 6px -4px rgba(0, 0, 0, 0.1);
   }
 
-  /* === Botones === */
+  /* Botones */
   .btn-primary {
     @apply inline-block font-semibold px-6 py-3 rounded-xl shadow-sm transition-transform;
-    background-color: #256340;
+    background-color: var(--clr-primary);
     color: #fff;
   }
   .btn-primary:hover {
     transform: scale(1.05);
   }
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--clr-primary);
+    outline-offset: 2px;
+  }
   .dark .btn-primary {
-    background-color: #60a98f;
+    background-color: var(--clr-accent);
     color: #000;
   }
 
   .btn-outline {
     @apply inline-block font-semibold px-6 py-3 rounded-xl transition-transform border-2;
-    border-color: #256340;
-    color: #256340;
+    border-color: var(--clr-primary);
+    color: var(--clr-primary);
   }
   .btn-outline:hover {
     transform: scale(1.05);
   }
+  .btn-outline:active {
+    transform: scale(0.98);
+  }
+  .btn-outline:focus-visible {
+    outline: 2px solid var(--clr-primary);
+    outline-offset: 2px;
+  }
   .dark .btn-outline {
-    border-color: #60a98f;
-    color: #60a98f;
+    border-color: var(--clr-accent);
+    color: var(--clr-accent);
   }
 
-  /* === Enlaces de navegación === */
+  /* Navegación */
   .nav-link {
     @apply transition-colors duration-150;
     color: #22223b;
@@ -149,19 +176,19 @@ html {
     color: #f8f8f2;
   }
   .nav-link:hover {
-    color: #256340;
+    color: var(--clr-primary);
   }
   .dark .nav-link:hover {
-    color: #60a98f;
+    color: var(--clr-accent);
   }
 }
 
-/* === Animaciones === */
+/* === Utilidades === */
 @layer utilities {
-  @keyframes fade-slide {
+  @keyframes fadeInUp {
     from {
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateY(24px);
     }
     to {
       opacity: 1;
@@ -169,26 +196,10 @@ html {
     }
   }
 
-  @keyframes fade-slide-down {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fade-slide-up {
-    from {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
   @keyframes icon-fade-scale {
@@ -202,15 +213,6 @@ html {
     }
   }
 
-  .animate-fade-slide {
-    animation: fade-slide 0.3s ease-out both;
-  }
-  .animate-fade-slide-down {
-    animation: fade-slide-down 0.3s ease-out both;
-  }
-  .animate-fade-slide-up {
-    animation: fade-slide-up 0.4s ease-out both;
-  }
   .theme-icon-enter {
     animation: icon-fade-scale 0.3s ease-out;
   }
@@ -221,4 +223,31 @@ html {
   .dark .icon-invert-dark {
     filter: invert(1);
   }
+}
+
+/* === Delay animaciones === */
+.fade-delay-100 {
+  animation-delay: 0.1s;
+}
+.fade-delay-200 {
+  animation-delay: 0.2s;
+}
+.fade-delay-300 {
+  animation-delay: 0.3s;
+}
+.fade-delay-400 {
+  animation-delay: 0.4s;
+}
+.fade-delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* === Navbar === */
+.navbar-shadow {
+  @apply shadow-md transition-shadow duration-300;
+}
+
+.navbar-scrolled {
+  @apply backdrop-blur-lg bg-white/70 dark:bg-zinc-900/70 border border-black/5 dark:border-white/10;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }

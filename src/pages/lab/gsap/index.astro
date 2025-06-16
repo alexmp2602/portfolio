@@ -18,7 +18,7 @@ const gsapDemos = experiments.filter((exp) =>
   <NavbarLab />
 
   <section
-    class="page-bg py-24 px-6"
+    class="page-bg py-24 px-6 md:px-12"
     data-reveal
     role="region"
     aria-labelledby="gsap-title"
@@ -31,18 +31,21 @@ const gsapDemos = experiments.filter((exp) =>
         Demos de Animaciones con GSAP 🚀
       </h1>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+      <ul
+        class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8"
+        aria-labelledby="gsap-title"
+      >
         {
           gsapDemos.map((exp, i) => (
-            <div
-              style={`animation-delay: ${i * 80}ms`}
+            <li
               class="motion-safe:animate-fade-slide-up"
+              style={`animation-delay: ${i * 80}ms`}
             >
               <LabCard {...exp} />
-            </div>
+            </li>
           ))
         }
-      </div>
+      </ul>
 
       <div class="mt-12 text-center">
         <a

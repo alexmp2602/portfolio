@@ -7,12 +7,12 @@ import ThemeToggle from "./ThemeToggle.astro";
   data-navbar
   role="navigation"
   aria-label="Menú principal"
-  class="fixed top-2 inset-x-2 z-50 glass-box border-b border-black/5 dark:border-white/10"
+  class="fixed top-2 inset-x-2 z-50 glass-box border border-black/5 dark:border-white/10 fade-in-up fade-delay-100"
 >
   <div
     class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between"
   >
-    <!-- Marca -->
+    <!-- Marca personal -->
     <a
       href="/"
       class="text-lg sm:text-xl font-extrabold tracking-tight text-surface"
@@ -21,19 +21,15 @@ import ThemeToggle from "./ThemeToggle.astro";
     </a>
 
     <!-- Navegación desktop -->
-    <div
-      class="hidden md:flex items-center gap-5 sm:gap-8 text-sm sm:text-base"
-    >
+    <div class="hidden md:flex items-center gap-6 text-sm sm:text-base">
       <a href="#sobre-mi" class="nav-link">Sobre mí</a>
       <a href="#proyectos" class="nav-link">Proyectos</a>
       <a href="#contacto" class="nav-link">Contacto</a>
 
-      <div class="ml-3">
-        <ThemeToggle />
-      </div>
+      <ThemeToggle class="ml-4" />
     </div>
 
-    <!-- Botón hamburguesa -->
+    <!-- Botón hamburguesa móvil -->
     <button
       id="menu-btn"
       aria-label="Abrir menú"
@@ -51,11 +47,10 @@ import ThemeToggle from "./ThemeToggle.astro";
     class="hidden md:hidden glass-box border-t border-black/5 dark:border-white/10 animate-fade-slide-down"
     tabindex="-1"
   >
-    <div class="flex flex-col px-6 py-4 space-y-4 text-center">
+    <div class="flex flex-col items-center px-6 py-4 space-y-4 text-center">
       <a href="#sobre-mi" class="nav-link">Sobre mí</a>
       <a href="#proyectos" class="nav-link">Proyectos</a>
       <a href="#contacto" class="nav-link">Contacto</a>
-
       <ThemeToggle size="w-6 h-6 mx-auto" />
     </div>
   </div>

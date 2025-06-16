@@ -5,31 +5,71 @@ import Hero from "../components/Hero.astro";
 import AboutSkills from "../components/AboutSkills.astro";
 import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
 import LabSection from "../components/LabSection.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<Layout>
+<Layout
+  title="Alex Pereyra | Frontend Developer"
+  description="Soy Alex Pereyra, desarrollador frontend especializado en Astro, React y Tailwind CSS. Mirá mis proyectos y explorá el laboratorio creativo."
+  canonical="https://www.alexpereyra.dev"
+  ogImage="/opengraph.png"
+>
   <Navbar />
 
-  <main id="main-content" role="main" aria-label="Contenido principal">
-    <section id="inicio" role="region" aria-labelledby="hero-title">
+  <main
+    id="main-content"
+    role="main"
+    aria-label="Contenido principal"
+    class="page-bg"
+  >
+    <!-- Hero: fondo y espaciado propios -->
+    <section
+      id="inicio"
+      role="region"
+      aria-labelledby="hero-title"
+      class="fade-in-up fade-delay-100"
+    >
       <Hero />
     </section>
 
-    <section id="sobre-mi" role="region" aria-labelledby="about-title">
+    <!-- Sobre mí -->
+    <section
+      id="sobre-mi"
+      role="region"
+      aria-labelledby="about-title"
+      class="fade-in-up fade-delay-200"
+    >
       <AboutSkills />
     </section>
 
-    <section id="proyectos" role="region" aria-labelledby="projects-title">
+    <!-- Proyectos -->
+    <section
+      id="proyectos"
+      role="region"
+      aria-labelledby="projects-title"
+      class="fade-in-up fade-delay-300"
+    >
       <Projects />
     </section>
 
-    <section id="contacto" role="region" aria-labelledby="contact-title">
+    <!-- Contacto -->
+    <section
+      id="contacto"
+      role="region"
+      aria-labelledby="contact-title"
+      class="fade-in-up fade-delay-400"
+    >
       <Contact />
     </section>
 
-    <section id="laboratorio" role="region" aria-labelledby="lab-title">
+    <!-- Laboratorio -->
+    <section
+      id="laboratorio"
+      role="region"
+      aria-labelledby="lab-title"
+      class="fade-in-up fade-delay-500"
+    >
       <LabSection />
     </section>
   </main>

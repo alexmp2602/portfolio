@@ -1,5 +1,12 @@
 ---
 import "../styles/global.css";
+
+const {
+  title = "Alex Pereyra | Frontend Developer",
+  description = "Portafolio de Alex Pereyra, desarrollador frontend especializado en Astro, React y Tailwind CSS.",
+  canonical = "https://www.alexpereyra.dev",
+  ogImage = "/opengraph.png",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -10,16 +17,13 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alex Pereyra | Frontend Developer</title>
+    <title>{title}</title>
 
     <!-- Meta -->
-    <meta
-      name="description"
-      content="Portafolio de Alex Pereyra, desarrollador frontend especializado en Astro, React y Tailwind CSS."
-    />
+    <meta name="description" content={description} />
     <meta name="theme-color" content="#256340" />
     <meta name="color-scheme" content="light dark" />
-    <link rel="canonical" href="https://www.alexpereyra.dev" />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -29,13 +33,10 @@ import "../styles/global.css";
     />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Alex Pereyra | Frontend Developer" />
-    <meta
-      property="og:description"
-      content="Explorá mi trabajo como desarrollador frontend y conocé mis proyectos."
-    />
-    <meta property="og:image" content="/opengraph.png" />
-    <meta property="og:url" content="https://www.alexpereyra.dev" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
 
     <!-- Tipografía Inter -->

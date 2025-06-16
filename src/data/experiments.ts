@@ -18,6 +18,8 @@ export const experiments: Experiment[] = [
   {
     slug: "gsap",
     title: "Animaciones con GSAP",
+    description:
+      "Colección de microanimaciones visuales creadas con GSAP. Ideal para UI modernas.",
     image: "/assets/lab/gsap-cover.webp",
   },
   {

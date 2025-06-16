@@ -6,30 +6,37 @@ export function setupNavToggle() {
 
   let isOpen = false;
 
-  const toggleMenu = () => {
-    isOpen = !isOpen;
+  const openMenu = () => {
+    isOpen = true;
+    mobileMenu.classList.remove("hidden");
+    mobileMenu.classList.add("animate-fade-slide-down");
 
-    mobileMenu.classList.toggle("hidden", !isOpen);
-    mobileMenu.classList.toggle("animate-fade-slide-down", isOpen);
-
-    // Accesibilidad
-    menuBtn.setAttribute("aria-expanded", isOpen.toString());
-    mobileMenu.setAttribute("aria-hidden", (!isOpen).toString());
-
-    // Prevención de foco si está oculto
-    if (!isOpen) {
-      mobileMenu.setAttribute("tabindex", "-1");
-    } else {
-      mobileMenu.removeAttribute("tabindex");
-    }
+    menuBtn.setAttribute("aria-expanded", "true");
+    mobileMenu.setAttribute("aria-hidden", "false");
+    mobileMenu.removeAttribute("tabindex");
   };
 
+  const closeMenu = () => {
+    isOpen = false;
+    mobileMenu.classList.add("hidden");
+    mobileMenu.classList.remove("animate-fade-slide-down");
+
+    menuBtn.setAttribute("aria-expanded", "false");
+    mobileMenu.setAttribute("aria-hidden", "true");
+    mobileMenu.setAttribute("tabindex", "-1");
+  };
+
+  const toggleMenu = () => {
+    isOpen ? closeMenu() : openMenu();
+  };
+
+  // Evento click botón
   menuBtn.addEventListener("click", toggleMenu);
 
-  // Cerrar menú al hacer clic en un enlace interno
+  // Cierra al hacer clic en cualquier <a href="#...">
   mobileMenu.querySelectorAll("a[href^='#']").forEach((link) => {
     link.addEventListener("click", () => {
-      if (isOpen) toggleMenu();
+      if (isOpen) closeMenu();
     });
   });
 }

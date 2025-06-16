@@ -2,23 +2,26 @@ export function setupNavbarShadow() {
   const nav = document.querySelector("[data-navbar]");
   if (!nav) return;
 
-  let lastKnownScrollY = 0;
+  let lastScrollY = window.scrollY;
   let ticking = false;
 
-  const applyShadow = () => {
-    nav.classList.toggle("shadow-md", lastKnownScrollY > 10);
+  const updateNavStyles = () => {
+    const shouldAddShadow = lastScrollY > 10;
+
+    nav.classList.toggle("navbar-shadow", shouldAddShadow);
+    nav.classList.toggle("navbar-scrolled", shouldAddShadow);
+
     ticking = false;
   };
 
   const onScroll = () => {
-    lastKnownScrollY = window.scrollY;
+    lastScrollY = window.scrollY;
     if (!ticking) {
-      window.requestAnimationFrame(applyShadow);
+      window.requestAnimationFrame(updateNavStyles);
       ticking = true;
     }
   };
 
-  // Inicial
-  applyShadow();
+  updateNavStyles(); // inicial
   window.addEventListener("scroll", onScroll, { passive: true });
 }

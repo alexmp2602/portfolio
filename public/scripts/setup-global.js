@@ -1,6 +1,5 @@
 import { setupThemeToggle } from "/scripts/theme-toggle.js";
 import { setupNavToggle } from "/scripts/nav-toggle.js";
-import { setupScrollReveal } from "/scripts/scroll-reveal.js";
 import { setupNavbarShadow } from "/scripts/navbar-shadow.js";
 
 // Callback para ejecutar en el momento óptimo
@@ -8,7 +7,6 @@ const initApp = () => {
   try {
     setupThemeToggle?.();
     setupNavToggle?.();
-    setupScrollReveal?.();
     setupNavbarShadow?.();
   } catch (err) {
     console.warn("Error al inicializar scripts globales:", err);

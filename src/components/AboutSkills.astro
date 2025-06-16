@@ -58,15 +58,14 @@ const invertInDark = ["GitHub", "Next.js"];
   <div class="max-w-7xl mx-auto">
     <h2
       id="about-title"
-      class="text-surface text-4xl md:text-5xl font-extrabold text-center mb-16 animate-fade-slide"
-      data-reveal
+      class="text-surface text-4xl md:text-5xl font-extrabold text-center mb-16 fade-in-up fade-delay-100"
     >
       Sobre mí & Tecnologías
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+    <div class="grid md:grid-cols-2 gap-20 items-start">
       <!-- Columna izquierda -->
-      <div class="flex flex-col gap-10 animate-fade-slide-down" data-reveal>
+      <div class="flex flex-col gap-10 fade-in-up fade-delay-200">
         <div class="flex justify-center">
           <img
             src="/assets/profile/alex.webp"
@@ -79,29 +78,27 @@ const invertInDark = ["GitHub", "Next.js"];
           />
         </div>
 
-        <div class="glass-box p-6 space-y-6 leading-relaxed text-balance">
+        <div class="glass-box p-6 space-y-6 leading-relaxed">
           <p class="text-surface text-lg md:text-xl text-justify">
             Soy <strong>Alex Pereyra</strong>, desarrollador frontend metódico y
             detallista, apasionado por crear interfaces limpias, modernas y
             accesibles. Trabajo con Astro, React, Tailwind CSS y TypeScript,
-            priorizando siempre buenas prácticas, rendimiento y calidad en cada
-            proyecto.
+            priorizando buenas prácticas, rendimiento y calidad.
           </p>
           <p class="text-surface-muted text-sm text-center">
-            Mi stack está orientado a eficiencia, diseño y accesibilidad. Me
-            enfoco en experiencias limpias, rápidas y adaptables a cualquier
-            dispositivo.
+            Mi stack está orientado a eficiencia, diseño y accesibilidad.
+            Enfocado en experiencias limpias, rápidas y adaptables.
           </p>
         </div>
       </div>
 
       <!-- Columna derecha -->
-      <div class="flex flex-col gap-8" data-reveal>
+      <div class="flex flex-col gap-8 fade-in-up fade-delay-300">
         {
           Object.entries(skills).map(([group, techs], groupIndex) => (
             <div
-              class="glass-box p-6 transition-transform duration-300 hover:scale-[1.02] motion-safe:animate-fade-slide-up"
-              style={`animation-delay: ${groupIndex * 100}ms`}
+              class="glass-box p-6 transition-transform duration-300 hover:scale-[1.02]"
+              style={`animation-delay: ${groupIndex * 150}ms`}
             >
               <h3
                 class="text-lg md:text-xl font-semibold text-primary tracking-wide mb-4 text-center"
@@ -111,14 +108,14 @@ const invertInDark = ["GitHub", "Next.js"];
               </h3>
 
               <ul
-                class="grid grid-cols-4 gap-6 place-items-center"
+                class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-4 gap-6 place-items-center"
                 aria-labelledby={`skills-${groupIndex}`}
               >
                 {techs.map((skill, index) => {
                   const shouldInvert = invertInDark.includes(skill.name);
                   return (
                     <li
-                      class="flex flex-col items-center gap-2 select-none motion-safe:animate-fade-slide-up"
+                      class="flex flex-col items-center gap-2 motion-safe:animate-fade-slide-up"
                       style={`animation-delay: ${index * 80}ms`}
                     >
                       <div
@@ -128,12 +125,12 @@ const invertInDark = ["GitHub", "Next.js"];
                         <img
                           src={skill.icon}
                           alt={skill.name}
+                          class={`w-8 h-8 transition duration-300 ${shouldInvert ? "icon-invert-dark" : ""}`}
                           loading="lazy"
                           decoding="async"
-                          class={`w-8 h-8 transition duration-300 ${shouldInvert ? "icon-invert-dark" : ""}`}
                         />
                       </div>
-                      <span class="text-xs sm:text-sm text-surface tracking-tight text-center">
+                      <span class="text-xs sm:text-sm text-surface text-center tracking-tight">
                         {skill.name}
                       </span>
                     </li>
