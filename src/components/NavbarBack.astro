@@ -34,8 +34,8 @@ const {
       {
         path.length > 0 ? (
           <>
-            {path.map(({ href, label }) => (
-              <>
+            {path.map(({ href, label }, index) => (
+              <span class="flex items-center gap-2">
                 <a
                   href={href}
                   class="text-surface hover:text-primary font-medium transition"
@@ -43,7 +43,7 @@ const {
                   {label}
                 </a>
                 <span class="select-none text-surface/40">/</span>
-              </>
+              </span>
             ))}
             <span
               class="text-surface/50 truncate max-w-[50%] whitespace-nowrap overflow-hidden text-ellipsis"

@@ -17,9 +17,15 @@ const gsapDemos = experiments.filter((exp) =>
 <Layout>
   <NavbarLab />
 
-  <section class="page-bg py-24 px-6" data-reveal>
+  <section
+    class="page-bg py-24 px-6"
+    data-reveal
+    role="region"
+    aria-labelledby="gsap-title"
+  >
     <div class="max-w-7xl mx-auto">
       <h1
+        id="gsap-title"
         class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-surface animate-fade-slide"
       >
         Demos de Animaciones con GSAP 🚀
@@ -39,7 +45,11 @@ const gsapDemos = experiments.filter((exp) =>
       </div>
 
       <div class="mt-12 text-center">
-        <a href="/lab" class="btn-primary rounded-full">
+        <a
+          href="/lab"
+          class="btn-primary rounded-full"
+          aria-label="Volver al laboratorio principal"
+        >
           ← Volver al laboratorio
         </a>
       </div>

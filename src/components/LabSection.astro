@@ -1,7 +1,6 @@
 ---
 import LabCard from "./LabCard.astro";
 
-// Solo mostramos SIGJ y el acceso a la carpeta GSAP
 const featuredDemos = [
   {
     slug: "sigj",
@@ -20,9 +19,16 @@ const featuredDemos = [
 ];
 ---
 
-<section id="lab" class="page-bg py-24 px-6" data-reveal>
+<section
+  id="laboratorio"
+  class="page-bg py-24 px-6"
+  role="region"
+  aria-labelledby="lab-title"
+  data-reveal
+>
   <div class="max-w-7xl mx-auto">
     <h2
+      id="lab-title"
       class="text-4xl md:text-5xl font-extrabold text-center mb-16 text-surface animate-fade-slide"
     >
       Laboratorio Creativo 🧪
@@ -31,28 +37,37 @@ const featuredDemos = [
     <div
       class="glass-box max-w-3xl mx-auto p-8 mb-12 text-center animate-fade-slide-down"
     >
-      <p class="text-lg md:text-xl leading-relaxed text-surface-muted">
+      <p
+        class="text-lg md:text-xl leading-relaxed text-surface-muted text-balance"
+      >
         Exploro ideas, animaciones, prototipos visuales y pruebas de código que
         no siempre terminan en proyectos formales, pero muestran cómo
         experimento y aprendo en el proceso.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+    <ul
+      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8"
+      aria-labelledby="lab-title"
+    >
       {
         featuredDemos.map((demo, i) => (
-          <div
-            style={`animation-delay: ${i * 100}ms`}
+          <li
             class="motion-safe:animate-fade-slide-up"
+            style={`animation-delay: ${i * 100}ms`}
           >
             <LabCard {...demo} />
-          </div>
+          </li>
         ))
       }
-    </div>
+    </ul>
 
     <div class="mt-12 text-center">
-      <a href="/lab" class="btn-primary rounded-full">
+      <a
+        href="/lab"
+        class="btn-primary rounded-full"
+        aria-label="Ver todos los experimentos del laboratorio"
+      >
         Ver todos los experimentos
       </a>
     </div>

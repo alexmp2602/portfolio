@@ -24,42 +24,42 @@ export const experiments: Experiment[] = [
     slug: "scroll-reveal",
     title: "Animación Scroll Reveal",
     description:
-      "Ejemplo de animación con IntersectionObserver para revelar contenido al hacer scroll, usando HTML, CSS y JavaScript.",
+      "Animación suave al hacer scroll, usando IntersectionObserver con HTML, CSS y JavaScript puro.",
     demo: "/demos/scroll-reveal/index.html",
   },
   {
     slug: "parallax-scroll",
     title: "Parallax Básico",
     description:
-      "Demostración de efecto parallax con imágenes de fondo y capas superpuestas.",
+      "Efecto parallax con imágenes de fondo y capas superpuestas para una experiencia visual más dinámica.",
     demo: "/demos/parallax-scroll/index.html",
   },
   {
     slug: "cursor-gsap",
     title: "Cursor Personalizado con GSAP",
     description:
-      "Interacción avanzada con animación del cursor usando la librería GSAP.",
+      "Interacción avanzada con cursor animado usando la librería GSAP para efectos suaves y personalizados.",
     demo: "/demos/cursor-gsap/index.html",
   },
   {
     slug: "scroll-progress",
     title: "Barra de Progreso al Scroll",
     description:
-      "Barra de progreso que indica el avance vertical de la página conforme se hace scroll.",
+      "Barra que muestra el avance de lectura vertical conforme se navega por la página.",
     demo: "/demos/scroll-progress/index.html",
   },
   {
     slug: "sticky-scroll",
     title: "Sticky Scroll Animado",
     description:
-      "Elementos que se fijan y animan mientras se hace scroll en la página.",
+      "Elementos que se fijan al viewport y se animan durante el desplazamiento.",
     demo: "/demos/sticky-scroll/index.html",
   },
   {
     slug: "scrolltrigger-timeline",
     title: "Sticky Timeline con ScrollTrigger",
     description:
-      "Cronología animada y sticky utilizando la librería ScrollTrigger de GSAP.",
+      "Cronología animada con efecto sticky usando ScrollTrigger de GSAP para una experiencia narrativa fluida.",
     demo: "/demos/scrolltrigger-timeline/index.html",
   },
 ];

@@ -2,17 +2,23 @@
 import ThemeToggle from "./ThemeToggle.astro";
 ---
 
-<nav class="fixed top-2 inset-x-2 z-50 glass-box border-b border-black/5 dark:border-white/10">
-  <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
-    <!-- Inicio -->
+<nav
+  class="fixed top-2 inset-x-2 z-50 glass-box border-b border-black/5 dark:border-white/10"
+  role="navigation"
+  aria-label="Navegación secundaria"
+>
+  <div
+    class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between"
+  >
+    <!-- Botón volver -->
     <a
       href="/"
-      class="text-sm sm:text-base font-medium text-surface hover:text-primary transition"
+      class="text-sm sm:text-base font-medium text-surface hover:text-primary dark:hover:text-accent transition-colors px-3 py-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:focus-visible:ring-accent"
     >
       ← Inicio
     </a>
 
-    <!-- Ruta + toggle -->
+    <!-- Controles -->
     <div class="flex items-center gap-4">
       <ThemeToggle size="w-6 h-6" />
     </div>

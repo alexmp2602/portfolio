@@ -1,11 +1,15 @@
 <section
+  id="inicio"
   class="page-bg relative isolate min-h-[85vh] flex items-center justify-center px-6 md:px-12 py-16 pt-28"
+  role="region"
+  aria-labelledby="hero-heading"
   data-reveal
 >
   <div
-    class="glass-box max-w-5xl w-full mx-auto p-8 md:p-14 shadow-lg rounded-2xl"
+    class="glass-box max-w-5xl w-full mx-auto p-8 md:p-14 shadow-lg rounded-2xl animate-fade-slide-up"
   >
     <h1
+      id="hero-heading"
       class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 text-surface"
     >
       Hola, soy <span class="text-primary dark:text-accent">Alex Pereyra</span>
@@ -19,6 +23,13 @@
       <strong>Tailwind CSS</strong> y animaciones con propósito.
     </p>
 
-    <a href="/AlexPereyra-CV.pdf" class="btn-primary">Ver CV</a>
+    <a
+      href="/AlexPereyra-CV.pdf"
+      class="btn-primary inline-block"
+      aria-label="Ver mi currículum en PDF"
+      download
+    >
+      Ver CV
+    </a>
   </div>
 </section>

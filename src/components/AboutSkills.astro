@@ -49,9 +49,15 @@ const skills: SkillGroup = {
 const invertInDark = ["GitHub", "Next.js"];
 ---
 
-<section id="about-skills" class="page-bg py-28 px-6 md:px-12">
+<section
+  id="sobre-mi"
+  class="page-bg py-28 px-6 md:px-12"
+  role="region"
+  aria-labelledby="about-title"
+>
   <div class="max-w-7xl mx-auto">
     <h2
+      id="about-title"
       class="text-surface text-4xl md:text-5xl font-extrabold text-center mb-16 animate-fade-slide"
       data-reveal
     >
@@ -67,12 +73,13 @@ const invertInDark = ["GitHub", "Next.js"];
             alt="Foto de Alex Pereyra"
             class="rounded-3xl shadow-lg max-w-[280px] w-full object-cover transition-transform duration-300 hover:scale-105"
             loading="lazy"
+            decoding="async"
             width="280"
             height="280"
           />
         </div>
 
-        <div class="glass-box p-6 space-y-6 leading-relaxed">
+        <div class="glass-box p-6 space-y-6 leading-relaxed text-balance">
           <p class="text-surface text-lg md:text-xl text-justify">
             Soy <strong>Alex Pereyra</strong>, desarrollador frontend metódico y
             detallista, apasionado por crear interfaces limpias, modernas y
@@ -80,13 +87,10 @@ const invertInDark = ["GitHub", "Next.js"];
             priorizando siempre buenas prácticas, rendimiento y calidad en cada
             proyecto.
           </p>
-          <p
-            class="text-surface/70 text-sm leading-relaxed text-balance text-center"
-          >
-            Trabajo con un stack moderno orientado a la eficiencia, calidad
-            visual y accesibilidad. Mi foco está en optimizar rendimiento,
-            aplicar buenas prácticas y crear experiencias que se adapten a
-            cualquier dispositivo.
+          <p class="text-surface-muted text-sm text-center">
+            Mi stack está orientado a eficiencia, diseño y accesibilidad. Me
+            enfoco en experiencias limpias, rápidas y adaptables a cualquier
+            dispositivo.
           </p>
         </div>
       </div>
@@ -96,18 +100,24 @@ const invertInDark = ["GitHub", "Next.js"];
         {
           Object.entries(skills).map(([group, techs], groupIndex) => (
             <div
-              class="glass-box p-6 transition-transform duration-300 hover:scale-[1.02]"
+              class="glass-box p-6 transition-transform duration-300 hover:scale-[1.02] motion-safe:animate-fade-slide-up"
               style={`animation-delay: ${groupIndex * 100}ms`}
             >
-              <h3 class="text-lg md:text-xl font-semibold text-primary tracking-wide mb-4 text-center">
+              <h3
+                class="text-lg md:text-xl font-semibold text-primary tracking-wide mb-4 text-center"
+                id={`skills-${groupIndex}`}
+              >
                 {group}
               </h3>
 
-              <div class="grid grid-cols-4 gap-6 place-items-center">
+              <ul
+                class="grid grid-cols-4 gap-6 place-items-center"
+                aria-labelledby={`skills-${groupIndex}`}
+              >
                 {techs.map((skill, index) => {
                   const shouldInvert = invertInDark.includes(skill.name);
                   return (
-                    <div
+                    <li
                       class="flex flex-col items-center gap-2 select-none motion-safe:animate-fade-slide-up"
                       style={`animation-delay: ${index * 80}ms`}
                     >
@@ -118,18 +128,18 @@ const invertInDark = ["GitHub", "Next.js"];
                         <img
                           src={skill.icon}
                           alt={skill.name}
-                          class={`w-8 h-8 transition duration-300 ${
-                            shouldInvert ? "icon-invert-dark" : ""
-                          }`}
+                          loading="lazy"
+                          decoding="async"
+                          class={`w-8 h-8 transition duration-300 ${shouldInvert ? "icon-invert-dark" : ""}`}
                         />
                       </div>
                       <span class="text-xs sm:text-sm text-surface tracking-tight text-center">
                         {skill.name}
                       </span>
-                    </div>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </div>
           ))
         }

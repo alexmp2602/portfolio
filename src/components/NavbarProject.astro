@@ -1,26 +1,32 @@
 ---
 interface Props {
-  title?: string; // opcional, para mostrar el nombre del proyecto a la derecha
+  title?: string;
 }
 const { title } = Astro.props as Props;
 ---
 
 <nav
   class="fixed top-0 left-0 w-full z-50 backdrop-blur bg-white/70 dark:bg-dark/70 border-b border-gray-200 dark:border-gray-800 transition-shadow"
+  role="navigation"
+  aria-label="Volver a sección proyectos"
 >
   <div
     class="max-w-screen-xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between"
   >
     <a
       href="/#projects"
-      class="text-lg font-medium text-dark dark:text-light hover:text-primary transition"
+      class="text-base font-medium text-dark dark:text-light hover:text-primary dark:hover:text-accent transition"
+      aria-label="Volver a la sección de proyectos"
     >
       ← Volver a Proyectos
     </a>
 
     {
       title && (
-        <span class="text-sm text-dark/50 dark:text-light/40 tracking-wide line-clamp-1 text-right max-w-[60%] hidden sm:block">
+        <span
+          class="text-sm text-dark/60 dark:text-light/50 tracking-wide truncate text-right max-w-[60%] hidden sm:block"
+          title={title}
+        >
           {title}
         </span>
       )

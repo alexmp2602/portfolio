@@ -10,44 +10,62 @@ const year = new Date().getFullYear();
   <div
     class="glass-box max-w-7xl mx-auto px-6 py-12 border-t border-black/10 dark:border-white/10 text-center text-sm text-surface-muted space-y-6"
   >
+    <!-- Íconos -->
     <div class="flex justify-center gap-6 text-xl">
       <a
         href="https://github.com/alexmp2602"
         target="_blank"
         rel="noopener noreferrer"
-        class="hover:text-primary dark:hover:text-accent transition"
         aria-label="GitHub"
+        class="hover:text-primary transition-colors"
       >
         <IconGitHub />
       </a>
+
       <a
         href="https://www.linkedin.com/in/alex-pereyra-dev/"
         target="_blank"
         rel="noopener noreferrer"
-        class="hover:text-primary dark:hover:text-accent transition"
         aria-label="LinkedIn"
+        class="hover:text-primary transition-colors"
       >
         <IconLinkedIn />
       </a>
+
       <a
         href="mailto:alexmp.2602@gmail.com"
-        class="hover:text-primary dark:hover:text-accent transition"
         aria-label="Email"
+        class="hover:text-primary transition-colors"
       >
         <IconEmail />
       </a>
     </div>
 
-    <p>© {year} Alex Pereyra. Todos los derechos reservados.</p>
+    <!-- Copyright -->
+    <p class="text-surface-muted">
+      © {year} Alex Pereyra. Todos los derechos reservados.
+    </p>
+
+    <!-- Tech stack -->
     <p>
       Desarrollado con
-      <a href="https://astro.build" class="text-primary hover:underline"
-        >Astro</a
+      <a
+        href="https://astro.build"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary hover:underline"
       >
+        Astro
+      </a>
       +
-      <a href="https://tailwindcss.com" class="text-primary hover:underline"
-        >Tailwind CSS</a
-      >.
+      <a
+        href="https://tailwindcss.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary hover:underline"
+      >
+        Tailwind CSS
+      </a>.
     </p>
   </div>
 </footer>

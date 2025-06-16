@@ -4,30 +4,35 @@ import { projects } from "../data/projects";
 ---
 
 <section
-  id="projects"
+  id="proyectos"
   class="page-bg py-28 px-6 md:px-12"
-  aria-label="Proyectos"
+  role="region"
+  aria-labelledby="projects-title"
 >
   <div class="max-w-7xl mx-auto">
     <h2
+      id="projects-title"
       class="text-4xl md:text-5xl font-extrabold text-center mb-16 text-surface animate-fade-slide"
       data-reveal
     >
       Proyectos Destacados
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+    <ul
+      class="grid grid-cols-1 md:grid-cols-3 gap-10"
+      aria-labelledby="projects-title"
+    >
       {
-        projects.map((p, i) => (
-          <div
+        projects.map((project, index) => (
+          <li
             class="glass-card p-6 rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg motion-safe:animate-fade-slide-up h-full min-h-[440px] flex flex-col"
-            style={`animation-delay: ${i * 100}ms`}
+            style={`animation-delay: ${index * 100}ms`}
             data-reveal
           >
-            <ProjectCard {...p} />
-          </div>
+            <ProjectCard {...project} />
+          </li>
         ))
       }
-    </div>
+    </ul>
   </div>
 </section>

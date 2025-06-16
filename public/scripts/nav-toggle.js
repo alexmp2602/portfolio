@@ -4,29 +4,32 @@ export function setupNavToggle() {
 
   if (!menuBtn || !mobileMenu) return;
 
-  // Toggle menú móvil
-  menuBtn.addEventListener("click", () => {
-    const isHidden = mobileMenu.classList.contains("hidden");
+  let isOpen = false;
 
-    if (isHidden) {
-      mobileMenu.classList.remove("hidden");
-      mobileMenu.classList.add("animate-fade-slide-down");
+  const toggleMenu = () => {
+    isOpen = !isOpen;
+
+    mobileMenu.classList.toggle("hidden", !isOpen);
+    mobileMenu.classList.toggle("animate-fade-slide-down", isOpen);
+
+    // Accesibilidad
+    menuBtn.setAttribute("aria-expanded", isOpen.toString());
+    mobileMenu.setAttribute("aria-hidden", (!isOpen).toString());
+
+    // Prevención de foco si está oculto
+    if (!isOpen) {
+      mobileMenu.setAttribute("tabindex", "-1");
     } else {
-      mobileMenu.classList.add("hidden");
-      mobileMenu.classList.remove("animate-fade-slide-down");
+      mobileMenu.removeAttribute("tabindex");
     }
+  };
 
-    menuBtn.setAttribute("aria-expanded", (!isHidden).toString());
-  });
+  menuBtn.addEventListener("click", toggleMenu);
 
-  // Cerrar menú al hacer clic en un link interno
-  const navLinks = mobileMenu.querySelectorAll("a[href^='#']");
-
-  navLinks.forEach((link) => {
+  // Cerrar menú al hacer clic en un enlace interno
+  mobileMenu.querySelectorAll("a[href^='#']").forEach((link) => {
     link.addEventListener("click", () => {
-      mobileMenu.classList.add("hidden");
-      mobileMenu.classList.remove("animate-fade-slide-down");
-      menuBtn.setAttribute("aria-expanded", "false");
+      if (isOpen) toggleMenu();
     });
   });
 }

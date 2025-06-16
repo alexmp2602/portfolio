@@ -4,7 +4,19 @@ export function setupThemeToggle() {
   const themeToggles = document.querySelectorAll("[data-toggle-theme]");
   const iconContainers = document.querySelectorAll(".theme-icon");
 
-  function updateThemeIcon(isDark) {
+  const applyTheme = (isDark) => {
+    const root = document.documentElement;
+    root.classList.toggle("dark", isDark);
+    root.setAttribute("data-theme", isDark ? "dark" : "light");
+    updateThemeIcon(isDark);
+
+    // Accesibilidad para botones toggle
+    themeToggles.forEach((btn) => {
+      btn.setAttribute("aria-pressed", isDark.toString());
+    });
+  };
+
+  const updateThemeIcon = (isDark) => {
     const iconHTML = isDark ? IconSunSVG : IconMoonSVG;
 
     iconContainers.forEach((container) => {
@@ -14,28 +26,27 @@ export function setupThemeToggle() {
 
       if (svg) {
         svg.classList.add("w-full", "h-full", "theme-icon-enter");
-        container.innerHTML = "";
-        container.appendChild(svg);
+        container.replaceChildren(svg);
       }
     });
-  }
+  };
 
-  function applyThemeFromStorage() {
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const savedTheme = localStorage.getItem("theme");
-    const isDark = savedTheme === "dark" || (!savedTheme && prefersDark);
-
-    document.documentElement.classList.toggle("dark", isDark);
-    updateThemeIcon(isDark);
-  }
+  const initTheme = () => {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    const saved = localStorage.getItem("theme");
+    const isDark = saved === "dark" || (!saved && prefersDark);
+    applyTheme(isDark);
+  };
 
   themeToggles.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const isDark = document.documentElement.classList.toggle("dark");
+      const isDark = !document.documentElement.classList.contains("dark");
       localStorage.setItem("theme", isDark ? "dark" : "light");
-      updateThemeIcon(isDark);
+      applyTheme(isDark);
     });
   });
 
-  applyThemeFromStorage();
+  initTheme();
 }
