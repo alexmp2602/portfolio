@@ -11,6 +11,20 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "Delfos",
+    title: "Delfos Studio · Agencia Creativa",
+    description:
+      "Delfos Studio es una agencia creativa que se especializa en diseño y desarrollo web. Nuestro enfoque está en crear experiencias digitales únicas y efectivas para nuestros clientes.",
+    image: "/assets/projects/delfos.webp",
+    tech: ["Astro", "Tailwind CSS"],
+    link: "https://delfos-studio.vercel.app/",
+    highlights: [
+      "Diseño minimalista y moderno",
+      "Carga ultrarrápida y optimizada para SEO",
+      "Interactividad avanzada con componentes de Astro",
+    ],
+  },
+  {
     slug: "iabot",
     title: "IABOT | Robótica con LEGO para Niños",
     description:
