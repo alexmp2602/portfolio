@@ -26,11 +26,11 @@ export const projects: Project[] = [
   },
   {
     slug: "iabot",
-    title: "IABOT | Robótica con LEGO para Niños",
+    title: "IABOT · Robótica con LEGO para Niños",
     description:
-      "Sitio institucional de IABOT, un espacio de robótica educativa para niños. Desarrollado con Next.js y Tailwind CSS, enfocado en claridad, escalabilidad y responsividad.",
+      "Sitio institucional de IABOT, un espacio de robótica educativa para niños. Desarrollado con Astro.js y Tailwind CSS, enfocado en claridad, escalabilidad y responsividad.",
     image: "/assets/projects/iabot.webp",
-    tech: ["Next.js", "React", "Tailwind CSS"],
+    tech: ["Astro.js", "Tailwind CSS"],
     link: "https://iabot.com.ar/",
     highlights: [
       "Diseño institucional orientado a padres y alumnos",
@@ -39,7 +39,7 @@ export const projects: Project[] = [
   },
   {
     slug: "gallinas-libres",
-    title: "Gallinas Libres | Emprendimiento Familiar",
+    title: "Gallinas Libres · Emprendimiento Familiar",
     description:
       "Landing page para un emprendimiento familiar dedicado a huevos de gallinas libres. Construida con Astro y Tailwind CSS, optimizada para rendimiento, SEO y bajo peso.",
     image: "/assets/projects/gallinas.webp",
@@ -52,7 +52,7 @@ export const projects: Project[] = [
   },
   {
     slug: "domus",
-    title: "Domus | Estética Profesional",
+    title: "Domus · Estética Profesional",
     description:
       "Sitio institucional para una marca en crecimiento en el rubro de estética. Desarrollado con Astro y Tailwind CSS, con un diseño accesible, limpio y adaptado a su identidad visual.",
     image: "/assets/projects/domus.webp",
