@@ -1,4 +1,5 @@
 ---
+// imports
 import IconGitHub from "./icons/IconGitHub.astro";
 import IconLinkedIn from "./icons/IconLinkedIn.astro";
 import IconEmail from "./icons/IconEmail.astro";
@@ -46,6 +47,7 @@ const year = new Date().getFullYear();
       © {year} Alex Pereyra — Todos los derechos reservados.
     </p>
 
+    <!-- Hecho con -->
     <p class="text-surface-muted">
       Hecho con
       <a
@@ -66,5 +68,22 @@ const year = new Date().getFullYear();
         Tailwind CSS
       </a>
     </p>
+
+    <!-- Banner AFIP F960/D -->
+    <div class="flex justify-center">
+      <a
+        href="http://qr.afip.gob.ar/?qr=nsxMyj6Utc9BxcRH5crmDg,,"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Acceso a la Información Pública AFIP"
+      >
+        <img
+          src="DATAWEB.jpg"
+          alt="F960/D - Acceso a la Información Pública AFIP"
+          class="w-16"
+          loading="lazy"
+        />
+      </a>
+    </div>
   </div>
 </footer>
