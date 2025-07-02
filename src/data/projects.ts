@@ -25,19 +25,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "iabot",
-    title: "IABOT · Robótica con LEGO para Niños",
-    description:
-      "Sitio institucional de IABOT, un espacio de robótica educativa para niños. Desarrollado con Astro.js y Tailwind CSS, enfocado en claridad, escalabilidad y responsividad.",
-    image: "/assets/projects/iabot.webp",
-    tech: ["Astro.js", "Tailwind CSS"],
-    link: "https://iabot.com.ar/",
-    highlights: [
-      "Diseño institucional orientado a padres y alumnos",
-      "Código modular y mantenible con enfoque educativo",
-    ],
-  },
-  {
     slug: "gallinas-libres",
     title: "Gallinas Libres · Emprendimiento Familiar",
     description:
@@ -51,10 +38,24 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "iabot",
+    title: "IABOT · Robótica con LEGO para Niños",
+    description:
+      "Sitio institucional de IABOT, un espacio de robótica educativa para niños. Desarrollado con Astro.js y Tailwind CSS, enfocado en claridad, escalabilidad y responsividad.",
+    image: "/assets/projects/iabot.webp",
+    tech: ["Astro.js", "Tailwind CSS"],
+    link: "https://iabot.com.ar/",
+    highlights: [
+      "Diseño institucional orientado a padres y alumnos",
+      "Código modular y mantenible con enfoque educativo",
+    ],
+  },
+
+  {
     slug: "domus",
     title: "Domus · Estética Profesional",
     description:
-      "Sitio institucional para una marca en crecimiento en el rubro de estética. Desarrollado con Astro y Tailwind CSS, con un diseño accesible, limpio y adaptado a su identidad visual.",
+      "Sitio web para una marca en crecimiento en el rubro de estética. Desarrollado con Astro y Tailwind CSS, con un diseño accesible, limpio y adaptado a su identidad visual.",
     image: "/assets/projects/domus.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://esteticadomus.com/",
@@ -65,9 +66,9 @@ export const projects: Project[] = [
   },
   {
     slug: "cerrajeria-apri",
-    title: "Cerrajería APRI",
+    title: "APRI · Cerrajería 24 hs",
     description:
-      "Sitio web para una cerrajería 24 hs en Buenos Aires. Hecho con Astro y Tailwind CSS, enfocado en visibilidad desde móviles, accesibilidad y performance.",
+      "Sitio web para una cerrajería 24 hs en Mendoza. Hecho con Astro y Tailwind CSS, enfocado en visibilidad desde móviles, accesibilidad y performance.",
     image: "/assets/projects/apri.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://www.cerrajeriaapri24hs.com.ar/",
