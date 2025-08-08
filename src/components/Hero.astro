@@ -4,7 +4,7 @@
   role="region"
   aria-labelledby="hero-heading"
 >
-  <!-- Fondo decorativo opcional -->
+  <!-- Fondo decorativo -->
   <div
     aria-hidden="true"
     class="absolute inset-0 overflow-hidden pointer-events-none"
@@ -31,27 +31,120 @@
       <strong>React</strong>, <strong>Tailwind</strong> y animaciones con propósito.
     </p>
 
-    <a
-      href="/Alex-Pereyra-Desarrollador-Frontend.pdf"
-      class="btn-primary inline-flex items-center gap-2 group"
-      aria-label="Descargar CV"
-      download
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-5 h-5 transition-transform group-hover:translate-y-0.5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
+    <!-- Botón con menú de idiomas -->
+    <div class="relative inline-block">
+      <button
+        id="cv-menu-button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl transition hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
-        ></path>
-      </svg>
-      Ver CV
-    </a>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
+          ></path>
+        </svg>
+        Ver CV
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+
+      <!-- Menú desplegable -->
+      <nav
+        id="cv-menu"
+        class="hidden absolute mt-2 right-0 w-48 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/20 dark:border-gray-700/40 rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 overflow-hidden animate-fade-in"
+        role="menu"
+        aria-label="Opciones de CV"
+      >
+        <a
+          href="/cv/Alex-Pereyra-Frontend-ES.pdf"
+          download
+          class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 transition"
+          role="menuitem">📄 CV en Español</a
+        >
+
+        <a
+          href="/cv/Alex-Pereyra-Frontend-EN.pdf"
+          download
+          class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 transition"
+          role="menuitem">📄 Resume in English</a
+        >
+      </nav>
+    </div>
   </div>
 </section>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.15s ease-out;
+  }
+</style>
+
+<script>
+  const button = document.getElementById(
+    "cv-menu-button"
+  ) as HTMLButtonElement | null;
+  const menu = document.getElementById("cv-menu") as HTMLElement | null;
+
+  if (button && menu) {
+    button.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", (!expanded).toString());
+      menu.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (!button.contains(target) && !menu.contains(target)) {
+        menu.classList.add("hidden");
+        button.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Cerrar con Escape
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        menu.classList.add("hidden");
+        button.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Cerrar con Tab si salimos del menú
+    menu.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Tab") {
+        menu.classList.add("hidden");
+        button.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+</script>
