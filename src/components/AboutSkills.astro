@@ -4,49 +4,39 @@ interface Skill {
   icon: string;
 }
 
-interface SkillGroup {
-  [category: string]: Skill[];
-}
+const frontend: Skill[] = [
+  { name: "HTML5", icon: "https://cdn.simpleicons.org/html5/E34F26" },
+  { name: "CSS", icon: "https://cdn.simpleicons.org/css/1572B6" },
+  { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript/F7DF1E" },
+  { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript/3178C6" },
+  { name: "React", icon: "https://cdn.simpleicons.org/react/61DAFB" },
+  { name: "Astro", icon: "https://cdn.simpleicons.org/astro/FF5D01" },
+  { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/000000" },
+  { name: "Tailwind", icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+];
 
-const skills: SkillGroup = {
-  Frontend: [
-    { name: "HTML5", icon: "https://cdn.simpleicons.org/html5/E34F26" },
-    { name: "CSS3", icon: "https://cdn.simpleicons.org/css3/1572B6" },
-    {
-      name: "JavaScript",
-      icon: "https://cdn.simpleicons.org/javascript/F7DF1E",
-    },
-    {
-      name: "TypeScript",
-      icon: "https://cdn.simpleicons.org/typescript/3178C6",
-    },
-    { name: "React", icon: "https://cdn.simpleicons.org/react/61DAFB" },
-    { name: "Astro", icon: "https://cdn.simpleicons.org/astro/FF5D01" },
-    { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/000000" },
-    {
-      name: "Tailwind",
-      icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4",
-    },
-  ],
-  Herramientas: [
-    { name: "Git", icon: "https://cdn.simpleicons.org/git/F05032" },
-    { name: "GitHub", icon: "https://cdn.simpleicons.org/github/181717" },
-    { name: "Vite", icon: "https://cdn.simpleicons.org/vite/646CFF" },
-    { name: "ESLint", icon: "https://cdn.simpleicons.org/eslint/4B32C3" },
-    { name: "Prettier", icon: "https://cdn.simpleicons.org/prettier/F7B93E" },
-    { name: "Jest", icon: "https://cdn.simpleicons.org/jest/C21325" },
-    {
-      name: "Lighthouse",
-      icon: "https://cdn.simpleicons.org/lighthouse/FF6D00",
-    },
-    {
-      name: "DevTools",
-      icon: "https://cdn.simpleicons.org/googlechrome/4285F4",
-    },
-  ],
-};
+const backend: Skill[] = [
+  { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/339933" },
+  { name: "Express", icon: "https://cdn.simpleicons.org/express/000000" },
+  { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql/4169E1" },
+  { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql/4479A1" },
+  { name: "Prisma", icon: "https://cdn.simpleicons.org/prisma/2D3748" },
+  { name: "AWS", icon: "https://cdn.simpleicons.org/amazonaws/232F3E" },
+  { name: "Vercel", icon: "https://cdn.simpleicons.org/vercel/000000" },
+];
 
-const invertInDark = ["GitHub", "Next.js"];
+const tools: Skill[] = [
+  { name: "Git", icon: "https://cdn.simpleicons.org/git/F05032" },
+  { name: "GitHub", icon: "https://cdn.simpleicons.org/github/181717" },
+  { name: "Vite", icon: "https://cdn.simpleicons.org/vite/646CFF" },
+  { name: "ESLint", icon: "https://cdn.simpleicons.org/eslint/4B32C3" },
+  { name: "Prettier", icon: "https://cdn.simpleicons.org/prettier/F7B93E" },
+  { name: "Jest", icon: "https://cdn.simpleicons.org/jest/C21325" },
+  { name: "Lighthouse", icon: "https://cdn.simpleicons.org/lighthouse/FF6D00" },
+  { name: "DevTools", icon: "https://cdn.simpleicons.org/googlechrome/4285F4" },
+];
+
+const invertInDark = ["GitHub", "Next.js", "Express", "Vercel"];
 ---
 
 <section
@@ -58,88 +48,168 @@ const invertInDark = ["GitHub", "Next.js"];
   <div class="max-w-7xl mx-auto">
     <h2
       id="about-title"
-      class="text-surface text-4xl md:text-5xl font-extrabold text-center mb-16 fade-in-up fade-delay-100"
+      class="text-surface text-4xl md:text-5xl font-extrabold text-center mb-16"
     >
       Sobre mí & Tecnologías
     </h2>
 
-    <div class="grid md:grid-cols-2 gap-20 items-start">
-      <!-- Columna izquierda -->
-      <div class="flex flex-col gap-10 fade-in-up fade-delay-200">
-        <div class="flex justify-center">
-          <img
-            src="/assets/profile/alex.webp"
-            alt="Foto de Alex Pereyra"
-            class="rounded-3xl shadow-lg max-w-[280px] w-full object-cover transition-transform duration-300 hover:scale-105"
-            loading="lazy"
-            decoding="async"
-            width="280"
-            height="280"
-          />
-        </div>
-
-        <div class="glass-box p-6 space-y-6 leading-relaxed">
-          <p class="text-surface text-lg md:text-xl text-justify">
-            Soy <strong>Alex Pereyra</strong>, desarrollador frontend metódico y
-            detallista, apasionado por crear interfaces limpias, modernas y
-            accesibles. Trabajo con Astro, React, Tailwind CSS y TypeScript,
-            priorizando buenas prácticas, rendimiento y calidad.
+    <!-- BENTO: bio izquierda, 3 columnas (cada una con 2 columnas internas) -->
+    <div class="grid gap-6 md:grid-cols-12 items-stretch">
+      <!-- Bio (izquierda, alta) -->
+      <article
+        class="glass-box p-6 md:col-span-5 md:row-span-2 flex flex-col items-center gap-6"
+      >
+        <img
+          src="/assets/profile/alex.webp"
+          alt="Foto de Alex Pereyra"
+          class="rounded-3xl shadow-lg max-w-[280px] w-full object-cover"
+          loading="lazy"
+          decoding="async"
+          width="200"
+          height="280"
+        />
+        <div class="space-y-4 leading-relaxed text-center md:text-left">
+          <p class="text-surface text-lg md:text-xl">
+            Soy <strong>Alex Pereyra</strong>, <strong
+              >Frontend & Full-Stack Developer</strong
+            >. Diseño interfaces limpias y accesibles con <strong
+              >React/Next.js</strong
+            > y construyo backends en <strong>Node.js</strong> con <strong
+              >SQL</strong
+            >, desplegando en
+            <strong>Vercel/AWS</strong>. Foco en rendimiento, accesibilidad y
+            calidad.
           </p>
-          <p class="text-surface-muted text-sm text-center">
-            Mi stack está orientado a eficiencia, diseño y accesibilidad.
-            Enfocado en experiencias limpias, rápidas y adaptables.
+          <p class="text-surface-muted text-sm">
+            Experiencias limpias, rápidas y mantenibles · Astro · Tailwind ·
+            GSAP.
           </p>
         </div>
-      </div>
+      </article>
 
-      <!-- Columna derecha -->
-      <div class="flex flex-col gap-8 fade-in-up fade-delay-300">
-        {
-          Object.entries(skills).map(([group, techs], groupIndex) => (
-            <div
-              class="glass-box p-6 transition-transform duration-300 hover:scale-[1.02]"
-              style={`animation-delay: ${groupIndex * 150}ms`}
-            >
-              <h3
-                class="text-lg md:text-xl font-semibold text-primary tracking-wide mb-4 text-center"
-                id={`skills-${groupIndex}`}
-              >
-                {group}
-              </h3>
-
-              <ul
-                class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-4 gap-6 place-items-center"
-                aria-labelledby={`skills-${groupIndex}`}
-              >
-                {techs.map((skill, index) => {
-                  const shouldInvert = invertInDark.includes(skill.name);
-                  return (
-                    <li
-                      class="flex flex-col items-center gap-2 motion-safe:animate-fade-slide-up"
-                      style={`animation-delay: ${index * 80}ms`}
+      <!-- Skills (derecha) -->
+      <div
+        class="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Frontend -->
+        <article class="glass-box p-6">
+          <h3
+            class="text-lg md:text-xl font-semibold text-primary tracking-wide mb-4 text-center"
+          >
+            Frontend
+          </h3>
+          <ul
+            class="grid grid-cols-4 md:grid-cols-2 gap-x-6 gap-y-6 place-items-center"
+          >
+            {
+              frontend.map((s) => {
+                const invert = invertInDark.includes(s.name);
+                return (
+                  <li class="flex flex-col items-center gap-2">
+                    <div
+                      class="w-14 h-14 rounded-xl glass-card ring-1 ring-black/5 dark:ring-white/10 flex items-center justify-center transition-transform duration-300 hover:scale-110"
+                      title={s.name}
                     >
-                      <div
-                        class="w-14 h-14 rounded-xl bg-light/70 dark:bg-dark/70 shadow-inner ring-1 ring-black/5 dark:ring-white/10 flex items-center justify-center transition-transform duration-300 hover:scale-110"
-                        title={skill.name}
-                      >
-                        <img
-                          src={skill.icon}
-                          alt={skill.name}
-                          class={`w-8 h-8 transition duration-300 ${shouldInvert ? "icon-invert-dark" : ""}`}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                      <span class="text-xs sm:text-sm text-surface text-center tracking-tight">
-                        {skill.name}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))
-        }
+                      <img
+                        src={s.icon}
+                        alt={s.name}
+                        class={`w-8 h-8 ${invert ? "icon-invert-dark" : ""}`}
+                        loading="lazy"
+                        decoding="async"
+                        fetchpriority="low"
+                        width="32"
+                        height="32"
+                      />
+                    </div>
+                    <span class="text-xs sm:text-sm text-surface text-center tracking-tight">
+                      {s.name}
+                    </span>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </article>
+
+        <!-- Backend & Cloud -->
+        <article class="glass-box p-6">
+          <h3
+            class="text-lg md:text-xl font-semibold text-primary tracking-wide mb-4 text-center"
+          >
+            Backend & Cloud
+          </h3>
+          <ul
+            class="grid grid-cols-4 md:grid-cols-2 gap-x-6 gap-y-6 place-items-center"
+          >
+            {
+              backend.map((s) => {
+                const invert = invertInDark.includes(s.name);
+                return (
+                  <li class="flex flex-col items-center gap-2">
+                    <div
+                      class="w-14 h-14 rounded-xl glass-card ring-1 ring-black/5 dark:ring-white/10 flex items-center justify-center transition-transform duration-300 hover:scale-110"
+                      title={s.name}
+                    >
+                      <img
+                        src={s.icon}
+                        alt={s.name}
+                        class={`w-8 h-8 ${invert ? "icon-invert-dark" : ""}`}
+                        loading="lazy"
+                        decoding="async"
+                        fetchpriority="low"
+                        width="32"
+                        height="32"
+                      />
+                    </div>
+                    <span class="text-xs sm:text-sm text-surface text-center tracking-tight">
+                      {s.name}
+                    </span>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </article>
+
+        <!-- Herramientas -->
+        <article class="glass-box p-6">
+          <h3
+            class="text-lg md:text-xl font-semibold text-primary tracking-wide mb-4 text-center"
+          >
+            Herramientas
+          </h3>
+          <ul
+            class="grid grid-cols-4 md:grid-cols-2 gap-x-6 gap-y-6 place-items-center"
+          >
+            {
+              tools.map((s) => {
+                const invert = invertInDark.includes(s.name);
+                return (
+                  <li class="flex flex-col items-center gap-2">
+                    <div
+                      class="w-14 h-14 rounded-xl glass-card ring-1 ring-black/5 dark:ring-white/10 flex items-center justify-center transition-transform duration-300 hover:scale-110"
+                      title={s.name}
+                    >
+                      <img
+                        src={s.icon}
+                        alt={s.name}
+                        class={`w-8 h-8 ${invert ? "icon-invert-dark" : ""}`}
+                        loading="lazy"
+                        decoding="async"
+                        fetchpriority="low"
+                        width="32"
+                        height="32"
+                      />
+                    </div>
+                    <span class="text-xs sm:text-sm text-surface text-center tracking-tight">
+                      {s.name}
+                    </span>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </article>
       </div>
     </div>
   </div>

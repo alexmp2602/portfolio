@@ -26,18 +26,25 @@
     </h1>
 
     <p class="text-surface text-lg md:text-xl max-w-4xl mb-8 leading-relaxed">
-      Desarrollador Frontend con enfoque en rendimiento, accesibilidad y
-      experiencia de usuario. Me especializo en <strong>Astro</strong>,
-      <strong>React</strong>, <strong>Tailwind</strong> y animaciones con propósito.
+      Frontend & <strong>Full-Stack</strong> Developer. Diseño interfaces rápidas
+      con
+      <strong>React/Next.js</strong> y construyo backends en <strong
+        >Node.js</strong
+      > con
+      <strong>SQL</strong>, desplegando en <strong>Vercel/AWS</strong>. Enfoque
+      en rendimiento, accesibilidad y animaciones con propósito (Astro ·
+      Tailwind · GSAP).
     </p>
 
-    <!-- Botón con menú de idiomas -->
+    <!-- Botón con menú de idiomas (menubutton accesible) -->
     <div class="relative inline-block">
       <button
         id="cv-menu-button"
-        aria-haspopup="true"
+        type="button"
+        class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        aria-haspopup="menu"
         aria-expanded="false"
-        class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl transition hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
+        aria-controls="cv-menu"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +52,7 @@
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"
@@ -60,6 +68,7 @@
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"
@@ -69,26 +78,31 @@
         </svg>
       </button>
 
-      <!-- Menú desplegable -->
       <nav
         id="cv-menu"
-        class="hidden absolute mt-2 right-0 w-48 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/20 dark:border-gray-700/40 rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 overflow-hidden animate-fade-in"
+        class="hidden absolute mt-2 right-0 w-56 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/20 dark:border-gray-700/40 rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 overflow-hidden animate-fade-in"
         role="menu"
         aria-label="Opciones de CV"
+        tabindex="-1"
       >
         <a
-          href="/cv/Alex-Pereyra-Frontend-ES.pdf"
-          download
-          class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 transition"
-          role="menuitem">📄 CV en Español</a
+          href="/assets/cv/ES-Alex-Pereyra-Frontend-Fullstack.pdf"
+          target="_blank" rel="noopener"
+          role="menuitem"
+          class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
+          tabindex="-1"
         >
-
+          📄 CV en Español
+        </a>
         <a
-          href="/cv/Alex-Pereyra-Frontend-EN.pdf"
-          download
-          class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 transition"
-          role="menuitem">📄 Resume in English</a
+          href="/assets/cv/EN-Alex-Pereyra-Frontend-Fullstack.pdf"
+          target="_blank" rel="noopener"
+          role="menuitem"
+          class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
+          tabindex="-1"
         >
+          📄 Resume in English
+        </a>
       </nav>
     </div>
   </div>
@@ -108,43 +122,101 @@
   .animate-fade-in {
     animation: fade-in 0.15s ease-out;
   }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in {
+      animation: none;
+    }
+  }
 </style>
 
-<script>
-  const button = document.getElementById(
-    "cv-menu-button"
-  ) as HTMLButtonElement | null;
-  const menu = document.getElementById("cv-menu") as HTMLElement | null;
+<script is:inline>
+  (function () {
+    const btn = document.getElementById("cv-menu-button");
+    const menu = document.getElementById("cv-menu");
+    if (!btn || !menu) return;
 
-  if (button && menu) {
-    button.addEventListener("click", () => {
-      const expanded = button.getAttribute("aria-expanded") === "true";
-      button.setAttribute("aria-expanded", (!expanded).toString());
-      menu.classList.toggle("hidden");
-    });
+    let open = false;
+    const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
 
-    document.addEventListener("click", (e: MouseEvent) => {
-      const target = e.target as Node;
-      if (!button.contains(target) && !menu.contains(target)) {
-        menu.classList.add("hidden");
-        button.setAttribute("aria-expanded", "false");
+    function show() {
+      open = true;
+      menu.classList.remove("hidden");
+      btn.setAttribute("aria-expanded", "true");
+      menu.removeAttribute("hidden");
+      menu.focus();
+      // Foco al primer item
+      items[0]?.focus();
+      // Cerrar al hacer click fuera
+      document.addEventListener("pointerdown", onDocPointerDown, {
+        capture: true,
+      });
+      document.addEventListener("keydown", onDocKeyDown);
+    }
+
+    function hide() {
+      open = false;
+      menu.classList.add("hidden");
+      btn.setAttribute("aria-expanded", "false");
+      menu.setAttribute("hidden", "true");
+      btn.focus();
+      document.removeEventListener("pointerdown", onDocPointerDown, {
+        capture: true,
+      });
+      document.removeEventListener("keydown", onDocKeyDown);
+    }
+
+    function toggle() {
+      open ? hide() : show();
+    }
+
+    function onDocPointerDown(e) {
+      if (!menu.contains(e.target) && !btn.contains(e.target)) hide();
+    }
+
+    function onDocKeyDown(e) {
+      if (!open) return;
+      const currentIndex = items.indexOf(document.activeElement);
+      switch (e.key) {
+        case "Escape":
+          e.preventDefault();
+          hide();
+          break;
+        case "ArrowDown":
+          e.preventDefault();
+          items[(currentIndex + 1 + items.length) % items.length]?.focus();
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          items[(currentIndex - 1 + items.length) % items.length]?.focus();
+          break;
+        case "Home":
+          e.preventDefault();
+          items[0]?.focus();
+          break;
+        case "End":
+          e.preventDefault();
+          items[items.length - 1]?.focus();
+          break;
+      }
+    }
+
+    // Click en botón
+    btn.addEventListener("click", toggle);
+
+    // Enter/Espacio abren/cerran cuando el foco está en el botón (ya lo maneja click, pero por accesibilidad):
+    btn.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" && !open) {
+        e.preventDefault();
+        show();
       }
     });
 
-    // Cerrar con Escape
-    document.addEventListener("keydown", (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        menu.classList.add("hidden");
-        button.setAttribute("aria-expanded", "false");
+    // Al tabular fuera del menú, cerramos
+    menu.addEventListener("focusout", (e) => {
+      // si el foco se va fuera del contenedor por completo
+      if (open && !menu.contains(e.relatedTarget) && e.relatedTarget !== btn) {
+        hide();
       }
     });
-
-    // Cerrar con Tab si salimos del menú
-    menu.addEventListener("keydown", (e: KeyboardEvent) => {
-      if (e.key === "Tab") {
-        menu.classList.add("hidden");
-        button.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
+  })();
 </script>

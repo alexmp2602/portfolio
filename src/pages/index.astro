@@ -10,8 +10,8 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Layout
-  title="Alex Pereyra | Frontend Developer"
-  description="Soy Alex Pereyra, desarrollador frontend especializado en Astro, React y Tailwind CSS. Mirá mis proyectos y explorá el laboratorio creativo."
+  title="Alex Pereyra | Frontend & Full-Stack Developer"
+  description="Soy Alex Pereyra, Frontend & Full-Stack Developer. Diseño interfaces rápidas con React/Next.js y construyo backends con Node.js y SQL. Explorá mis proyectos y el laboratorio creativo."
   canonical="https://www.alexpereyra.dev"
   ogImage="/opengraph.png"
 >
@@ -23,24 +23,31 @@ import Footer from "../components/Footer.astro";
     aria-label="Contenido principal"
     class="page-bg"
   >
-    <!-- Hero: fondo y espaciado propios -->
+    <!-- Hero -->
     <section
       id="inicio"
       role="region"
       aria-labelledby="hero-title"
       class="fade-in-up fade-delay-100"
     >
+      <!-- Etiqueta accesible independiente del componente -->
+      <h1 id="hero-title" class="sr-only">
+        Alex Pereyra — Frontend & Full-Stack Developer
+      </h1>
       <Hero />
     </section>
 
-    <!-- Sobre mí -->
+    <!-- Sobre mí & Skills -->
     <section
       id="sobre-mi"
       role="region"
       aria-labelledby="about-title"
       class="fade-in-up fade-delay-200"
     >
-      <AboutSkills />
+      <div class="section-container">
+        <h2 id="about-title" class="sr-only">Sobre mí y habilidades</h2>
+        <AboutSkills />
+      </div>
     </section>
 
     <!-- Proyectos -->
@@ -50,7 +57,10 @@ import Footer from "../components/Footer.astro";
       aria-labelledby="projects-title"
       class="fade-in-up fade-delay-300"
     >
-      <Projects />
+      <div class="section-container">
+        <h2 id="projects-title" class="sr-only">Proyectos destacados</h2>
+        <Projects />
+      </div>
     </section>
 
     <!-- Contacto -->
@@ -60,7 +70,10 @@ import Footer from "../components/Footer.astro";
       aria-labelledby="contact-title"
       class="fade-in-up fade-delay-400"
     >
-      <Contact />
+      <div class="section-container">
+        <h2 id="contact-title" class="sr-only">Contacto</h2>
+        <Contact />
+      </div>
     </section>
 
     <!-- Laboratorio -->
@@ -70,7 +83,10 @@ import Footer from "../components/Footer.astro";
       aria-labelledby="lab-title"
       class="fade-in-up fade-delay-500"
     >
-      <LabSection />
+      <div class="section-container">
+        <h2 id="lab-title" class="sr-only">Laboratorio</h2>
+        <LabSection />
+      </div>
     </section>
   </main>
 

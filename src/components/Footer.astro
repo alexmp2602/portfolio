@@ -1,5 +1,4 @@
 ---
-// imports
 import IconGitHub from "./icons/IconGitHub.astro";
 import IconLinkedIn from "./icons/IconLinkedIn.astro";
 import IconEmail from "./icons/IconEmail.astro";
@@ -16,29 +15,32 @@ const year = new Date().getFullYear();
       <a
         href="https://github.com/alexmp2602"
         target="_blank"
-        rel="noopener noreferrer"
+        rel="me noopener noreferrer"
         aria-label="GitHub"
-        class="hover:text-primary transition-colors"
+        class="hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded transition-colors"
       >
-        <IconGitHub />
+        <IconGitHub aria-hidden="true" />
       </a>
 
       <a
         href="https://www.linkedin.com/in/alex-pereyra-dev/"
         target="_blank"
-        rel="noopener noreferrer"
+        rel="me noopener noreferrer"
         aria-label="LinkedIn"
-        class="hover:text-primary transition-colors"
+        class="hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded transition-colors"
       >
-        <IconLinkedIn />
+        <IconLinkedIn aria-hidden="true" />
       </a>
 
+      <!-- Email (ofuscado) -->
       <a
-        href="mailto:alexmp.2602@gmail.com"
-        aria-label="Email"
-        class="hover:text-primary transition-colors"
+        id="footer-email"
+        data-user="alexmp.2602"
+        data-domain="gmail.com"
+        aria-label="Enviar email"
+        class="hover:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded transition-colors cursor-pointer"
       >
-        <IconEmail />
+        <IconEmail aria-hidden="true" />
       </a>
     </div>
 
@@ -54,36 +56,60 @@ const year = new Date().getFullYear();
         href="https://astro.build"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-primary hover:underline"
+        class="text-primary hover:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
+        >Astro</a
       >
-        Astro
-      </a>
       +
       <a
         href="https://tailwindcss.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-primary hover:underline"
+        class="text-primary hover:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
+        >Tailwind CSS</a
       >
-        Tailwind CSS
-      </a>
     </p>
 
     <!-- Banner AFIP F960/D -->
-    <div class="flex justify-center">
+    <div class="flex items-center justify-center gap-3">
       <a
         href="http://qr.afip.gob.ar/?qr=nsxMyj6Utc9BxcRH5crmDg,,"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Acceso a la Información Pública ARCA"
+        aria-label="AFIP F960/D - Datos del contribuyente"
+        class="inline-flex"
       >
         <img
-          src="DATAWEB.jpg"
-          alt="F960/D - Acceso a la Información Pública ARCA"
-          class="w-16"
+          src="/DATAWEB.jpg"
+          alt="AFIP F960/D"
+          class="w-16 h-auto"
           loading="lazy"
+          decoding="async"
+          width="64"
+          height="64"
         />
+      </a>
+
+      <a
+        href="#inicio"
+        class="btn-outline rounded-full px-3 py-1"
+        aria-label="Volver al inicio"
+      >
+        ↑ Arriba
       </a>
     </div>
   </div>
+
+  <!-- Arma el mailto en cliente (ofuscación simple) -->
+  <script is:inline>
+    (function () {
+      const a = document.getElementById("footer-email");
+      if (!a) return;
+      const user = a.getAttribute("data-user");
+      const domain = a.getAttribute("data-domain");
+      if (!user || !domain) return;
+      const email = `${user}@${domain}`;
+      const subject = encodeURIComponent("Consulta desde alexpereyra.dev");
+      a.setAttribute("href", `mailto:${email}?subject=${subject}`);
+    })();
+  </script>
 </footer>

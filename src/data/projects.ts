@@ -18,6 +18,7 @@ export const projects: Project[] = [
     image: "/assets/projects/delfos.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://delfos-studio.vercel.app/",
+    repo: "https://github.com/alexmp2602/delfos",
     highlights: [
       "Diseño minimalista y moderno",
       "Carga ultrarrápida y optimizada para SEO",
@@ -32,6 +33,7 @@ export const projects: Project[] = [
     image: "/assets/projects/gallinas.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://www.gallinaslibres.com/",
+    repo: "https://github.com/alexmp2602/gallinas-libres",
     highlights: [
       "Carga ultraligera y rápida (web estática)",
       "SEO local para mejor posicionamiento en buscadores",
@@ -45,6 +47,7 @@ export const projects: Project[] = [
     image: "/assets/projects/iabot.webp",
     tech: ["Astro.js", "Tailwind CSS"],
     link: "https://iabot.com.ar/",
+    repo: "https://github.com/alexmp2602/iabot-v3",
     highlights: [
       "Diseño institucional orientado a padres y alumnos",
       "Código modular y mantenible con enfoque educativo",
@@ -59,6 +62,7 @@ export const projects: Project[] = [
     image: "/assets/projects/domus.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://esteticadomus.com/",
+    repo: "https://github.com/alexmp2602/domus",
     highlights: [
       "Interfaz visual adaptada al sector salud/estética",
       "Modo oscuro implementado desde el inicio",
@@ -72,6 +76,7 @@ export const projects: Project[] = [
     image: "/assets/projects/apri.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://www.cerrajeriaapri24hs.com.ar/",
+    repo: "https://github.com/alexmp2602/apri-cerrajeria",
     highlights: [
       "Optimización total para dispositivos móviles",
       "Mapa interactivo para contacto inmediato",

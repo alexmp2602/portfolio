@@ -1,6 +1,17 @@
 ---
 import IconMenu from "./icons/IconMenu.astro";
 import ThemeToggle from "./ThemeToggle.astro";
+
+// Ruta activa para aria-current
+const path = Astro.url?.pathname ?? "/";
+const isHome = path === "/" || path === "/index.html";
+
+const navItems = [
+  { href: "#sobre-mi", label: "Sobre mí" },
+  { href: "#proyectos", label: "Proyectos" },
+  { href: "#laboratorio", label: "Laboratorio" },
+  { href: "#contacto", label: "Contacto" },
+];
 ---
 
 <nav
@@ -10,50 +21,82 @@ import ThemeToggle from "./ThemeToggle.astro";
   class="fixed top-2 inset-x-2 z-50 glass-box border border-black/5 dark:border-white/10 fade-in-up fade-delay-100"
 >
   <div
-    class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between"
+    class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 md:py-4 flex items-center justify-between"
   >
-    <!-- Marca personal -->
+    <!-- Marca -->
     <a
       href="/"
-      class="text-lg sm:text-xl font-extrabold tracking-tight text-surface"
+      class="text-lg sm:text-xl font-extrabold tracking-tight text-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      aria-current={isHome ? "page" : undefined}
     >
       Alex Pereyra
     </a>
 
     <!-- Navegación desktop -->
-    <div class="hidden md:flex items-center gap-6 text-sm sm:text-base">
-      <a href="#sobre-mi" class="nav-link">Sobre mí</a>
-      <a href="#proyectos" class="nav-link">Proyectos</a>
-      <a href="#laboratorio" class="nav-link">Laboratorio</a>
-      <a href="#contacto" class="nav-link">Contacto</a>
+    <div class="hidden md:flex items-center gap-5 text-sm sm:text-base">
+      {
+        navItems.map(({ href, label }) => (
+          <a href={href} class="nav-link focus:outline-none" data-nav-link>
+            {label}
+          </a>
+        ))
+      }
 
-      <ThemeToggle class="ml-4" />
+      <!-- CTA CV -->
+      <a
+        href="/assets/cv/ES-Alex-Pereyra-Frontend-Fullstack.pdf"
+        class="btn-outline hidden lg:inline-flex"
+        rel="noopener"
+      >
+        Ver CV
+      </a>
+
+      <ThemeToggle class="ml-1" />
     </div>
 
-    <!-- Botón hamburguesa móvil -->
+    <!-- Botón hamburguesa (móvil) -->
     <button
       id="menu-btn"
+      class="md:hidden p-2 rounded-md text-surface hover:bg-black/5 dark:hover:bg-white/10 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
       aria-label="Abrir menú"
       aria-expanded="false"
       aria-controls="mobile-menu"
-      class="md:hidden p-2 rounded-md text-surface hover:bg-black/5 dark:hover:bg-white/10 transition"
     >
       <IconMenu />
+      <span class="sr-only">Abrir menú</span>
     </button>
   </div>
 
   <!-- Menú móvil -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden glass-box border-t border-black/5 dark:border-white/10 animate-fade-slide-down"
+    class="hidden md:hidden glass-box border-t border-black/5 dark:border-white/10"
     tabindex="-1"
   >
-    <div class="flex flex-col items-center px-6 py-4 space-y-4 text-center">
-      <a href="#sobre-mi" class="nav-link">Sobre mí</a>
-      <a href="#proyectos" class="nav-link">Proyectos</a>
-      <a href="#laboratorio" class="nav-link">Laboratorio</a>
-      <a href="#contacto" class="nav-link">Contacto</a>
-      <ThemeToggle size="w-6 h-6 mx-auto" />
+    <div class="flex flex-col items-stretch px-4 py-3 space-y-1 text-base">
+      {
+        navItems.map(({ href, label }) => (
+          <a
+            href={href}
+            class="nav-link px-3 py-2 rounded-lg text-center focus:outline-none focus-visible:ring-2"
+            data-nav-link
+          >
+            {label}
+          </a>
+        ))
+      }
+
+      <a
+        href="/cv/ES-Alex-Pereyra-Frontend-Fullstack.pdf"
+        class="btn-outline mt-2"
+        rel="noopener"
+      >
+        Ver CV
+      </a>
+
+      <div class="flex items-center justify-center pt-2">
+        <ThemeToggle />
+      </div>
     </div>
   </div>
 </nav>

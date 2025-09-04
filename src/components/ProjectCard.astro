@@ -1,67 +1,146 @@
 ---
-const { title, description, slug, image, tags = [] } = Astro.props;
+interface RepoEntry {
+  label: string;
+  url: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  image: string;
+  imageWebp?: string;
+  imageAvif?: string;
+  /** Acepta cualquiera de las dos props */
+  tags?: string[];
+  tech?: string[];
+
+  /** CTAs */
+  link?: string; // demo/live
+  repo?: string | RepoEntry[]; // uno o varios repos
+  repoPrivate?: boolean; // si el código es privado
+}
+
+const p = Astro.props as Props;
+
+const titleId = `project-${p.slug}`;
+const pills: string[] = (p.tags?.length ? p.tags : p.tech) ?? [];
+
+const repoArray: RepoEntry[] =
+  typeof p.repo === "string"
+    ? [{ label: "Código", url: p.repo }]
+    : Array.isArray(p.repo)
+      ? p.repo
+      : [];
 ---
 
 <article
-  class="glass-card rounded-2xl overflow-hidden shadow-subtle transition-transform duration-300 hover:scale-[1.015] group h-full flex flex-col"
-  role="article"
-  aria-labelledby={`project-${slug}`}
+  class="glass-card rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.015] motion-reduce:hover:scale-100 group h-full flex flex-col"
+  aria-labelledby={titleId}
   data-reveal
 >
+  <!-- Imagen: link a Ver caso -->
   <a
-    href={`/projects/${slug}`}
-    class="flex flex-col justify-between h-full outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-2xl"
-    aria-label={`Ver proyecto ${title}`}
+    href={`/projects/${p.slug}`}
+    class="block outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+    aria-label={`Ver caso: ${p.title}`}
   >
-    <img
-      src={image}
-      alt={`Captura del proyecto ${title}`}
-      class="w-full aspect-video object-cover group-hover:opacity-90 transition-opacity duration-300"
-      loading="lazy"
-      decoding="async"
-      width="640"
-      height="360"
-    />
+    <figure class="w-full">
+      <picture>
+        {p.imageAvif && <source srcset={p.imageAvif} type="image/avif" />}
+        {p.imageWebp && <source srcset={p.imageWebp} type="image/webp" />}
+        <img
+          src={p.image}
+          alt={`Captura del proyecto ${p.title}`}
+          class="w-full aspect-video object-cover group-hover:opacity-90 transition-opacity duration-300"
+          loading="lazy"
+          decoding="async"
+          width="640"
+          height="360"
+        />
+      </picture>
+      <figcaption class="sr-only">{p.title}</figcaption>
+    </figure>
+  </a>
 
-    <div class="p-6 surface-muted backdrop-blur-sm transition-colors duration-300 flex flex-col gap-4 flex-1">
-      <h3
-        id={`project-${slug}`}
-        class="text-lg font-bold text-surface group-hover:text-primary dark:group-hover:text-accent transition-colors"
+  <div
+    class="p-6 surface-muted backdrop-blur-sm transition-colors duration-300 flex flex-col gap-4 flex-1"
+  >
+    <!-- Título: link a Ver caso -->
+    <h3 id={titleId} class="text-lg font-bold text-surface">
+      <a
+        href={`/projects/${p.slug}`}
+        class="outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
       >
-        {title}
-      </h3>
+        {p.title}
+      </a>
+    </h3>
 
-      <p class="text-sm text-surface-muted leading-relaxed text-balance">
-        {description}
-      </p>
+    <p class="text-sm text-surface-muted leading-relaxed text-balance">
+      {p.description}
+    </p>
 
-      {tags.length > 0 && (
-        <ul class="flex flex-wrap gap-2 mt-auto pt-2">
-          {tags.map((tag: string) => (
-            <li
-              class="text-xs px-2 py-1 rounded-full bg-primary/10 dark:bg-accent/10 text-primary dark:text-accent border border-primary/20 dark:border-accent/20 font-medium transition-all duration-300 hover:scale-105 hover:bg-primary/20 dark:hover:bg-accent/20"
-            >
+    {
+      pills.length > 0 && (
+        <ul
+          class="flex flex-wrap gap-2 mt-auto pt-2"
+          aria-label="Tecnologías usadas"
+        >
+          {pills.map((tag) => (
+            <li class="text-xs px-2 py-1 rounded-full bg-primary/10 dark:bg-accent/10 text-primary dark:text-accent border border-primary/20 dark:border-accent/20 font-medium transition-all duration-300 hover:scale-105 hover:bg-primary/20 dark:hover:bg-accent/20">
               {tag}
             </li>
           ))}
         </ul>
-      )}
+      )
+    }
 
-      <span
-        class="inline-flex items-center gap-1 text-sm text-primary dark:text-accent font-semibold mt-4 group-hover:underline transition-all duration-300"
+    <!-- CTA row -->
+    <div class="mt-3 flex flex-wrap gap-2">
+      {
+        p.link && (
+          <a
+            href={p.link}
+            target="_blank"
+            rel="noopener"
+            class="btn-primary"
+            aria-label={`Abrir sitio de ${p.title} en nueva pestaña`}
+          >
+            Ver sitio
+          </a>
+        )
+      }
+
+      <a
+        href={`/projects/${p.slug}`}
+        class="btn-outline"
+        aria-label={`Ver caso de ${p.title}`}
       >
-        Ver proyecto
-        <svg
-          class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
-      </span>
+        Ver caso
+      </a>
+
+      {
+        repoArray.length > 0 &&
+          repoArray.map((r) => (
+            <a
+              href={r.url}
+              target="_blank"
+              rel="noopener"
+              class="btn-outline"
+              aria-label={`Ver código (${r.label}) de ${p.title}`}
+            >
+              {r.label}
+            </a>
+          ))
+      }
+
+      {
+        p.repoPrivate && repoArray.length === 0 && (
+          <span class="inline-flex items-center text-xs px-2 py-1 rounded-full bg-zinc-200/60 dark:bg-zinc-700/60 text-surface">
+            Código privado · a pedido
+          </span>
+        )
+      }
     </div>
-  </a>
+  </div>
 </article>
