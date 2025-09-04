@@ -1,6 +1,6 @@
 <section
   id="inicio"
-  class="page-bg relative isolate min-h-[90vh] flex items-center justify-center px-6 md:px-12 py-16 pt-28 fade-in-up fade-delay-100"
+  class="page-bg relative isolate min-h-[90vh] flex items-center justify-center px-5 md:px-12 py-16 pt-28 lg:pt-40 fade-in-up fade-delay-100"
   role="region"
   aria-labelledby="hero-heading"
 >
@@ -15,95 +15,100 @@
     </div>
   </div>
 
-  <div
-    class="glass-box w-full max-w-6xl mx-auto p-8 md:p-14 shadow-lg rounded-2xl backdrop-blur-md"
-  >
-    <h1
-      id="hero-heading"
-      class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 text-surface"
+  <div class="section-container">
+    <div
+      class="glass-box w-full max-w-6xl mx-auto p-8 md:p-14 shadow-lg rounded-2xl backdrop-blur-md"
     >
-      Hola, soy <span class="text-primary dark:text-accent">Alex Pereyra</span>
-    </h1>
-
-    <p class="text-surface text-lg md:text-xl max-w-4xl mb-8 leading-relaxed">
-      Frontend & <strong>Full-Stack</strong> Developer. Diseño interfaces rápidas
-      con
-      <strong>React/Next.js</strong> y construyo backends en <strong
-        >Node.js</strong
-      > con
-      <strong>SQL</strong>, desplegando en <strong>Vercel/AWS</strong>. Enfoque
-      en rendimiento, accesibilidad y animaciones con propósito (Astro ·
-      Tailwind · GSAP).
-    </p>
-
-    <!-- Botón con menú de idiomas (menubutton accesible) -->
-    <div class="relative inline-block">
-      <button
-        id="cv-menu-button"
-        type="button"
-        class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-        aria-haspopup="menu"
-        aria-expanded="false"
-        aria-controls="cv-menu"
+      <h1
+        id="hero-heading"
+        class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 text-surface"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-5 h-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
+        Hola, soy <span class="text-primary dark:text-accent">Alex Pereyra</span
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
-          ></path>
-        </svg>
-        Ver CV
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"></path>
-        </svg>
-      </button>
+      </h1>
 
-      <nav
-        id="cv-menu"
-        class="hidden absolute mt-2 right-0 w-56 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/20 dark:border-gray-700/40 rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 overflow-hidden animate-fade-in"
-        role="menu"
-        aria-label="Opciones de CV"
-        tabindex="-1"
-      >
-        <a
-          href="/assets/cv/ES-Alex-Pereyra-Frontend-Fullstack.pdf"
-          target="_blank" rel="noopener"
-          role="menuitem"
-          class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
+      <p class="text-surface text-lg md:text-xl max-w-4xl mb-8 leading-relaxed">
+        Frontend & <strong>Full-Stack</strong> Developer. Diseño interfaces rápidas
+        con
+        <strong>React/Next.js</strong> y construyo backends en <strong
+          >Node.js</strong
+        > con
+        <strong>SQL</strong>, desplegando en <strong>Vercel/AWS</strong>.
+        Enfoque en rendimiento, accesibilidad y animaciones con propósito (Astro
+        · Tailwind · GSAP).
+      </p>
+
+      <!-- Botón con menú de idiomas (menubutton accesible) -->
+      <div class="relative inline-block">
+        <button
+          id="cv-menu-button"
+          type="button"
+          class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          aria-controls="cv-menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
+            ></path>
+          </svg>
+          Ver CV
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <nav
+          id="cv-menu"
+          class="hidden absolute mt-2 right-0 w-56 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/20 dark:border-gray-700/40 rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 overflow-hidden animate-fade-in"
+          role="menu"
+          aria-label="Opciones de CV"
           tabindex="-1"
         >
-          📄 CV en Español
-        </a>
-        <a
-          href="/assets/cv/EN-Alex-Pereyra-Frontend-Fullstack.pdf"
-          target="_blank" rel="noopener"
-          role="menuitem"
-          class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
-          tabindex="-1"
-        >
-          📄 Resume in English
-        </a>
-      </nav>
+          <a
+            href="/assets/cv/ES-Alex-Pereyra-Frontend-Fullstack.pdf"
+            target="_blank"
+            rel="noopener"
+            role="menuitem"
+            class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
+            tabindex="-1"
+          >
+            📄 CV en Español
+          </a>
+          <a
+            href="/assets/cv/EN-Alex-Pereyra-Frontend-Fullstack.pdf"
+            target="_blank"
+            rel="noopener"
+            role="menuitem"
+            class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
+            tabindex="-1"
+          >
+            📄 Resume in English
+          </a>
+        </nav>
+      </div>
     </div>
   </div>
 </section>
