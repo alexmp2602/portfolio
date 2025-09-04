@@ -1,10 +1,13 @@
+---
+
+---
+
 <section
   id="inicio"
   class="page-bg relative isolate min-h-[90vh] flex items-center justify-center px-5 md:px-12 py-16 pt-28 lg:pt-40 fade-in-up fade-delay-100"
   role="region"
   aria-labelledby="hero-heading"
 >
-  <!-- Fondo decorativo -->
   <div
     aria-hidden="true"
     class="absolute inset-0 overflow-hidden pointer-events-none"
@@ -38,10 +41,9 @@
         · Tailwind · GSAP).
       </p>
 
-      <!-- Botón con menú de idiomas (menubutton accesible) -->
       <div class="relative inline-block">
         <button
-          id="cv-menu-button"
+          id="cv-button"
           type="button"
           class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           aria-haspopup="menu"
@@ -79,39 +81,37 @@
               d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
-
-        <nav
-          id="cv-menu"
-          class="hidden absolute mt-2 right-0 w-56 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/20 dark:border-gray-700/40 rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 overflow-hidden animate-fade-in"
-          role="menu"
-          aria-label="Opciones de CV"
-          tabindex="-1"
-        >
-          <a
-            href="/assets/cv/ES-Alex-Pereyra-Frontend-Fullstack.pdf"
-            target="_blank"
-            rel="noopener"
-            role="menuitem"
-            class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
-            tabindex="-1"
-          >
-            📄 CV en Español
-          </a>
-          <a
-            href="/assets/cv/EN-Alex-Pereyra-Frontend-Fullstack.pdf"
-            target="_blank"
-            rel="noopener"
-            role="menuitem"
-            class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
-            tabindex="-1"
-          >
-            📄 Resume in English
-          </a>
-        </nav>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Menú fijo fuera del flow para que no se recorte -->
+<nav
+  id="cv-menu"
+  class="hidden fixed z-[9999] w-56 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/20 dark:border-gray-700/40 rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 overflow-hidden animate-fade-in"
+  role="menu"
+  aria-label="Opciones de CV"
+  tabindex="-1"
+>
+  <a
+    href="/assets/cv/ES-Alex-Pereyra-Frontend-Fullstack.pdf"
+    target="_blank"
+    rel="noopener"
+    role="menuitem"
+    class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
+    tabindex="-1">📄 CV en Español</a
+  >
+
+  <a
+    href="/assets/cv/EN-Alex-Pereyra-Frontend-Fullstack.pdf"
+    target="_blank"
+    rel="noopener"
+    role="menuitem"
+    class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
+    tabindex="-1">📄 Resume in English</a
+  >
+</nav>
 
 <style>
   @keyframes fade-in {
@@ -135,23 +135,83 @@
 </style>
 
 <script is:inline>
-  (function () {
-    const btn = document.getElementById("cv-menu-button");
+  (() => {
+    const btn = document.getElementById("cv-button");
     const menu = document.getElementById("cv-menu");
     if (!btn || !menu) return;
 
     let open = false;
     const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
+    const GAP = 10; // separación botón ↔ menú
+    const PAD = 8; // margen desde bordes del viewport
+
+    function clamp(v, min, max) {
+      return Math.min(Math.max(v, min), max);
+    }
+
+    function place() {
+      if (menu.classList.contains("hidden")) return;
+
+      // Medimos tamaño real del menú
+      const prevVis = menu.style.visibility;
+      const prevL = menu.style.left,
+        prevT = menu.style.top;
+      menu.style.visibility = "hidden";
+      menu.style.left = "-9999px";
+      menu.style.top = "-9999px";
+
+      const r = btn.getBoundingClientRect();
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      // al forzar layout ya tenemos offsetWidth/Height
+      const mw = menu.offsetWidth;
+      const mh = menu.offsetHeight;
+
+      let left, top;
+
+      // 1) Debajo (preferido)
+      left = clamp(r.left, PAD, vw - mw - PAD);
+      top = r.bottom + GAP;
+
+      // 2) Si no entra abajo, probamos arriba
+      if (top + mh > vh - PAD) {
+        const tryTop = r.top - GAP - mh;
+        if (tryTop >= PAD) {
+          top = tryTop;
+        } else {
+          // 3) Si no hay altura, vamos a los costados (derecha → izquierda)
+          const rightFit = r.right + GAP + mw <= vw - PAD;
+          const leftFit = r.left - GAP - mw >= PAD;
+
+          // vertical centrado respecto al botón, clamped
+          top = clamp(r.top + r.height / 2 - mh / 2, PAD, vh - mh - PAD);
+
+          if (rightFit) {
+            left = r.right + GAP;
+          } else if (leftFit) {
+            left = r.left - GAP - mw;
+          } else {
+            // 4) Fallback: volvemos abajo y permitimos solapar un poco
+            left = clamp(r.left, PAD, vw - mw - PAD);
+            top = clamp(r.bottom + GAP, PAD, vh - mh - PAD);
+          }
+        }
+      }
+
+      menu.style.left = `${left}px`;
+      menu.style.top = `${top}px`;
+      menu.style.visibility = prevVis || "";
+    }
 
     function show() {
       open = true;
       menu.classList.remove("hidden");
       btn.setAttribute("aria-expanded", "true");
-      menu.removeAttribute("hidden");
-      menu.focus();
-      // Foco al primer item
+      place();
       items[0]?.focus();
-      // Cerrar al hacer click fuera
+      window.addEventListener("scroll", place, { passive: true });
+      window.addEventListener("resize", place);
       document.addEventListener("pointerdown", onDocPointerDown, {
         capture: true,
       });
@@ -162,8 +222,9 @@
       open = false;
       menu.classList.add("hidden");
       btn.setAttribute("aria-expanded", "false");
-      menu.setAttribute("hidden", "true");
       btn.focus();
+      window.removeEventListener("scroll", place);
+      window.removeEventListener("resize", place);
       document.removeEventListener("pointerdown", onDocPointerDown, {
         capture: true,
       });
@@ -180,47 +241,34 @@
 
     function onDocKeyDown(e) {
       if (!open) return;
-      const currentIndex = items.indexOf(document.activeElement);
-      switch (e.key) {
-        case "Escape":
-          e.preventDefault();
-          hide();
-          break;
-        case "ArrowDown":
-          e.preventDefault();
-          items[(currentIndex + 1 + items.length) % items.length]?.focus();
-          break;
-        case "ArrowUp":
-          e.preventDefault();
-          items[(currentIndex - 1 + items.length) % items.length]?.focus();
-          break;
-        case "Home":
-          e.preventDefault();
-          items[0]?.focus();
-          break;
-        case "End":
-          e.preventDefault();
-          items[items.length - 1]?.focus();
-          break;
+      const i = items.indexOf(document.activeElement);
+      if (e.key === "Escape") {
+        e.preventDefault();
+        hide();
+      }
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        items[(i + 1 + items.length) % items.length]?.focus();
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        items[(i - 1 + items.length) % items.length]?.focus();
+      }
+      if (e.key === "Home") {
+        e.preventDefault();
+        items[0]?.focus();
+      }
+      if (e.key === "End") {
+        e.preventDefault();
+        items[items.length - 1]?.focus();
       }
     }
 
-    // Click en botón
     btn.addEventListener("click", toggle);
-
-    // Enter/Espacio abren/cerran cuando el foco está en el botón (ya lo maneja click, pero por accesibilidad):
     btn.addEventListener("keydown", (e) => {
       if (e.key === "ArrowDown" && !open) {
         e.preventDefault();
         show();
-      }
-    });
-
-    // Al tabular fuera del menú, cerramos
-    menu.addEventListener("focusout", (e) => {
-      // si el foco se va fuera del contenedor por completo
-      if (open && !menu.contains(e.relatedTarget) && e.relatedTarget !== btn) {
-        hide();
       }
     });
   })();

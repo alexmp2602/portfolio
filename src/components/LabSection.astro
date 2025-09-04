@@ -2,39 +2,31 @@
 import LabCard from "./LabCard.astro";
 import { experiments } from "../data/experiments";
 
-type Tag = string;
 type Experiment = (typeof experiments)[number];
 
-// Prioridad para elegir/ordenar destacados (primero Sistemas, luego Animaciones, luego UI)
-const TAG_PRIORITY: Tag[] = ["Sistemas", "Animaciones", "UI"];
+// Card 1: GSAP
+const gsapDemo: Experiment | undefined =
+  experiments.find((e) => e.slug === "gsap") ??
+  experiments.find((e) => /gsap/i.test(e.title));
+const gsapImg = gsapDemo?.image ?? "/assets/lab/gsap-cover.webp";
 
-// Score por mejor coincidencia de prioridad; sin tags => al final
-const score = (e: Experiment) => {
-  const tags: Tag[] = e.tags ?? [];
-  const idxs = tags.map((t) => TAG_PRIORITY.indexOf(t)).filter((i) => i >= 0);
-  return idxs.length ? Math.min(...idxs) : Number.POSITIVE_INFINITY;
-};
+// Card 2: Sistemas
+const sigj = experiments.find((e) => e.slug === "sigj");
+const saae = experiments.find((e) => e.slug === "saae");
+const systemsImg = sigj?.image ?? saae?.image ?? "/assets/lab/default.webp";
 
-// Elegimos hasta 6 destacados según prioridad
-const featuredDemos = experiments
-  .slice()
-  .sort((a, b) => score(a) - score(b))
-  .slice(0, 6);
+// Texto corto para cada card
+const gsapDesc =
+  gsapDemo?.description ??
+  "Colección curada de micro-animaciones y transiciones con GSAP.";
 
-// Filtros dinámicos: “Todos” + tags presentes SOLO en los destacados, ordenados por prioridad
-const tagSet = new Set<string>();
-for (const e of featuredDemos) (e.tags ?? []).forEach((t) => tagSet.add(t));
-const filters = [
-  "Todos",
-  ...Array.from(tagSet).sort(
-    (a, b) => TAG_PRIORITY.indexOf(a) - TAG_PRIORITY.indexOf(b)
-  ),
-];
+const systemsDesc =
+  "Espacio de sistemas full-stack que diseño y desarrollo. Entrá para ver el detalle.";
 ---
 
 <section
   id="laboratorio"
-  class="page-bg py-28 px-6 md:px-12"
+  class="page-bg py-28 px-6 md:px-12 section-lazy"
   role="region"
   aria-labelledby="lab-title"
 >
@@ -47,131 +39,44 @@ const filters = [
     </h2>
 
     <div
-      class="glass-box max-w-3xl mx-auto p-8 md:p-10 mb-10 text-center fade-in-up fade-delay-100"
+      class="glass-box max-w-3xl mx-auto p-8 md:p-10 mb-12 text-center fade-in-up fade-delay-100"
     >
       <p
         class="text-lg md:text-xl text-surface-muted leading-relaxed text-balance"
       >
-        Ideas, animaciones, prototipos y mini-experimentos. Algunos quedan acá
-        como demos para mostrar proceso y exploración.
+        En el home te muestro una vista resumida. Al entrar a cada card,
+        explorás la colección completa (animaciones o sistemas) sin sobrecargar
+        esta página.
       </p>
     </div>
 
-    <!-- Filtros -->
-    <div class="flex flex-col items-center gap-3 mb-8">
-      <div
-        id="lab-filters"
-        role="tablist"
-        aria-label="Filtrar experimentos destacados"
-        class="flex flex-wrap justify-center gap-2"
-      >
-        {
-          filters.map((f, i) => (
-            <button
-              role="tab"
-              aria-selected={i === 0 ? "true" : "false"}
-              tabindex={i === 0 ? 0 : -1}
-              class={`btn-outline rounded-full px-4 py-2 ${i === 0 ? "ring-2" : ""}`}
-              data-filter={f}
-            >
-              {f}
-            </button>
-          ))
-        }
-      </div>
-      <span id="lab-count" class="text-surface-muted text-sm" aria-live="polite"
-      ></span>
-    </div>
-
-    <!-- Grid de destacados -->
     <ul
-      id="lab-grid"
       class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8"
       aria-labelledby="lab-title"
     >
       {
-        featuredDemos.map((demo, i) => (
-          <li
-            class="fade-in-up"
-            style={`animation-delay: ${i * 100}ms`}
-            data-tags={(demo.tags ?? []).join(",")}
-          >
+        gsapDemo && (
+          <li class="fade-in-up" style="animation-delay: 60ms">
             <LabCard
-              slug={demo.slug}
-              title={demo.title}
-              description={demo.description}
-              demo={demo.demo}
-              image={demo.image}
-              imageWebp={demo.imageWebp}
-              imageAvif={demo.imageAvif}
+              slug="gsap"
+              title="Animaciones con GSAP"
+              description={gsapDesc}
+              image={gsapImg}
+              imageWebp={gsapDemo.imageWebp}
+              imageAvif={gsapDemo.imageAvif}
             />
           </li>
-        ))
+        )
       }
+
+      <li class="fade-in-up" style="animation-delay: 120ms">
+        <LabCard
+          slug="sistemas"
+          title="Sistemas"
+          description={systemsDesc}
+          image={systemsImg}
+        />
+      </li>
     </ul>
-
-    <div class="mt-14 text-center">
-      <a
-        href="/lab"
-        class="btn-primary rounded-full"
-        aria-label="Ver todos los experimentos del laboratorio"
-      >
-        Ver todos los experimentos
-      </a>
-    </div>
   </div>
-
-  <!-- Filtrado accesible -->
-  <script is:inline>
-    (function () {
-      const tabs = Array.from(
-        document.querySelectorAll('#lab-filters [role="tab"]')
-      );
-      const items = Array.from(document.querySelectorAll("#lab-grid > li"));
-      const countEl = document.getElementById("lab-count");
-
-      function apply(filter) {
-        const f = filter === "Todos" ? null : filter.toLowerCase();
-        let visible = 0;
-        items.forEach((el) => {
-          const tags = (el.getAttribute("data-tags") || "")
-            .toLowerCase()
-            .split(",")
-            .map((s) => s.trim())
-            .filter(Boolean);
-          const show = !f || tags.includes(f); // match exacto por token
-          el.classList.toggle("hidden", !show);
-          if (show) visible++;
-        });
-        if (countEl)
-          countEl.textContent = `${visible} experimento${visible === 1 ? "" : "s"}`;
-      }
-
-      tabs.forEach((t) => {
-        t.addEventListener("click", () => {
-          tabs.forEach((x) => {
-            x.setAttribute("aria-selected", "false");
-            x.setAttribute("tabindex", "-1");
-          });
-          t.setAttribute("aria-selected", "true");
-          t.setAttribute("tabindex", "0");
-          t.focus();
-          apply(t.dataset.filter || "Todos");
-        });
-        // navegación con flechas
-        t.addEventListener("keydown", (e) => {
-          const i = tabs.indexOf(document.activeElement);
-          if (i < 0) return;
-          if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-            e.preventDefault();
-            const dir = e.key === "ArrowRight" ? 1 : -1;
-            const next = tabs[(i + dir + tabs.length) % tabs.length];
-            next.click(); // click también ajusta tabindex/aria-selected
-          }
-        });
-      });
-
-      apply("Todos"); // inicial
-    })();
-  </script>
 </section>

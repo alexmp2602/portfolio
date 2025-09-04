@@ -1,0 +1,126 @@
+---
+interface Props {
+  title: string;
+  href: string;
+  description?: string;
+  poster?: string;
+  posterWebp?: string;
+  posterAvif?: string;
+}
+
+const { title, href, description, poster, posterWebp, posterAvif } =
+  Astro.props as Props;
+
+const srcPoster =
+  poster && poster.trim() !== "" ? poster : "/assets/lab/gsap-cover.webp";
+---
+
+<article
+  data-preview-card
+  class="group glass-card rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] motion-reduce:hover:scale-100"
+  aria-label={`Demo: ${title}`}
+  data-reveal
+>
+  <div
+    class="relative w-full aspect-video border-t border-black/5 dark:border-white/10"
+  >
+    <!-- CTA flotante -->
+    <div class="absolute right-2 top-2 z-20">
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-outline px-3 py-1.5 rounded-full text-xs md:text-sm bg-black/30 dark:bg-white/10 backdrop-blur-sm"
+        aria-label={`Abrir demo ${title} en una pestaña nueva`}
+      >
+        Abrir demo ↗
+      </a>
+    </div>
+
+    <!-- Poster (se oculta al cargar el iframe) -->
+    <picture data-fallback class="absolute inset-0 z-0">
+      {posterAvif && <source srcset={posterAvif} type="image/avif" />}
+      {posterWebp && <source srcset={posterWebp} type="image/webp" />}
+      <img
+        src={srcPoster}
+        alt=""
+        class="w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+
+    <!-- Live preview INTERACTIVO -->
+    <iframe
+      data-frame
+      data-src={href}
+      title={title}
+      loading="lazy"
+      sandbox="allow-scripts allow-same-origin"
+      class="w-full h-full opacity-0 transition-opacity duration-300 z-[1]"
+    ></iframe>
+
+    <!-- Borde decorativo, no intercepta eventos -->
+    <div
+      class="absolute inset-0 ring-1 ring-black/5 dark:ring-white/10 pointer-events-none z-0"
+      aria-hidden="true"
+    >
+    </div>
+  </div>
+
+  <div
+    class="p-6 surface-muted backdrop-blur-sm transition-colors duration-300"
+  >
+    <h3
+      class="text-lg md:text-xl font-bold text-surface group-hover:text-primary dark:group-hover:text-accent transition-colors"
+    >
+      {title}
+    </h3>
+    {
+      description && (
+        <p class="mt-3 text-surface-muted leading-relaxed">{description}</p>
+      )
+    }
+  </div>
+
+  <script is:inline>
+    (() => {
+      const root = document.currentScript?.closest("[data-preview-card]");
+      if (!root) return;
+
+      const frame = root.querySelector("[data-frame]");
+      const fallback = root.querySelector("[data-fallback]");
+      if (!frame) return;
+
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      if (prefersReduced) return;
+
+      const load = () => {
+        if (!frame.getAttribute("src")) {
+          frame.setAttribute("src", frame.getAttribute("data-src") || "");
+        }
+      };
+
+      const onLoad = () => {
+        frame.classList.add("opacity-100");
+        if (fallback) fallback.style.display = "none";
+      };
+      frame.addEventListener("load", onLoad, { once: true });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          const e = entries[0];
+          if (e?.isIntersecting) {
+            load();
+            io.disconnect();
+          }
+        },
+        { rootMargin: "200px 0px" }
+      );
+
+      io.observe(frame);
+    })();
+  </script>
+</article>

@@ -26,10 +26,11 @@ const jsonLd = {
   url: canonical,
   sameAs: [
     "https://www.linkedin.com/in/alex-pereyra-dev",
-    "https://github.com/"
-  ]
+    "https://github.com/",
+  ],
 };
 ---
+
 <!doctype html>
 <html
   lang="es"
@@ -45,8 +46,16 @@ const jsonLd = {
     <meta name="robots" content="index,follow" />
     <meta name="color-scheme" content="light dark" />
     <!-- theme-color por modo -->
-    <meta name="theme-color" content="#256340" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0b1110" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="theme-color"
+      content="#256340"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#0b1110"
+      media="(prefers-color-scheme: dark)"
+    />
     <link rel="canonical" href={canonical} />
     <link rel="manifest" href="/site.webmanifest" />
 
@@ -55,11 +64,14 @@ const jsonLd = {
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
 
     <!-- Open Graph -->
-    <meta property="og:locale" content={locale.replace("_","-")} />
+    <meta property="og:locale" content={locale.replace("_", "-")} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -94,16 +106,29 @@ const jsonLd = {
         --color-dark: #1f1f1f;
       }
       .skip-link {
-        position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+        position: absolute;
+        left: -999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
       }
       .skip-link:focus {
-        position: fixed; left: 1rem; top: 1rem; width: auto; height: auto; padding: .5rem .75rem;
-        background: var(--color-primary); color: white; border-radius: .5rem; z-index: 1000;
+        position: fixed;
+        left: 1rem;
+        top: 1rem;
+        width: auto;
+        height: auto;
+        padding: 0.5rem 0.75rem;
+        background: var(--color-primary);
+        color: white;
+        border-radius: 0.5rem;
+        z-index: 1000;
       }
     </style>
 
     <!-- JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
 
   <body class="bg-light dark:bg-dark">

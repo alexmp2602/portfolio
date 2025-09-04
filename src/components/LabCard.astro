@@ -1,101 +1,78 @@
 ---
 interface Props {
   title: string;
-  slug: string;
+  slug?: string;
   description?: string;
   image?: string;
   imageWebp?: string;
   imageAvif?: string;
+  href?: string;
   demo?: string;
 }
 
-const { title, slug, description, demo, image, imageWebp, imageAvif } =
-  Astro.props as Props;
+const {
+  title,
+  slug = "",
+  description,
+  image,
+  imageWebp,
+  imageAvif,
+  href,
+} = Astro.props as Props;
 
-const demoId = `lab-${slug}`;
-const hasIframe = Boolean(demo);
-// Fallback centralizado para src de imagen
-const poster =
-  image && image.trim() !== "" ? image : "/assets/lab/default.webp";
+const fallback = "/assets/lab/default.webp";
+const poster = image && image.trim() !== "" ? image : fallback;
+
+const makeId = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+const titleId = `lab-${slug || makeId(title)}`;
+
+const url = href ?? (slug ? `/lab/${slug}` : "#");
+const isExternal = !!href && /^https?:\/\//i.test(href);
 ---
 
-<article
-  class="glass-card rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] motion-reduce:hover:scale-100 group h-full flex flex-col"
-  aria-labelledby={demoId}
+<a
+  href={url}
+  class="group block glass-card rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] motion-reduce:hover:scale-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+  aria-labelledby={titleId}
   data-reveal
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noopener noreferrer" : undefined}
 >
-  <header class="p-6">
-    <h3 id={demoId} class="text-lg md:text-xl font-bold text-surface">
-      <a
-        href={`/lab/${slug}`}
-        class="outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded transition-colors group-hover:text-primary dark:group-hover:text-accent"
-        aria-label={`Ver demo: ${title}`}
-      >
-        {title}
-      </a>
+  <figure class="w-full">
+    <picture>
+      {imageAvif && <source srcset={imageAvif} type="image/avif" />}
+      {imageWebp && <source srcset={imageWebp} type="image/webp" />}
+      <img
+        src={poster}
+        alt={`Vista de ${title}`}
+        loading="lazy"
+        decoding="async"
+        width="640"
+        height="270"
+        class="w-full h-48 md:h-56 object-cover border-t border-black/5 dark:border-white/10 group-hover:opacity-90 transition-opacity duration-300"
+      />
+    </picture>
+    <figcaption class="sr-only">{title}</figcaption>
+  </figure>
+
+  <div
+    class="p-6 surface-muted backdrop-blur-sm transition-colors duration-300"
+  >
+    <h3
+      id={titleId}
+      class="text-lg md:text-xl font-bold text-surface group-hover:text-primary dark:group-hover:text-accent transition-colors"
+    >
+      {title}
     </h3>
+
     {
       description && (
-        <p
-          class="mt-1 text-surface-muted text-sm"
-          style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;"
-        >
-          {description}
-        </p>
-      )
-    }
-  </header>
-  {
-    hasIframe ? (
-      <div class="w-full aspect-video border-t border-black/5 dark:border-white/10 rounded-b-2xl overflow-hidden">
-        <iframe
-          src={demo}
-          title={`Vista previa animada de ${title}`}
-          loading="lazy"
-          referrerpolicy="no-referrer"
-          sandbox="allow-scripts allow-same-origin"
-          class="w-full h-full pointer-events-none opacity-80 transition-opacity duration-300 group-hover:opacity-100"
-        />
-      </div>
-    ) : (
-      <figure class="w-full">
-        <picture>
-          {imageAvif && <source srcset={imageAvif} type="image/avif" />}
-          {imageWebp && <source srcset={imageWebp} type="image/webp" />}
-          <img
-            src={poster}
-            alt={`Vista previa de ${title}`}
-            loading="lazy"
-            decoding="async"
-            width="640"
-            height="270"
-            class="w-full h-48 md:h-56 object-cover border-t border-black/5 dark:border-white/10 group-hover:opacity-90 transition-opacity duration-300 rounded-b-2xl"
-          />
-        </picture>
-        <figcaption class="sr-only">{title}</figcaption>
-      </figure>
-    )
-  }
-  <div class="flex flex-wrap gap-2 items-center justify-between p-6 pt-4 mt-auto">
-    <a
-      href={`/lab/${slug}`}
-      class="btn-primary"
-      aria-label={`Abrir demo: ${title}`}
-    >
-      Ver demo
-    </a>
-    {
-      hasIframe && (
-        <a
-          href={demo}
-          target="_blank"
-          rel="noopener"
-          class="btn-outline"
-          aria-label={`Abrir preview de ${title} en nueva pestaña`}
-        >
-          Abrir preview
-        </a>
+        <p class="mt-3 text-surface-muted leading-relaxed">{description}</p>
       )
     }
   </div>
-</article>
+</a>
