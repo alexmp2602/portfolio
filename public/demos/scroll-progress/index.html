@@ -2,34 +2,48 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Scroll Progress</title>
     <style>
-      body {
+      :root {
+        --accent: #60a98f;
+        --bg: #fafafa;
+        --fg: #1f1f1f;
+      }
+      * {
+        box-sizing: border-box;
         margin: 0;
-        font-family: sans-serif;
+      }
+      body {
+        font-family: ui-sans-serif, system-ui, sans-serif;
         line-height: 1.6;
-        background: #fafafa;
-        color: #1f1f1f;
+        background: var(--bg);
+        color: var(--fg);
+        overscroll-behavior: none;
       }
 
-      /* Progress bar */
+      /* Contenedor fijo arriba */
       .progress-container {
         position: fixed;
-        top: 0;
-        left: 0;
+        inset: 0 auto auto 0;
         height: 6px;
         width: 100%;
-        background: rgba(0, 0, 0, 0.05);
+        background: rgba(0, 0, 0, 0.06);
         z-index: 9999;
       }
 
       .progress-bar {
         height: 100%;
         width: 0%;
-        background: #60a98f;
+        background: linear-gradient(90deg, var(--accent), #4d8c76);
         transform-origin: left center;
-        transition: width 0.1s ease-out;
+        transition: width 0.15s ease-out;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .progress-bar {
+          transition: none;
+        }
       }
 
       main {
@@ -37,14 +51,13 @@
         max-width: 800px;
         margin: auto;
       }
-
       h1 {
-        margin-bottom: 2rem;
-        font-size: 2rem;
-      }
-
-      p {
         margin-bottom: 1.5rem;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 800;
+      }
+      p {
+        margin-bottom: 1.2rem;
       }
     </style>
   </head>
@@ -56,23 +69,48 @@
     <main>
       <h1>Scroll Progress Demo</h1>
       <p>
-        Este experimento muestra una barra de progreso arriba mientras hacés
-        scroll.
+        Este experimento muestra una barra de progreso fija arriba que se
+        completa mientras bajás por la página.
       </p>
-      ${`
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      `.repeat(60)}
+      <div id="filler"></div>
     </main>
 
     <script>
       const progressBar = document.getElementById("progress");
+      const filler = document.getElementById("filler");
 
-      window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
+      // Generar contenido de relleno
+      filler.innerHTML = Array.from(
+        { length: 50 },
+        (_, i) =>
+          `<p>Bloque de contenido ${
+            i + 1
+          }: texto de ejemplo para hacer scroll.</p>`
+      ).join("");
+
+      let last = 0,
+        ticking = false;
+
+      function update() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const docHeight = document.body.scrollHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
-        progressBar.style.width = `${scrollPercent}%`;
-      });
+        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        if (percent !== last) {
+          progressBar.style.width = percent.toFixed(2) + "%";
+          last = percent;
+        }
+        ticking = false;
+      }
+
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      update(); // inicial
     </script>
   </body>
 </html>

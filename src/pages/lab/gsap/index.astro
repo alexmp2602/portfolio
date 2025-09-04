@@ -4,14 +4,16 @@ import NavbarLab from "../../../components/NavbarLab.astro";
 import { experiments } from "../../../data/experiments";
 import LabCard from "../../../components/LabCard.astro";
 
-const gsapDemos = experiments.filter((exp) =>
-  [
-    "cursor-gsap",
-    "scroll-progress",
-    "sticky-scroll",
-    "scrolltrigger-timeline",
-  ].includes(exp.slug)
-);
+const GSAP_SLUGS = [
+  "cursor-gsap",
+  "parallax-scroll",
+  "scroll-progress",
+  "scroll-reveal",
+  "scrolltrigger-animation",
+  "scrolltrigger-timeline",
+];
+
+const gsapDemos = experiments.filter((exp) => GSAP_SLUGS.includes(exp.slug));
 ---
 
 <Layout>

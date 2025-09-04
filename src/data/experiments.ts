@@ -23,11 +23,11 @@ export const experiments: Experiment[] = [
     image: "/assets/lab/gsap-cover.webp",
   },
   {
-    slug: "scroll-reveal",
-    title: "Animación Scroll Reveal",
+    slug: "cursor-gsap",
+    title: "Cursor Personalizado con GSAP",
     description:
-      "Animación suave al hacer scroll, usando IntersectionObserver con HTML, CSS y JavaScript puro.",
-    demo: "/demos/scroll-reveal/index.html",
+      "Interacción avanzada con cursor animado usando la librería GSAP para efectos suaves y personalizados.",
+    demo: "/demos/cursor-gsap/index.html",
   },
   {
     slug: "parallax-scroll",
@@ -37,13 +37,6 @@ export const experiments: Experiment[] = [
     demo: "/demos/parallax-scroll/index.html",
   },
   {
-    slug: "cursor-gsap",
-    title: "Cursor Personalizado con GSAP",
-    description:
-      "Interacción avanzada con cursor animado usando la librería GSAP para efectos suaves y personalizados.",
-    demo: "/demos/cursor-gsap/index.html",
-  },
-  {
     slug: "scroll-progress",
     title: "Barra de Progreso al Scroll",
     description:
@@ -51,11 +44,18 @@ export const experiments: Experiment[] = [
     demo: "/demos/scroll-progress/index.html",
   },
   {
-    slug: "sticky-scroll",
-    title: "Sticky Scroll Animado",
+    slug: "scroll-reveal",
+    title: "Animación Scroll Reveal",
     description:
-      "Elementos que se fijan al viewport y se animan durante el desplazamiento.",
-    demo: "/demos/sticky-scroll/index.html",
+      "Animación suave al hacer scroll, usando IntersectionObserver con HTML, CSS y JavaScript puro.",
+    demo: "/demos/scroll-reveal/index.html",
+  },
+  {
+    slug: "scrolltrigger-animation",
+    title: "ScrollTrigger Animation",
+    description:
+      "Animaciones por secciones controladas con ScrollTrigger para una narrativa fluida.",
+    demo: "/demos/scrolltrigger-animation/index.html",
   },
   {
     slug: "scrolltrigger-timeline",
