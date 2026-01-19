@@ -4,30 +4,27 @@ import { experiments } from "../data/experiments";
 
 type Experiment = (typeof experiments)[number];
 
-// Card 1: GSAP
 const gsapDemo: Experiment | undefined =
   experiments.find((e) => e.slug === "gsap") ??
   experiments.find((e) => /gsap/i.test(e.title));
+
 const gsapImg = gsapDemo?.image ?? "/assets/lab/gsap-cover.webp";
 
-// Card 2: Sistemas
 const sigj = experiments.find((e) => e.slug === "sigj");
 const saae = experiments.find((e) => e.slug === "saae");
 const systemsImg = sigj?.image ?? saae?.image ?? "/assets/lab/default.webp";
 
-// Texto corto para cada card
 const gsapDesc =
   gsapDemo?.description ??
   "Colección curada de micro-animaciones y transiciones con GSAP.";
 
 const systemsDesc =
-  "Espacio de sistemas full-stack que diseño y desarrollo. Entrá para ver el detalle.";
+  "Exploración de sistemas y herramientas internas. Detalles, pantallas y decisiones de implementación.";
 ---
 
 <section
   id="laboratorio"
   class="page-bg py-28 px-6 md:px-12 section-lazy"
-  role="region"
   aria-labelledby="lab-title"
 >
   <div class="max-w-7xl mx-auto">
@@ -35,7 +32,7 @@ const systemsDesc =
       id="lab-title"
       class="text-4xl md:text-5xl font-extrabold text-center mb-10 text-surface fade-in-up"
     >
-      Laboratorio Creativo 🧪
+      Laboratorio
     </h2>
 
     <div
@@ -44,19 +41,15 @@ const systemsDesc =
       <p
         class="text-lg md:text-xl text-surface-muted leading-relaxed text-balance"
       >
-        En el home te muestro una vista resumida. Al entrar a cada card,
-        explorás la colección completa (animaciones o sistemas) sin sobrecargar
-        esta página.
+        Una selección breve para no sobrecargar el home. Entrando a cada card
+        podés ver el detalle completo.
       </p>
     </div>
 
-    <ul
-      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8"
-      aria-labelledby="lab-title"
-    >
+    <ul class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
       {
         gsapDemo && (
-          <li class="fade-in-up" style="animation-delay: 60ms">
+          <li class="fade-in-up" data-reveal>
             <LabCard
               slug="gsap"
               title="Animaciones con GSAP"
@@ -69,7 +62,7 @@ const systemsDesc =
         )
       }
 
-      <li class="fade-in-up" style="animation-delay: 120ms">
+      <li class="fade-in-up" data-reveal>
         <LabCard
           slug="sistemas"
           title="Sistemas"

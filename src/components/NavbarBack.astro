@@ -23,29 +23,31 @@ const {
 
 <nav
   class="fixed top-2 inset-x-2 z-50 glass-box border-b border-black/5 dark:border-white/10"
-  role="navigation"
   aria-label="Breadcrumb"
 >
   <div
     class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between"
   >
+    <!-- Ruta / breadcrumb -->
     <div
       class="flex items-center gap-2 text-sm text-surface/70 overflow-x-auto whitespace-nowrap max-w-full"
     >
       {
         path.length > 0 ? (
           <>
-            {path.map(({ href, label }, index) => (
+            {path.map(({ href, label }) => (
               <a
                 href={href}
-                class="text-surface hover:text-primary font-medium transition flex items-center gap-2"
+                class="text-surface font-medium hover:text-primary transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
               >
                 {label}
                 <span class="text-surface/40 select-none">/</span>
               </a>
             ))}
+
+            <!-- Página actual (no es link) -->
             <span
-              class="text-surface/50 truncate max-w-[60%] overflow-hidden text-ellipsis"
+              class="text-surface/50 truncate max-w-[60%]"
               aria-current="page"
               title={current}
             >
@@ -53,9 +55,10 @@ const {
             </span>
           </>
         ) : (
+          <!-- Fallback simple cuando no hay breadcrumbs -->
           <a
             href={fallbackHref}
-            class="text-surface font-medium hover:text-primary transition"
+            class="text-surface font-medium hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
           >
             {fallbackLabel}
           </a>

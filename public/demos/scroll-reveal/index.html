@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -10,103 +10,135 @@
         --accent-dark: #256340;
         --bg-dark: #1f1f1f;
         --fg: #fafafa;
+        --text: #111315;
       }
+
       * {
         box-sizing: border-box;
         margin: 0;
       }
+
       body {
-        font-family: ui-sans-serif, system-ui, sans-serif;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial;
         background: var(--fg);
-        color: #1f1f1f;
+        color: var(--text);
         line-height: 1.5;
       }
 
       section {
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        display: grid;
+        place-items: center;
         text-align: center;
+        padding: 2.5rem 1.75rem;
+      }
+
+      .title {
         font-size: clamp(1.8rem, 4vw, 3rem);
         font-weight: 800;
-        padding: 2rem;
-        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        letter-spacing: 0.01em;
+        text-wrap: balance;
       }
 
-      /* Estado inicial oculto */
-      [data-reveal] {
+      /* Reveal */
+      [data-reveal] .title {
         opacity: 0;
-        transform: translateY(60px);
+        transform: translateY(28px);
+        transition:
+          opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform;
       }
 
-      /* Estado visible */
-      .revealed {
+      [data-reveal].is-in .title {
         opacity: 1;
         transform: translateY(0);
       }
 
-      /* Diferentes fondos */
+      /* Fondos */
       .section-1 {
         background: var(--accent);
         color: #fff;
       }
+
       .section-2 {
         background: var(--accent-dark);
         color: #fff;
       }
+
       .section-3 {
         background: var(--bg-dark);
         color: var(--fg);
       }
 
-      /* Reduce motion → no animar */
+      /* Reduce motion */
       @media (prefers-reduced-motion: reduce) {
-        [data-reveal] {
-          opacity: 1 !important;
-          transform: none !important;
-          transition: none !important;
+        [data-reveal] .title {
+          opacity: 1;
+          transform: none;
+          transition: none;
+          will-change: auto;
         }
+      }
+
+      :focus-visible {
+        outline: 2px solid rgba(17, 19, 21, 0.5);
+        outline-offset: 3px;
       }
     </style>
   </head>
+
   <body>
-    <section class="section-1" data-reveal>Bienvenido al experimento</section>
-    <section class="section-2" data-reveal>Scroll Reveal Animado</section>
-    <section class="section-3" data-reveal>¡Gracias por mirar!</section>
+    <section class="section-1" data-reveal>
+      <h1 class="title">Bienvenido al experimento</h1>
+    </section>
+
+    <section class="section-2" data-reveal>
+      <h2 class="title">Scroll Reveal animado</h2>
+    </section>
+
+    <section class="section-3" data-reveal>
+      <h2 class="title">Gracias por mirar</h2>
+    </section>
 
     <noscript>
       <style>
-        [data-reveal] {
+        [data-reveal] .title {
           opacity: 1 !important;
           transform: none !important;
+          transition: none !important;
         }
       </style>
     </noscript>
 
     <script>
-      const sections = document.querySelectorAll("[data-reveal]");
+      (() => {
+        const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) return;
 
-      const observer = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
+        const sections = document.querySelectorAll("[data-reveal]");
+        if (!sections.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
               const el = entry.target;
-              el.classList.add("revealed");
+              el.classList.add("is-in");
               obs.unobserve(el);
-
-              // escalonar elementos hijos si los hubiera
-              [...el.children].forEach((child, i) => {
-                child.style.transitionDelay = `${i * 120}ms`;
-              });
             }
-          });
-        },
-        { threshold: 0.2 }
-      );
+          },
+          { threshold: 0.22, rootMargin: "0px 0px -10% 0px" },
+        );
 
-      sections.forEach((el) => observer.observe(el));
+        sections.forEach((el) => observer.observe(el));
+      })();
     </script>
   </body>
 </html>

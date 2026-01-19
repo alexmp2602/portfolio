@@ -5,7 +5,6 @@
 <section
   id="inicio"
   class="page-bg relative isolate min-h-[90vh] flex items-center justify-center px-5 md:px-12 py-16 pt-28 lg:pt-40 fade-in-up fade-delay-100"
-  role="region"
   aria-labelledby="hero-heading"
 >
   <div
@@ -26,91 +25,97 @@
         id="hero-heading"
         class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 text-surface"
       >
-        Hola, soy <span class="text-primary dark:text-accent">Alex Pereyra</span
+        Frontend Engineer
+        <span
+          class="block text-xl sm:text-2xl md:text-3xl font-semibold text-surface-muted mt-3"
         >
+          React / Next.js / TypeScript · Arquitectura, performance,
+          accesibilidad y UX escalable
+        </span>
       </h1>
 
       <p class="text-surface text-lg md:text-xl max-w-4xl mb-8 leading-relaxed">
-        Frontend & <strong>Full-Stack</strong> Developer. Diseño interfaces rápidas
-        con
-        <strong>React/Next.js</strong> y construyo backends en <strong
-          >Node.js</strong
-        > con
-        <strong>SQL</strong>, desplegando en <strong>Vercel/AWS</strong>.
-        Enfoque en rendimiento, accesibilidad y animaciones con propósito (Astro
-        · Tailwind · GSAP).
+        Construyo interfaces rápidas y consistentes, cuidando la experiencia de
+        usuario y la calidad del código.
+        <span class="text-surface-muted">
+          Backend como conocimiento complementario: Node.js, SQL y APIs.
+        </span>
       </p>
 
-      <div class="relative inline-block">
-        <button
-          id="cv-button"
-          type="button"
-          class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-          aria-haspopup="menu"
-          aria-expanded="false"
-          aria-controls="cv-menu"
+      <div class="flex flex-wrap items-center gap-3">
+        <a
+          href="#proyectos"
+          class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
+          Ver proyectos
+        </a>
+
+        <div class="relative inline-block">
+          <button
+            id="cv-button"
+            type="button"
+            class="btn-outline inline-flex items-center gap-2 px-6 py-3 rounded-xl"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="cv-menu"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"
-            ></path>
-          </svg>
-          Ver CV
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-4 h-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </button>
+            Ver CV
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <a
+          href="#contacto"
+          class="btn-outline inline-flex items-center gap-2 px-6 py-3 rounded-xl"
+        >
+          Contacto
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Menú fijo fuera del flow para que no se recorte -->
 <nav
   id="cv-menu"
-  class="hidden fixed z-[9999] w-56 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/20 dark:border-gray-700/40 rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 overflow-hidden animate-fade-in"
+  class="hidden fixed z-9999 w-56 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/20 dark:border-gray-700/40 rounded-lg shadow-lg ring-1 ring-black/10 dark:ring-white/10 overflow-hidden animate-fade-in"
   role="menu"
   aria-label="Opciones de CV"
   tabindex="-1"
 >
   <a
-    href="/assets/cv/ES-Alex-Pereyra-Frontend-Fullstack.pdf"
+    href="/assets/cv/ES-Alex-Pereyra-Frontend-Engineer.pdf"
     target="_blank"
     rel="noopener"
     role="menuitem"
     class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
-    tabindex="-1">📄 CV en Español</a
+    tabindex="-1"
   >
+    📄 CV en Español
+  </a>
 
   <a
-    href="/assets/cv/EN-Alex-Pereyra-Frontend-Fullstack.pdf"
+    href="/assets/cv/EN-Alex-Pereyra-Frontend-Engineer.pdf"
     target="_blank"
     rel="noopener"
     role="menuitem"
     class="block px-4 py-3 text-sm text-gray-800 dark:text-gray-200 hover:bg-primary/10 focus:bg-primary/10 focus:outline-none"
-    tabindex="-1">📄 Resume in English</a
+    tabindex="-1"
   >
+    📄 Resume in English
+  </a>
 </nav>
 
 <style>
@@ -142,20 +147,15 @@
 
     let open = false;
     const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
-    const GAP = 10; // separación botón ↔ menú
-    const PAD = 8; // margen desde bordes del viewport
+    const GAP = 10;
+    const PAD = 8;
 
-    function clamp(v, min, max) {
-      return Math.min(Math.max(v, min), max);
-    }
+    const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
 
     function place() {
       if (menu.classList.contains("hidden")) return;
 
-      // Medimos tamaño real del menú
       const prevVis = menu.style.visibility;
-      const prevL = menu.style.left,
-        prevT = menu.style.top;
       menu.style.visibility = "hidden";
       menu.style.left = "-9999px";
       menu.style.top = "-9999px";
@@ -164,38 +164,25 @@
       const vw = window.innerWidth;
       const vh = window.innerHeight;
 
-      // al forzar layout ya tenemos offsetWidth/Height
       const mw = menu.offsetWidth;
       const mh = menu.offsetHeight;
 
-      let left, top;
+      let left = clamp(r.left, PAD, vw - mw - PAD);
+      let top = r.bottom + GAP;
 
-      // 1) Debajo (preferido)
-      left = clamp(r.left, PAD, vw - mw - PAD);
-      top = r.bottom + GAP;
-
-      // 2) Si no entra abajo, probamos arriba
       if (top + mh > vh - PAD) {
         const tryTop = r.top - GAP - mh;
         if (tryTop >= PAD) {
           top = tryTop;
         } else {
-          // 3) Si no hay altura, vamos a los costados (derecha → izquierda)
           const rightFit = r.right + GAP + mw <= vw - PAD;
           const leftFit = r.left - GAP - mw >= PAD;
 
-          // vertical centrado respecto al botón, clamped
           top = clamp(r.top + r.height / 2 - mh / 2, PAD, vh - mh - PAD);
 
-          if (rightFit) {
-            left = r.right + GAP;
-          } else if (leftFit) {
-            left = r.left - GAP - mw;
-          } else {
-            // 4) Fallback: volvemos abajo y permitimos solapar un poco
-            left = clamp(r.left, PAD, vw - mw - PAD);
-            top = clamp(r.bottom + GAP, PAD, vh - mh - PAD);
-          }
+          if (rightFit) left = r.right + GAP;
+          else if (leftFit) left = r.left - GAP - mw;
+          else top = clamp(r.bottom + GAP, PAD, vh - mh - PAD);
         }
       }
 
@@ -231,9 +218,7 @@
       document.removeEventListener("keydown", onDocKeyDown);
     }
 
-    function toggle() {
-      open ? hide() : show();
-    }
+    const toggle = () => (open ? hide() : show());
 
     function onDocPointerDown(e) {
       if (!menu.contains(e.target) && !btn.contains(e.target)) hide();
@@ -241,23 +226,29 @@
 
     function onDocKeyDown(e) {
       if (!open) return;
+
       const i = items.indexOf(document.activeElement);
+
       if (e.key === "Escape") {
         e.preventDefault();
         hide();
       }
+
       if (e.key === "ArrowDown") {
         e.preventDefault();
         items[(i + 1 + items.length) % items.length]?.focus();
       }
+
       if (e.key === "ArrowUp") {
         e.preventDefault();
         items[(i - 1 + items.length) % items.length]?.focus();
       }
+
       if (e.key === "Home") {
         e.preventDefault();
         items[0]?.focus();
       }
+
       if (e.key === "End") {
         e.preventDefault();
         items[items.length - 1]?.focus();

@@ -6,12 +6,12 @@ import IconEmail from "./icons/IconEmail.astro";
 const year = new Date().getFullYear();
 ---
 
-<footer class="page-bg pt-24 pb-10 px-6" role="contentinfo">
+<footer class="page-bg pt-24 pb-10 px-6">
   <div
     class="glass-box max-w-7xl mx-auto px-6 py-12 border-t border-black/10 dark:border-white/10 text-center text-sm text-surface-muted space-y-6"
   >
-    <!-- Redes -->
-    <div class="flex justify-center gap-6 text-xl">
+    <!-- Social -->
+    <nav class="flex justify-center gap-6 text-xl" aria-label="Redes">
       <a
         href="https://github.com/alexmp2602"
         target="_blank"
@@ -32,7 +32,7 @@ const year = new Date().getFullYear();
         <IconLinkedIn aria-hidden="true" />
       </a>
 
-      <!-- Email (ofuscado) -->
+      <!-- Email (mailto se arma en cliente) -->
       <a
         id="footer-email"
         data-user="alexmp.2602"
@@ -42,40 +42,40 @@ const year = new Date().getFullYear();
       >
         <IconEmail aria-hidden="true" />
       </a>
-    </div>
+    </nav>
 
-    <!-- Créditos -->
-    <p class="text-surface-muted">
-      © {year} Alex Pereyra — Todos los derechos reservados.
-    </p>
+    <!-- Legal -->
+    <p>© {year} Alex Pereyra. Todos los derechos reservados.</p>
 
-    <!-- Hecho con -->
-    <p class="text-surface-muted">
-      Hecho con
+    <!-- Stack -->
+    <p>
+      Hecho con{" "}
       <a
         href="https://astro.build"
         target="_blank"
         rel="noopener noreferrer"
         class="text-primary hover:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
-        >Astro</a
       >
-      +
+        Astro
+      </a>{" "}
+      +{" "}
       <a
         href="https://tailwindcss.com"
         target="_blank"
         rel="noopener noreferrer"
         class="text-primary hover:underline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
-        >Tailwind CSS</a
       >
+        Tailwind CSS
+      </a>
     </p>
 
-    <!-- Banner AFIP F960/D -->
-    <div class="flex items-center justify-center gap-3">
+    <!-- Extras -->
+    <div class="flex items-center justify-center gap-4">
       <a
         href="http://qr.afip.gob.ar/?qr=nsxMyj6Utc9BxcRH5crmDg,,"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="AFIP F960/D - Datos del contribuyente"
+        aria-label="AFIP F960/D"
         class="inline-flex"
       >
         <img
@@ -99,17 +99,16 @@ const year = new Date().getFullYear();
     </div>
   </div>
 
-  <!-- Arma el mailto en cliente (ofuscación simple) -->
   <script is:inline>
-    (function () {
+    (() => {
       const a = document.getElementById("footer-email");
       if (!a) return;
-      const user = a.getAttribute("data-user");
-      const domain = a.getAttribute("data-domain");
+      const user = a.dataset.user;
+      const domain = a.dataset.domain;
       if (!user || !domain) return;
-      const email = `${user}@${domain}`;
-      const subject = encodeURIComponent("Consulta desde alexpereyra.dev");
-      a.setAttribute("href", `mailto:${email}?subject=${subject}`);
+      a.href = `mailto:${user}@${domain}?subject=${encodeURIComponent(
+        "Contacto desde alexpereyra.dev",
+      )}`;
     })();
   </script>
 </footer>

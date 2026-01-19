@@ -3,23 +3,21 @@ import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <nav
-  class="fixed top-2 left-2 right-2 z-50 glass-box border-b border-black/5 dark:border-white/10 backdrop-blur-md shadow-sm transition-all"
-  role="navigation"
+  class="fixed top-2 left-2 right-2 z-50 glass-box border-b border-black/5 dark:border-white/10 backdrop-blur-md shadow-sm transition-colors"
   aria-label="Navegación secundaria"
 >
   <div
     class="max-w-7xl mx-auto px-6 md:px-12 py-3 flex items-center justify-between"
   >
-    <!-- Botón volver -->
+    <!-- Volver al inicio -->
     <a
       href="/"
-      aria-current="false"
-      class="text-sm sm:text-base font-medium text-surface hover:text-primary dark:hover:text-accent transition-colors px-3 py-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:focus-visible:ring-accent"
+      class="text-sm sm:text-base font-medium text-surface transition-colors px-3 py-2 rounded-md hover:text-primary dark:hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:focus-visible:ring-accent"
     >
       ← Inicio
     </a>
 
-    <!-- Controles -->
+    <!-- Controles de UI -->
     <div class="flex items-center gap-4">
       <ThemeToggle size="w-6 h-6" />
     </div>

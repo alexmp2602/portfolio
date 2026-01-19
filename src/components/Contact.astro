@@ -1,12 +1,11 @@
 <section
   id="contacto"
   class="page-bg py-24 px-6 md:px-12"
-  role="region"
   aria-labelledby="contact-title"
   data-reveal
 >
   <div class="max-w-4xl mx-auto">
-    <div class="glass-box p-8 md:p-12 transition-all">
+    <div class="glass-box p-8 md:p-12">
       <h2
         id="contact-title"
         class="text-4xl md:text-5xl font-extrabold text-surface text-center mb-8 leading-tight"
@@ -17,13 +16,12 @@
       <p
         class="text-base md:text-lg text-surface-muted mb-10 leading-relaxed text-center text-balance max-w-2xl mx-auto"
       >
-        Si tenés una propuesta, proyecto o idea para desarrollar, estoy abierto
-        a nuevas oportunidades y colaboraciones. Podés escribirme directo o
-        contactarme por LinkedIn.
+        Si tenés una propuesta, proyecto o colaboración en mente, podés
+        escribirme por mail o contactarme vía LinkedIn.
       </p>
 
       <div class="flex flex-col sm:flex-row sm:justify-center gap-4">
-        <!-- Email protegido contra scrapers: se arma por JS -->
+        <!-- Email (se arma por JS para evitar scrapers) -->
         <a
           id="email-link"
           data-user="alexmp.2602"
@@ -31,16 +29,16 @@
           class="btn-primary inline-flex items-center justify-center rounded-full"
           aria-label="Escribirme por email"
         >
-          📧 Escribime
+          Escribime
         </a>
 
-        <!-- Copiar email al portapapeles -->
         <button
           id="copy-email"
           type="button"
           class="btn-outline inline-flex items-center justify-center rounded-full"
+          aria-describedby="copy-status"
         >
-          📋 Copiar mail
+          Copiar mail
         </button>
 
         <a
@@ -50,45 +48,43 @@
           class="btn-outline inline-flex items-center justify-center rounded-full"
           aria-label="Abrir mi perfil de LinkedIn en una nueva pestaña"
         >
-          🔗 LinkedIn
+          LinkedIn
         </a>
       </div>
 
-      <!-- Mensajes accesibles -->
+      <!-- Feedback accesible -->
       <p id="copy-status" class="sr-only" aria-live="polite"></p>
     </div>
   </div>
 
-  <!-- Script inline para armar mailto y copiar email -->
   <script is:inline>
-    (function () {
+    (() => {
       const link = document.getElementById("email-link");
       const copyBtn = document.getElementById("copy-email");
       const live = document.getElementById("copy-status");
 
-      if (link) {
-        const email = `${link.dataset.user}@${link.dataset.domain}`;
-        const subject = encodeURIComponent("Consulta desde alexpereyra.dev");
-        link.setAttribute("href", `mailto:${email}?subject=${subject}`);
-      }
+      if (!link) return;
 
-      if (copyBtn && link) {
-        copyBtn.addEventListener("click", async () => {
-          const email = `${link.dataset.user}@${link.dataset.domain}`;
-          try {
-            await navigator.clipboard.writeText(email);
-            copyBtn.textContent = "✅ Copiado";
-            if (live) live.textContent = "Email copiado al portapapeles";
-            setTimeout(() => {
-              copyBtn.textContent = "📋 Copiar mail";
-              if (live) live.textContent = "";
-            }, 1500);
-          } catch {
-            if (live)
-              live.textContent = "No se pudo copiar. Probá manualmente.";
-          }
-        });
-      }
+      const email = `${link.dataset.user}@${link.dataset.domain}`;
+      link.href = `mailto:${email}?subject=${encodeURIComponent(
+        "Contacto desde alexpereyra.dev",
+      )}`;
+
+      if (!copyBtn || !navigator.clipboard) return;
+
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          copyBtn.textContent = "Copiado";
+          if (live) live.textContent = "Email copiado al portapapeles";
+          setTimeout(() => {
+            copyBtn.textContent = "Copiar mail";
+            if (live) live.textContent = "";
+          }, 1400);
+        } catch {
+          if (live) live.textContent = "No se pudo copiar el email.";
+        }
+      });
     })();
   </script>
 </section>

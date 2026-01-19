@@ -11,75 +11,95 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "Delfos",
+    slug: "minuto-de-silencio",
+    title: "Minuto de Silencio · Experiencia Web Interactiva",
+    description:
+      "Experiencia web inmersiva con una escena 3D interactiva y microinteracciones guiadas por el usuario. Combina narrativa, performance y UX para crear un ritual digital de despedida.",
+    image: "/assets/projects/minutodesilencio.webp",
+    tech: [
+      "Next.js",
+      "React Three Fiber",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+    ],
+    link: "https://www.minutodesilencio.net/",
+    repo: "https://github.com/alexmp2602/minutodesilencio",
+    highlights: [
+      "Escena 3D interactiva con React Three Fiber",
+      "Flujos de interacción guiados y estados controlados",
+      "Mensajes colaborativos en tiempo real",
+      "Integración de UI, audio y narrativa",
+    ],
+  },
+  {
+    slug: "iabot",
+    title: "IABOT · Robótica Educativa",
+    description:
+      "Sitio institucional para un espacio de robótica educativa. Enfoque en claridad del mensaje, estructura escalable y experiencia responsive para padres y alumnos.",
+    image: "/assets/projects/iabot.webp",
+    tech: ["Astro", "Tailwind CSS"],
+    link: "https://iabot.com.ar/",
+    repo: "https://github.com/alexmp2602/iabot-v3",
+    highlights: [
+      "Arquitectura clara y mantenible",
+      "Diseño orientado a contenido educativo",
+    ],
+  },
+  {
+    slug: "delfos",
     title: "Delfos Studio · Agencia Creativa",
     description:
-      "Delfos Studio es una agencia creativa que se especializa en diseño y desarrollo web. Nuestro enfoque está en crear experiencias digitales únicas y efectivas para nuestros clientes.",
+      "Web institucional para una agencia creativa. Diseño minimalista, estructura modular y foco en performance y SEO.",
     image: "/assets/projects/delfos.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://delfos-studio.vercel.app/",
     repo: "https://github.com/alexmp2602/delfos",
     highlights: [
-      "Diseño minimalista y moderno",
-      "Carga ultrarrápida y optimizada para SEO",
-      "Interactividad avanzada con componentes de Astro",
+      "Diseño limpio y consistente",
+      "Carga rápida y base optimizada para SEO",
     ],
   },
   {
     slug: "gallinas-libres",
-    title: "Gallinas Libres · Emprendimiento Familiar",
+    title: "Gallinas Libres · Landing de Emprendimiento",
     description:
-      "Landing page para un emprendimiento familiar dedicado a huevos de gallinas libres. Construida con Astro y Tailwind CSS, optimizada para rendimiento, SEO y bajo peso.",
+      "Landing page para un emprendimiento familiar. Sitio estático optimizado para performance, SEO y bajo peso.",
     image: "/assets/projects/gallinas.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://www.gallinaslibres.com/",
     repo: "https://github.com/alexmp2602/gallinas-libres",
     highlights: [
-      "Carga ultraligera y rápida (web estática)",
-      "SEO local para mejor posicionamiento en buscadores",
+      "Web estática ultraligera",
+      "Optimización SEO para búsquedas locales",
     ],
   },
-  {
-    slug: "iabot",
-    title: "IABOT · Robótica con LEGO para Niños",
-    description:
-      "Sitio institucional de IABOT, un espacio de robótica educativa para niños. Desarrollado con Astro.js y Tailwind CSS, enfocado en claridad, escalabilidad y responsividad.",
-    image: "/assets/projects/iabot.webp",
-    tech: ["Astro.js", "Tailwind CSS"],
-    link: "https://iabot.com.ar/",
-    repo: "https://github.com/alexmp2602/iabot-v3",
-    highlights: [
-      "Diseño institucional orientado a padres y alumnos",
-      "Código modular y mantenible con enfoque educativo",
-    ],
-  },
-
   {
     slug: "domus",
     title: "Domus · Estética Profesional",
     description:
-      "Sitio web para una marca en crecimiento en el rubro de estética. Desarrollado con Astro y Tailwind CSS, con un diseño accesible, limpio y adaptado a su identidad visual.",
+      "Sitio web para una marca del rubro estética. Diseño accesible, identidad visual cuidada y soporte de modo oscuro.",
     image: "/assets/projects/domus.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://esteticadomus.com/",
     repo: "https://github.com/alexmp2602/domus",
     highlights: [
-      "Interfaz visual adaptada al sector salud/estética",
-      "Modo oscuro implementado desde el inicio",
+      "Diseño alineado al sector salud/estética",
+      "Modo oscuro integrado desde la base",
     ],
   },
   {
     slug: "cerrajeria-apri",
     title: "APRI · Cerrajería 24 hs",
     description:
-      "Sitio web para una cerrajería 24 hs en Mendoza. Hecho con Astro y Tailwind CSS, enfocado en visibilidad desde móviles, accesibilidad y performance.",
+      "Sitio web orientado a contacto rápido desde dispositivos móviles, con foco en accesibilidad y performance.",
     image: "/assets/projects/apri.webp",
     tech: ["Astro", "Tailwind CSS"],
     link: "https://www.cerrajeriaapri24hs.com.ar/",
     repo: "https://github.com/alexmp2602/apri-cerrajeria",
     highlights: [
-      "Optimización total para dispositivos móviles",
-      "Mapa interactivo para contacto inmediato",
+      "Diseño mobile-first",
+      "Integración de mapa para contacto inmediato",
     ],
   },
 ];

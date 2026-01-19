@@ -6,23 +6,24 @@ type Props = {
   description?: string;
   canonical?: string;
   ogImage?: string;
-  locale?: string; // ej: "es_AR"
+  locale?: string;
 };
 
 const {
-  title = "Alex Pereyra | Frontend & Full-Stack Developer",
-  description = "Portafolio de Alex Pereyra — Frontend & Full-Stack: React, Next.js, Node.js, SQL, AWS, Astro y Tailwind CSS.",
+  title = "Alex Pereyra | Frontend Engineer",
+  description =
+    "Portafolio de Alex Pereyra, Frontend Engineer enfocado en React, Next.js y TypeScript. Arquitectura, performance, accesibilidad y UX escalable. Conocimientos complementarios en Node.js, SQL y APIs.",
   canonical = "https://www.alexpereyra.dev",
   ogImage = "https://www.alexpereyra.dev/assets/logo/opengraph-preview.png",
   locale = "es_AR",
 } = Astro.props as Props;
 
-// JSON-LD (Person)
+// Structured data básico (Person)
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Alex Pereyra",
-  jobTitle: "Frontend & Full-Stack Developer",
+  jobTitle: "Frontend Engineer",
   url: canonical,
   sameAs: [
     "https://www.linkedin.com/in/alex-pereyra-dev",
@@ -45,7 +46,8 @@ const jsonLd = {
     <meta name="description" content={description} />
     <meta name="robots" content="index,follow" />
     <meta name="color-scheme" content="light dark" />
-    <!-- theme-color por modo -->
+
+    <!-- Theme color por modo -->
     <meta
       name="theme-color"
       content="#256340"
@@ -56,6 +58,7 @@ const jsonLd = {
       content="#0b1110"
       media="(prefers-color-scheme: dark)"
     />
+
     <link rel="canonical" href={canonical} />
     <link rel="manifest" href="/site.webmanifest" />
 
@@ -84,7 +87,7 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Preconnect / Fonts (mejor perf) -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -97,7 +100,7 @@ const jsonLd = {
       rel="stylesheet"
     />
 
-    <!-- Variables CSS base -->
+    <!-- Variables base + helpers -->
     <style>
       :root {
         --color-primary: #256340;
@@ -105,6 +108,8 @@ const jsonLd = {
         --color-light: #fafafa;
         --color-dark: #1f1f1f;
       }
+
+      /* Accesibilidad: salto al contenido */
       .skip-link {
         position: absolute;
         left: -999px;
@@ -125,6 +130,17 @@ const jsonLd = {
         border-radius: 0.5rem;
         z-index: 1000;
       }
+
+      /* Respeto a usuarios con reducción de movimiento */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
     </style>
 
     <!-- JSON-LD -->
@@ -143,7 +159,7 @@ const jsonLd = {
       <slot />
     </main>
 
-    <!-- Scripts globales: defer -->
+    <!-- Scripts globales -->
     <script type="module" src="/scripts/setup-global.js" defer></script>
   </body>
 </html>

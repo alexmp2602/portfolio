@@ -10,15 +10,15 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Layout
-  title="Alex Pereyra | Frontend & Full-Stack Developer"
-  description="Soy Alex Pereyra, Frontend & Full-Stack Developer. Diseño interfaces rápidas con React/Next.js y construyo backends con Node.js y SQL. Explorá mis proyectos y el laboratorio creativo."
+  title="Alex Pereyra | Frontend Engineer"
+  description="Soy Alex Pereyra, Frontend Engineer. Trabajo con React, Next.js y TypeScript, con foco en arquitectura, performance, accesibilidad y UX escalable. Conocimientos complementarios: Node.js, SQL y APIs. Explorá proyectos y laboratorio."
   canonical="https://www.alexpereyra.dev"
   ogImage="/opengraph.png"
 >
   <Navbar />
 
   <main
-    id="main-content"
+    id="content"
     role="main"
     aria-label="Contenido principal"
     class="page-bg"
@@ -26,21 +26,16 @@ import Footer from "../components/Footer.astro";
     <!-- Hero -->
     <section
       id="inicio"
-      role="region"
       aria-labelledby="hero-title"
       class="fade-in-up fade-delay-100"
     >
-      <!-- Etiqueta accesible independiente del componente -->
-      <h1 id="hero-title" class="sr-only">
-        Alex Pereyra — Frontend & Full-Stack Developer
-      </h1>
+      <h1 id="hero-title" class="sr-only">Alex Pereyra — Frontend Engineer</h1>
       <Hero />
     </section>
 
     <!-- Sobre mí & Skills -->
     <section
       id="sobre-mi"
-      role="region"
       aria-labelledby="about-title"
       class="fade-in-up fade-delay-200"
     >
@@ -53,7 +48,6 @@ import Footer from "../components/Footer.astro";
     <!-- Proyectos -->
     <section
       id="proyectos"
-      role="region"
       aria-labelledby="projects-title"
       class="fade-in-up fade-delay-300"
     >
@@ -66,7 +60,6 @@ import Footer from "../components/Footer.astro";
     <!-- Contacto -->
     <section
       id="contacto"
-      role="region"
       aria-labelledby="contact-title"
       class="fade-in-up fade-delay-400"
     >
@@ -79,7 +72,6 @@ import Footer from "../components/Footer.astro";
     <!-- Laboratorio -->
     <section
       id="laboratorio"
-      role="region"
       aria-labelledby="lab-title"
       class="fade-in-up fade-delay-500"
     >

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -9,27 +9,35 @@
         --accent: #60a98f;
         --bg: #fafafa;
         --fg: #1f1f1f;
+        --track: rgba(0, 0, 0, 0.08);
       }
+
       * {
         box-sizing: border-box;
         margin: 0;
       }
+
       body {
-        font-family: ui-sans-serif, system-ui, sans-serif;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial;
         line-height: 1.6;
         background: var(--bg);
         color: var(--fg);
         overscroll-behavior: none;
       }
 
-      /* Contenedor fijo arriba */
-      .progress-container {
+      /* Progreso (sticky + accesible) */
+      .progress {
         position: fixed;
-        inset: 0 auto auto 0;
+        inset: 0 0 auto 0;
         height: 6px;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.06);
         z-index: 9999;
+        background: var(--track);
       }
 
       .progress-bar {
@@ -37,7 +45,7 @@
         width: 0%;
         background: linear-gradient(90deg, var(--accent), #4d8c76);
         transform-origin: left center;
-        transition: width 0.15s ease-out;
+        transition: width 0.12s ease-out;
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -51,66 +59,98 @@
         max-width: 800px;
         margin: auto;
       }
+
       h1 {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.2rem;
         font-size: clamp(1.8rem, 4vw, 2.5rem);
         font-weight: 800;
+        letter-spacing: 0.01em;
       }
+
       p {
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.1rem;
+        color: color-mix(in oklab, var(--fg) 85%, transparent);
+      }
+
+      :focus-visible {
+        outline: 2px solid rgba(31, 31, 31, 0.5);
+        outline-offset: 3px;
       }
     </style>
   </head>
+
   <body>
-    <div class="progress-container">
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Progreso de lectura"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+    >
       <div class="progress-bar" id="progress"></div>
     </div>
 
     <main>
-      <h1>Scroll Progress Demo</h1>
+      <h1>Scroll Progress</h1>
       <p>
-        Este experimento muestra una barra de progreso fija arriba que se
-        completa mientras bajás por la página.
+        Barra fija superior que refleja el avance de lectura a medida que
+        navegás por la página.
       </p>
       <div id="filler"></div>
     </main>
 
     <script>
-      const progressBar = document.getElementById("progress");
-      const filler = document.getElementById("filler");
+      (() => {
+        const bar = document.getElementById("progress");
+        const filler = document.getElementById("filler");
+        const prog = document.querySelector(".progress");
+        if (!bar || !filler || !prog) return;
 
-      // Generar contenido de relleno
-      filler.innerHTML = Array.from(
-        { length: 50 },
-        (_, i) =>
-          `<p>Bloque de contenido ${
-            i + 1
-          }: texto de ejemplo para hacer scroll.</p>`
-      ).join("");
+        // Contenido de relleno (demo)
+        filler.innerHTML = Array.from(
+          { length: 50 },
+          (_, i) =>
+            `<p>Bloque de contenido ${i + 1}: texto de ejemplo para hacer scroll.</p>`,
+        ).join("");
 
-      let last = 0,
-        ticking = false;
+        let ticking = false;
+        let last = -1;
 
-      function update() {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        if (percent !== last) {
-          progressBar.style.width = percent.toFixed(2) + "%";
-          last = percent;
+        const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+        function getProgress() {
+          const scrollTop =
+            window.scrollY || document.documentElement.scrollTop;
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          return clamp(pct, 0, 100);
         }
-        ticking = false;
-      }
 
-      function onScroll() {
-        if (!ticking) {
-          requestAnimationFrame(update);
+        function render(pct) {
+          const rounded = Math.round(pct);
+          if (rounded === last) return;
+          bar.style.width = pct.toFixed(2) + "%";
+          prog.setAttribute("aria-valuenow", String(rounded));
+          last = rounded;
+        }
+
+        function update() {
+          render(getProgress());
+          ticking = false;
+        }
+
+        function onScroll() {
+          if (ticking) return;
           ticking = true;
+          requestAnimationFrame(update);
         }
-      }
 
-      window.addEventListener("scroll", onScroll, { passive: true });
-      update(); // inicial
+        addEventListener("scroll", onScroll, { passive: true });
+        addEventListener("resize", onScroll);
+        update();
+      })();
     </script>
   </body>
 </html>

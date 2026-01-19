@@ -1,7 +1,7 @@
 {
-    "name": "Alex Pereyra | Frontend & Full-Stack Developer",
+    "name": "Alex Pereyra | Frontend Engineer",
     "short_name": "Alex Pereyra",
-    "description": "Portafolio de Alex Pereyra, desarrollador Frontend & Full-Stack especializado en React, Next.js, Node.js, SQL, AWS, Astro y Tailwind CSS.",
+    "description": "Portafolio de Alex Pereyra, Frontend Engineer enfocado en React, Next.js y TypeScript, con énfasis en arquitectura, performance, accesibilidad y UX escalable. Conocimientos complementarios: Node.js, SQL y APIs.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#fafafa",
@@ -14,7 +14,7 @@
         "portfolio",
         "web development",
         "frontend",
-        "fullstack"
+        "software engineering"
     ],
     "prefer_related_applications": false,
     "icons": [

@@ -17,14 +17,13 @@ const srcPoster =
 
 <article
   data-preview-card
-  class="group glass-card rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] motion-reduce:hover:scale-100"
+  class="group glass-card rounded-2xl overflow-hidden card-hover"
   aria-label={`Demo: ${title}`}
   data-reveal
 >
   <div
     class="relative w-full aspect-video border-t border-black/5 dark:border-white/10"
   >
-    <!-- CTA flotante -->
     <div class="absolute right-2 top-2 z-20">
       <a
         href={href}
@@ -37,7 +36,6 @@ const srcPoster =
       </a>
     </div>
 
-    <!-- Poster (se oculta al cargar el iframe) -->
     <picture data-fallback class="absolute inset-0 z-0">
       {posterAvif && <source srcset={posterAvif} type="image/avif" />}
       {posterWebp && <source srcset={posterWebp} type="image/webp" />}
@@ -47,20 +45,20 @@ const srcPoster =
         class="w-full h-full object-cover"
         loading="lazy"
         decoding="async"
+        width="640"
+        height="360"
       />
     </picture>
 
-    <!-- Live preview INTERACTIVO -->
     <iframe
       data-frame
       data-src={href}
       title={title}
       loading="lazy"
       sandbox="allow-scripts allow-same-origin"
-      class="w-full h-full opacity-0 transition-opacity duration-300 z-[1]"
+      class="w-full h-full opacity-0 transition-opacity duration-300 z-1"
     ></iframe>
 
-    <!-- Borde decorativo, no intercepta eventos -->
     <div
       class="absolute inset-0 ring-1 ring-black/5 dark:ring-white/10 pointer-events-none z-0"
       aria-hidden="true"
@@ -68,17 +66,18 @@ const srcPoster =
     </div>
   </div>
 
-  <div
-    class="p-6 surface-muted backdrop-blur-sm transition-colors duration-300"
-  >
+  <div class="p-6 surface-muted transition-colors duration-300">
     <h3
-      class="text-lg md:text-xl font-bold text-surface group-hover:text-primary dark:group-hover:text-accent transition-colors"
+      class="text-lg md:text-xl font-bold text-surface transition-colors group-hover:text-primary dark:group-hover:text-accent"
     >
       {title}
     </h3>
+
     {
       description && (
-        <p class="mt-3 text-surface-muted leading-relaxed">{description}</p>
+        <p class="mt-3 text-surface-muted leading-relaxed text-balance">
+          {description}
+        </p>
       )
     }
   </div>
@@ -90,34 +89,39 @@ const srcPoster =
 
       const frame = root.querySelector("[data-frame]");
       const fallback = root.querySelector("[data-fallback]");
-      if (!frame) return;
+      if (!(frame instanceof HTMLIFrameElement)) return;
 
-      const prefersReduced = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-      if (prefersReduced) return;
+      const reduced =
+        document.documentElement.dataset.reduceMotion === "true" ||
+        window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ===
+          true;
+
+      if (reduced) return;
+
+      const src = frame.getAttribute("data-src") || "";
+      if (!src) return;
 
       const load = () => {
-        if (!frame.getAttribute("src")) {
-          frame.setAttribute("src", frame.getAttribute("data-src") || "");
-        }
+        if (!frame.src) frame.src = src;
       };
 
-      const onLoad = () => {
-        frame.classList.add("opacity-100");
-        if (fallback) fallback.style.display = "none";
-      };
-      frame.addEventListener("load", onLoad, { once: true });
+      frame.addEventListener(
+        "load",
+        () => {
+          frame.classList.add("opacity-100");
+          if (fallback instanceof HTMLElement) fallback.style.display = "none";
+        },
+        { once: true },
+      );
 
       const io = new IntersectionObserver(
         (entries) => {
-          const e = entries[0];
-          if (e?.isIntersecting) {
+          if (entries[0]?.isIntersecting) {
             load();
             io.disconnect();
           }
         },
-        { rootMargin: "200px 0px" }
+        { rootMargin: "200px 0px" },
       );
 
       io.observe(frame);

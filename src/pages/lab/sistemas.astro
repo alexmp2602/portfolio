@@ -7,64 +7,85 @@ import { experiments } from "../../data/experiments";
 
 type Experiment = (typeof experiments)[number];
 
-// Filtramos por tag "Sistemas" o por slugs conocidos
-const systems: Experiment[] = experiments
-  .filter((e) => (e.tags ?? []).includes("Sistemas") || ["sigj", "saae"].includes(e.slug));
+const systems: Experiment[] = experiments.filter(
+  (e) =>
+    (e.tags ?? []).includes("Sistemas") || ["sigj", "saae"].includes(e.slug),
+);
 
-// Orden preferido
 const ORDER = ["sigj", "saae"];
 systems.sort((a, b) => ORDER.indexOf(a.slug) - ORDER.indexOf(b.slug));
 
 const urlFor = (e: Experiment) =>
   (e as any).site || (e as any).link || e.demo || "#";
-
 const hasSystems = systems.length > 0;
 ---
 
 <Layout
   title="Sistemas | Lab de Alex Pereyra"
-  description="Sistemas full-stack que diseño y desarrollo: gestión, flujos y UI enfocada en productividad."
+  description="Sistemas y herramientas internas: pantallas, flujos y decisiones de implementación enfocadas en productividad."
   canonical="https://www.alexpereyra.dev/lab/sistemas"
   ogImage="/opengraph.png"
 >
   <Navbar />
 
-  <main id="content" class="page-bg py-24 px-6 md:px-12 section-lazy" role="main" aria-labelledby="page-title">
+  <main
+    id="content"
+    class="page-bg py-24 px-6 md:px-12 section-lazy"
+    aria-labelledby="page-title"
+  >
     <div class="max-w-7xl mx-auto">
       <header class="mb-10 md:mb-12 text-center">
-        <h1 id="page-title" class="text-4xl md:text-5xl md:pt-12 font-extrabold text-surface fade-in-up">
+        <h1
+          id="page-title"
+          class="text-4xl md:text-5xl md:pt-12 font-extrabold text-surface fade-in-up"
+        >
           Sistemas
         </h1>
-        <p class="max-w-3xl mx-auto mt-4 text-surface-muted text-lg fade-in-up fade-delay-200">
-          Acá agrupo mis sistemas full-stack. Al seleccionar uno, se abre su sitio oficial en una nueva pestaña.
+
+        <p
+          class="max-w-3xl mx-auto mt-4 text-surface-muted text-lg fade-in-up fade-delay-200"
+        >
+          Una selección de sistemas y herramientas internas. Al abrir una card,
+          se carga el detalle o el sitio asociado.
         </p>
       </header>
 
-      {hasSystems ? (
-        <ul class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8" aria-label="Listado de sistemas">
-          {systems.map((exp, i) => (
-            <li class="fade-in-up" style={`animation-delay:${i * 100}ms`}>
-              <LabCard
-                title={exp.title}
-                description={exp.description}
-                image={exp.image ?? "/assets/lab/default.webp"}
-                imageWebp={exp.imageWebp}
-                imageAvif={exp.imageAvif}
-                href={urlFor(exp)}
-              />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div class="glass-box max-w-2xl mx-auto p-8 text-center fade-in-up">
-          <p class="text-surface">
-            Aún no hay sistemas publicados aquí. Volvé pronto 🙂
-          </p>
-        </div>
-      )}
+      {
+        hasSystems ? (
+          <ul
+            class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8"
+            aria-label="Listado de sistemas"
+          >
+            {systems.map((exp) => (
+              <li class="fade-in-up" data-reveal>
+                <LabCard
+                  title={exp.title}
+                  description={exp.description}
+                  image={exp.image ?? "/assets/lab/default.webp"}
+                  imageWebp={exp.imageWebp}
+                  imageAvif={exp.imageAvif}
+                  href={urlFor(exp)}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="glass-box max-w-2xl mx-auto p-8 text-center fade-in-up">
+            <p class="text-surface">
+              Aún no hay sistemas publicados aquí. Volvé pronto.
+            </p>
+          </div>
+        )
+      }
 
       <div class="mt-14 text-center">
-        <a href="/" class="btn-outline rounded-full">← Volver al inicio</a>
+        <a
+          href="/lab"
+          class="btn-outline rounded-full"
+          aria-label="Volver al laboratorio"
+        >
+          ← Volver al laboratorio
+        </a>
       </div>
     </div>
   </main>

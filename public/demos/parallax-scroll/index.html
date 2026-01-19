@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -6,27 +6,39 @@
     <title>Parallax Scroll</title>
     <style>
       :root {
-        --bg-dark: #1f1f1f;
-        --fg: #fafafa;
+        --bg: #111315;
+        --surface: #15191c;
+        --fg: #f6f7f9;
+        --muted: #cfd3d8;
         --accent: #60a98f;
       }
+
       * {
         box-sizing: border-box;
         margin: 0;
-        user-select: none;
       }
+
       html,
       body {
         height: 100%;
       }
+
       body {
-        font-family: ui-sans-serif, system-ui, sans-serif;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial;
         color: var(--fg);
-        background: var(--bg-dark);
+        background: var(--bg);
         line-height: 1.45;
         overscroll-behavior: none;
       }
-      .use-custom-cursor body {
+
+      /* Solo ocultar cursor cuando el custom está habilitado */
+      html.custom-cursor body {
         cursor: none;
       }
 
@@ -39,60 +51,73 @@
         position: relative;
         overflow: hidden;
       }
+
       .title {
         font-size: clamp(1.6rem, 4vw, 2.6rem);
         font-weight: 800;
         letter-spacing: 0.01em;
         text-wrap: balance;
       }
+
       .muted {
-        opacity: 0.75;
+        color: color-mix(in oklab, var(--fg) 78%, transparent);
         font-weight: 600;
       }
 
       .bg-dark {
-        background: var(--bg-dark);
-      }
-      .bg-accent {
-        background: var(--accent);
-        color: #111;
+        background: radial-gradient(
+          1200px 800px at 70% -10%,
+          #1c2023 0%,
+          var(--bg) 55%
+        );
       }
 
-      /* Parallax compatible iOS: fondo como capa con transform */
+      .bg-surface {
+        background: var(--surface);
+      }
+
+      .bg-accent {
+        background: var(--accent);
+        color: #0e1110;
+      }
+
+      /* Parallax (sin background-attachment) */
       .parallax {
         isolation: isolate;
         background: #0d0f10;
       }
+
       .parallax-bg {
         position: absolute;
-        inset: -10% 0 -10% 0;
+        inset: -12% 0 -12% 0;
         z-index: -1;
         background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80");
         background-size: cover;
         background-position: center;
         transform: translateY(var(--bgOffset, 0px));
         filter: contrast(1.05) brightness(0.9);
-        will-change: transform; /* se quita al salir de vista */
       }
 
       .layer {
         transform: translateY(var(--offset, 0px));
         transition: transform 0.18s cubic-bezier(0.17, 0.84, 0.44, 1);
-        text-align: center;
       }
 
-      /* Reveal sutil al entrar */
+      /* Reveal */
       .reveal {
         opacity: 0;
         transform: translateY(16px);
       }
+
       .reveal.is-in {
         opacity: 1;
         transform: translateY(0);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
       }
 
-      /* Cursor minimal (solo desktop sin reduce-motion) */
+      /* Cursor minimal */
       .cursor {
         position: fixed;
         left: 0;
@@ -107,25 +132,45 @@
         mix-blend-mode: difference;
         opacity: 0.9;
       }
-      .no-custom-cursor .cursor {
+
+      html.no-custom-cursor .cursor {
         display: none;
+      }
+
+      /* Reduce motion */
+      @media (prefers-reduced-motion: reduce) {
+        .layer {
+          transition: none;
+        }
+        .reveal,
+        .reveal.is-in {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
+      :focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.7);
+        outline-offset: 3px;
       }
     </style>
   </head>
+
   <body>
     <section class="section bg-dark">
       <div class="layer reveal" data-speed="0.25">
-        <h1 class="title">Parallax Scroll Demo</h1>
-        <p class="muted">Capas sutiles moviéndose al deslizar hacia abajo</p>
+        <h1 class="title">Parallax Scroll</h1>
+        <p class="muted">Capas sutiles que responden al scroll.</p>
       </div>
     </section>
 
     <section class="section parallax">
-      <div class="parallax-bg"></div>
+      <div class="parallax-bg" aria-hidden="true"></div>
       <div class="layer reveal" data-speed="0.18">
         <h2 class="title">Fondo con parallax</h2>
         <p class="muted">
-          Compatibilidad total (sin <code>background-attachment</code>)
+          Sin <code>background-attachment</code> para compatibilidad.
         </p>
       </div>
     </section>
@@ -133,80 +178,85 @@
     <section class="section bg-accent">
       <div class="layer reveal" data-speed="0.32">
         <h2 class="title">Contenido</h2>
-        <p class="muted">Movimiento suave y performante</p>
+        <p class="muted">Movimiento suave y performante.</p>
       </div>
     </section>
 
-    <div class="cursor"></div>
+    <div class="cursor" aria-hidden="true"></div>
 
     <script>
       (function () {
         const isTouch =
           "ontouchstart" in window || navigator.maxTouchPoints > 0;
         const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
         document.documentElement.classList.add(
-          isTouch || reduce ? "no-custom-cursor" : "use-custom-cursor"
+          isTouch || reduce ? "no-custom-cursor" : "custom-cursor",
         );
 
         const layers = Array.from(document.querySelectorAll(".layer"));
         const parallaxBg = document.querySelector(".parallax-bg");
 
-        // Solo animamos elementos visibles
+        // Solo animar visibles
         const visible = new Set();
+
         const io = new IntersectionObserver(
           (entries) => {
             for (const e of entries) {
               if (e.isIntersecting) {
                 visible.add(e.target);
-                e.target.classList.add("is-in"); // reveal
-                // activar will-change solo cuando entra
+                if (e.target.classList.contains("reveal")) {
+                  e.target.classList.add("is-in");
+                }
                 if (e.target === parallaxBg)
-                  parallaxBg.style.willChange = "transform";
+                  e.target.style.willChange = "transform";
               } else {
                 visible.delete(e.target);
-                if (e.target === parallaxBg) parallaxBg.style.willChange = "";
+                if (e.target === parallaxBg) e.target.style.willChange = "";
               }
             }
           },
-          { rootMargin: "10% 0% 10% 0%" }
+          { rootMargin: "10% 0% 10% 0%" },
         );
 
-        // Marcar reveal targets
         document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
         if (parallaxBg) io.observe(parallaxBg);
 
-        // Utilidades
+        if (reduce) return;
+
         const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
         const lerp = (a, b, t) => a + (b - a) * t;
 
-        let targetY = window.scrollY,
-          currentY = targetY;
+        let targetY = window.scrollY;
+        let currentY = targetY;
         let ticking = false;
 
         function update() {
-          // Lerp para suavizar
           currentY = lerp(currentY, targetY, 0.12);
 
-          // Para cada layer visible, calcular offset relativo a su sección
           const vh = window.innerHeight;
-          visible.forEach((el) => {
-            if (!el.classList.contains("layer")) return;
-            const rect = el.getBoundingClientRect();
-            // distancia del centro del viewport al centro del elemento
-            const delta = vh / 2 - (rect.top + rect.height / 2);
-            const speed = parseFloat(el.dataset.speed || "0.25");
-            const offset = clamp(delta * speed, -200, 200); // límites para no exagerar
-            el.style.setProperty("--offset", offset.toFixed(2) + "px");
-          });
 
-          // Fondo parallax (más sutil)
+          // Capas de texto
+          for (const el of visible) {
+            if (!(el instanceof HTMLElement)) continue;
+
+            if (el.classList.contains("layer")) {
+              const rect = el.getBoundingClientRect();
+              const delta = vh / 2 - (rect.top + rect.height / 2);
+              const speed = parseFloat(el.dataset.speed || "0.25");
+              const offset = clamp(delta * speed, -200, 200);
+              el.style.setProperty("--offset", offset.toFixed(2) + "px");
+            }
+          }
+
+          // Fondo
           if (parallaxBg && visible.has(parallaxBg)) {
             const sRect = parallaxBg.parentElement.getBoundingClientRect();
             const rel = vh / 2 - (sRect.top + sRect.height / 2);
             const bgOffset = clamp(rel * 0.1, -120, 120);
             parallaxBg.style.setProperty(
               "--bgOffset",
-              bgOffset.toFixed(2) + "px"
+              bgOffset.toFixed(2) + "px",
             );
           }
 
@@ -219,23 +269,28 @@
 
         function onScroll() {
           targetY = window.scrollY || window.pageYOffset;
-          if (!ticking && !reduce) {
+          if (!ticking) {
             ticking = true;
             requestAnimationFrame(update);
           }
         }
 
-        // Primera pintada
         onScroll();
         addEventListener("scroll", onScroll, { passive: true });
         addEventListener("resize", onScroll);
 
-        // Cursor (solo si procede)
-        if (!isTouch && !reduce) {
+        // Cursor (solo desktop)
+        if (!isTouch) {
           const cursor = document.querySelector(".cursor");
-          let cx = innerWidth / 2,
-            cy = innerHeight / 2,
-            rafId = 0;
+          if (!cursor) return;
+
+          let cx = innerWidth / 2;
+          let cy = innerHeight / 2;
+          let rafId = 0;
+
+          // Estado inicial centrado
+          cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+
           function move(e) {
             cx = e.clientX;
             cy = e.clientY;
@@ -246,6 +301,7 @@
               });
             }
           }
+
           addEventListener("mousemove", move, { passive: true });
         }
       })();

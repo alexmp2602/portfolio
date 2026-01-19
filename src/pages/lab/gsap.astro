@@ -18,29 +18,25 @@ const gsapDemos = experiments
   .filter((exp) => !!exp.demo);
 ---
 
-<Layout>
+<Layout
+  title="GSAP · Demos"
+  description="Demos de micro-animaciones con GSAP. Vista liviana con previsualización bajo demanda."
+>
   <NavbarLab />
 
-  <section
-    class="page-bg py-24 px-6 md:px-12"
-    role="region"
-    aria-labelledby="gsap-title"
-  >
+  <section class="page-bg py-24 px-6 md:px-12" aria-labelledby="gsap-title">
     <div class="max-w-7xl mx-auto">
       <h1
         id="gsap-title"
         class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-surface"
       >
-        Demos de Animaciones con GSAP 🚀
+        Demos con GSAP
       </h1>
 
-      <ul
-        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8"
-        aria-labelledby="gsap-title"
-      >
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {
-          gsapDemos.map((exp, i) => (
-            <li class="fade-in-up" style={`animation-delay:${i * 80}ms`}>
+          gsapDemos.map((exp) => (
+            <li class="fade-in-up" data-reveal>
               <LabPreviewCard
                 title={exp.title}
                 description={exp.description}
@@ -55,9 +51,13 @@ const gsapDemos = experiments
       </ul>
 
       <div class="mt-12 text-center">
-        <a href="/lab" class="btn-outline rounded-full"
-          >← Volver al laboratorio</a
+        <a
+          href="/lab"
+          class="btn-outline rounded-full"
+          aria-label="Volver al laboratorio"
         >
+          ← Volver al laboratorio
+        </a>
       </div>
     </div>
   </section>

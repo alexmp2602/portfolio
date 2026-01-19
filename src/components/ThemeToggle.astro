@@ -7,12 +7,12 @@ const size = Astro.props.size ?? "w-6 h-6";
   data-toggle-theme
   aria-label="Cambiar entre modo claro y oscuro"
   aria-pressed="false"
-  class={`theme-toggle p-2 rounded-full border border-black/10 dark:border-white/20 bg-light dark:bg-dark text-surface transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary dark:focus-visible:ring-accent`}
+  class={`theme-toggle p-2 rounded-full border border-black/10 dark:border-white/20 bg-light dark:bg-dark text-surface transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary dark:focus-visible:ring-accent leading-none`}
 >
   <span class="sr-only">Alternar tema</span>
-  <div
-    class={`theme-icon ${size} flex items-center justify-center theme-icon-enter`}
-    aria-hidden="true"
-  >
-  </div>
+
+  <!-- Contenedor del SVG inyectado -->
+  <span
+    class={`theme-icon ${size} grid place-items-center leading-none text-[0px] theme-icon-enter`}
+    aria-hidden="true"></span>
 </button>
