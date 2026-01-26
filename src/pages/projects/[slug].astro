@@ -1,4 +1,5 @@
 ---
+// src/pages/projects/[slug].astro
 import Layout from "../../layouts/Layout.astro";
 import NavbarBack from "../../components/NavbarBack.astro";
 import { projects } from "../../data/projects";
@@ -25,6 +26,12 @@ const pageTitle = `${project.title} | Alex Pereyra`;
 const pageDescription =
   project.description ?? "Caso de estudio y detalles del proyecto.";
 const ogImage = project.image ?? "/opengraph.png";
+
+const hasHighlights =
+  Array.isArray(project.highlights) && project.highlights.length > 0;
+
+const hasEngineering =
+  Array.isArray(project.engineering) && project.engineering.length > 0;
 ---
 
 <Layout
@@ -52,7 +59,7 @@ const ogImage = project.image ?? "/opengraph.png";
           <img
             src={project.image}
             alt={`Captura de ${project.title}`}
-            class="w-full object-cover max-h-[460px]"
+            class="w-full object-cover max-h-115"
             loading="lazy"
             decoding="async"
             width="1280"
@@ -62,7 +69,7 @@ const ogImage = project.image ?? "/opengraph.png";
 
         <div
           data-reveal
-          class="glass-box px-6 py-10 md:px-10 md:py-12 rounded-2xl space-y-8"
+          class="glass-box px-6 py-10 md:px-10 md:py-12 rounded-2xl space-y-10"
         >
           <div class="text-center space-y-4">
             <h1
@@ -92,18 +99,46 @@ const ogImage = project.image ?? "/opengraph.png";
             )
           }
 
+          <!-- Highlights -->
           {
-            Array.isArray(project.highlights) &&
-              project.highlights.length > 0 && (
-                <section class="max-w-2xl mx-auto">
-                  <h2 class="sr-only">Puntos destacados</h2>
-                  <ul class="list-disc list-inside text-left text-surface-muted space-y-2 text-base">
-                    {project.highlights.map((point) => (
-                      <li>{point}</li>
-                    ))}
-                  </ul>
-                </section>
-              )
+            hasHighlights && (
+              <section class="max-w-2xl mx-auto">
+                <h2 class="sr-only">Puntos destacados</h2>
+                <ul class="list-disc list-inside text-left text-surface-muted space-y-2 text-base">
+                  {project.highlights!.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+              </section>
+            )
+          }
+
+          <!-- Engineering decisions -->
+          {
+            hasEngineering && (
+              <section class="max-w-2xl mx-auto">
+                <div class="text-center mb-4">
+                  <h2 class="text-lg md:text-xl font-bold text-surface">
+                    Engineering
+                  </h2>
+                  <p class="text-sm text-surface-muted mt-1 text-balance">
+                    Decisiones técnicas y trade-offs que guiaron el desarrollo.
+                  </p>
+                </div>
+
+                <ul class="space-y-2 text-left">
+                  {project.engineering!.map((item) => (
+                    <li class="flex gap-3 text-base text-surface-muted leading-relaxed">
+                      <span
+                        class="mt-2 w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent flex-none"
+                        aria-hidden="true"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )
           }
 
           <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">

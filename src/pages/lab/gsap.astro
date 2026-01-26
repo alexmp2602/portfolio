@@ -1,4 +1,5 @@
 ---
+// src/pages/lab/gsap.astro
 import Layout from "../../layouts/Layout.astro";
 import NavbarLab from "../../components/NavbarLab.astro";
 import { experiments } from "../../data/experiments";
@@ -16,27 +17,63 @@ const GSAP_SLUGS = [
 const gsapDemos = experiments
   .filter((exp) => GSAP_SLUGS.includes(exp.slug))
   .filter((exp) => !!exp.demo);
+
+const pageTitle = "GSAP · Demos | Alex Pereyra";
+const pageDescription =
+  "Demos de micro-animaciones con GSAP aplicadas a UI de producto: scroll, interacción y transiciones. Previsualización bajo demanda, performance y reduce-motion.";
 ---
 
-<Layout
-  title="GSAP · Demos"
-  description="Demos de micro-animaciones con GSAP. Vista liviana con previsualización bajo demanda."
->
+<Layout title={pageTitle} description={pageDescription}>
   <NavbarLab />
 
   <section class="page-bg py-24 px-6 md:px-12" aria-labelledby="gsap-title">
     <div class="max-w-7xl mx-auto">
-      <h1
-        id="gsap-title"
-        class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-surface"
-      >
-        Demos con GSAP
-      </h1>
+      <header class="max-w-3xl mx-auto text-center mb-12 space-y-5">
+        <h1
+          id="gsap-title"
+          class="text-4xl md:text-5xl font-extrabold text-surface"
+        >
+          Demos con GSAP
+        </h1>
 
-      <ul class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <p class="text-surface-muted text-lg leading-relaxed text-balance">
+          Micro-animaciones pensadas para UI moderna: mejoran feedback,
+          jerarquía visual y percepción de calidad sin sacrificar performance.
+        </p>
+
+        <ul
+          class="flex flex-wrap justify-center gap-2 pt-2"
+          aria-label="Criterios de implementación"
+        >
+          <li
+            class="text-sm px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-surface"
+          >
+            Lazy preview (iframe bajo demanda)
+          </li>
+          <li
+            class="text-sm px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-surface"
+          >
+            Respeta prefers-reduced-motion
+          </li>
+          <li
+            class="text-sm px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-surface"
+          >
+            Enfoque en UX + performance
+          </li>
+        </ul>
+      </header>
+
+      <ul
+        class="grid grid-cols-1 md:grid-cols-2 gap-8"
+        aria-label="Listado de demos"
+      >
         {
-          gsapDemos.map((exp) => (
-            <li class="fade-in-up" data-reveal>
+          gsapDemos.map((exp, i) => (
+            <li
+              class="fade-in-up"
+              data-reveal
+              style={`animation-delay:${i * 90}ms`}
+            >
               <LabPreviewCard
                 title={exp.title}
                 description={exp.description}

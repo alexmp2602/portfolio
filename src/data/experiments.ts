@@ -12,29 +12,11 @@ export interface Experiment {
 
 export const experiments: Experiment[] = [
   {
-    slug: "sigj",
-    title: "SIGJ | Gestión Judicial",
-    description:
-      "Aplicación para la gestión de expedientes, documentación y agenda, con foco en flujos de trabajo y accesibilidad.",
-    demo: "https://sigj.vercel.app/",
-    image: "/assets/lab/sigj.webp",
-    tags: ["Sistemas"],
-  },
-  {
-    slug: "saae",
-    title: "SAAE | Acciones Estatutarias",
-    description:
-      "Sistema web para gestionar acciones estatutarias docentes con registro de escuelas, importación, workflow de revisión/aprobación y tablero con totales por región.",
-    demo: "https://saae-sist.vercel.app/",
-    image: "/assets/lab/saae.webp",
-    tags: ["Sistemas", "Educación"],
-  },
-  {
     slug: "gsap",
     title: "Animaciones con GSAP",
     description:
       "Colección de microanimaciones pensadas para UI modernas, con foco en suavidad y control.",
-    image: "/assets/lab/gsap-cover.webp",
+    image: "/demos/gsap-cover.webp",
     tags: ["Animaciones", "UI", "GSAP"],
   },
   {

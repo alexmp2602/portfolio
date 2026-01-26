@@ -1,3 +1,5 @@
+// src/data/projects.ts
+
 export interface Project {
   slug: string;
   title: string;
@@ -7,6 +9,7 @@ export interface Project {
   link: string;
   repo?: string;
   highlights?: string[];
+  engineering?: string[];
 }
 
 export const projects: Project[] = [
@@ -31,7 +34,53 @@ export const projects: Project[] = [
       "Mensajes colaborativos en tiempo real",
       "Integración de UI, audio y narrativa",
     ],
+    engineering: [
+      "Carga diferida de la escena 3D para reducir TTI en dispositivos móviles",
+      "Gestión de estados de interacción como flujos explícitos para evitar inconsistencias en la experiencia",
+      "Uso de Supabase Realtime con control de renders para minimizar impacto en performance",
+    ],
   },
+
+  {
+    slug: "sigj",
+    title: "SIGJ · Gestión Judicial",
+    description:
+      "Sistema web para gestión de expedientes, documentación y agenda. Optimiza flujos de trabajo, reduce fricción operativa y prioriza accesibilidad en pantallas de alta densidad de información.",
+    image: "/assets/projects/sigj.webp",
+    tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
+    link: "https://sigj.vercel.app/",
+    highlights: [
+      "Gestión de expedientes, documentación y agenda en un flujo unificado",
+      "UI pensada para productividad: jerarquía visual + atajos de navegación",
+      "Tableros y vistas de detalle con foco en legibilidad y densidad",
+    ],
+    engineering: [
+      "Modelado de UI compleja con componentes reutilizables y estados predecibles para reducir bugs en flujos críticos",
+      "Estrategias de performance en listados (render parcial, memoización y paginación) para mantener la app fluida con datasets grandes",
+      "Accesibilidad aplicada a tablas/controles (focus states, navegación por teclado, contraste) para uso intensivo",
+    ],
+  },
+
+  {
+    slug: "saae",
+    title: "SAAE · Acciones Estatutarias",
+    description:
+      "Sistema web para gestionar acciones estatutarias docentes (MAD, Acrecentamiento, Servicio Provisorio, Traslado). Incluye registro de escuelas, importación, workflow de revisión/aprobación y tablero con totales por región.",
+    image: "/assets/projects/saae.webp",
+    tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
+    link: "https://saae-sist.vercel.app/",
+    highlights: [
+      "Workflow de revisión/aprobación con estados claros y trazabilidad",
+      "Importación de datos + normalización para operar sobre base consistente",
+      "Tablero con métricas y totales por región para seguimiento operativo",
+    ],
+    engineering: [
+      "Diseño de workflow explícito (estados + transiciones) para evitar ambigüedad en aprobaciones y reducir errores operativos",
+      "Validaciones de datos e integridad (cliente/servidor) para mantener consistencia tras importaciones",
+      "Separación de concerns: UI de administración + capas de dominio para facilitar mantenimiento y evolución",
+    ],
+  },
+
   {
     slug: "iabot",
     title: "IABOT · Robótica Educativa",
@@ -46,6 +95,7 @@ export const projects: Project[] = [
       "Diseño orientado a contenido educativo",
     ],
   },
+
   {
     slug: "delfos",
     title: "Delfos Studio · Agencia Creativa",
@@ -60,6 +110,7 @@ export const projects: Project[] = [
       "Carga rápida y base optimizada para SEO",
     ],
   },
+
   {
     slug: "gallinas-libres",
     title: "Gallinas Libres · Landing de Emprendimiento",
@@ -74,6 +125,7 @@ export const projects: Project[] = [
       "Optimización SEO para búsquedas locales",
     ],
   },
+
   {
     slug: "domus",
     title: "Domus · Estética Profesional",
@@ -88,6 +140,7 @@ export const projects: Project[] = [
       "Modo oscuro integrado desde la base",
     ],
   },
+
   {
     slug: "cerrajeria-apri",
     title: "APRI · Cerrajería 24 hs",

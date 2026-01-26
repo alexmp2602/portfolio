@@ -1,3 +1,4 @@
+/* src/styles/global.css */
 @import "tailwindcss";
 
 /* ========= Base & Tokens ========= */
@@ -52,7 +53,7 @@
   }
 
   .section-container {
-    max-width: 72rem;
+    max-width: 92rem;
     margin-inline: auto;
     padding-inline: 1.5rem;
   }
@@ -252,7 +253,7 @@
     border-radius: 0.75rem;
     transition: transform 0.18s ease;
     outline: none;
-    border: 2px;
+    border: 2px solid;
     border-color: var(--clr-primary);
     color: var(--clr-primary) !important;
     background: transparent;

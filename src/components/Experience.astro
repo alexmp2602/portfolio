@@ -1,0 +1,99 @@
+---
+// src/components/Experience.astro
+
+const items = [
+  {
+    company: "Hogarth (WPP)",
+    role: "Frontend Developer (Freelance)",
+    period: "2025 — Presente",
+    bullets: [
+      "Desarrollo de banners animados para campañas digitales globales, siguiendo especificaciones estrictas de diseño, layout y comportamiento.",
+      "Motion engineering con GSAP: timelines complejas, easing, microinteracciones y control preciso de estados visuales.",
+      "Optimización de performance y peso de assets para entornos publicitarios.",
+      "Entrega orientada a calidad: compatibilidad cross-browser, testing visual, revisiones iterativas y handoff claro con diseño y PM.",
+    ],
+    tech: ["HTML", "CSS", "JavaScript", "GSAP", "Ad Creatives"],
+  },
+
+  {
+    company: "Municipalidad de Mercedes",
+    role: "Desarrollo de Sistemas Internos · Área de Sistemas",
+    period: "2022 — 2024",
+    bullets: [
+      "Desarrollo y mantenimiento de sistemas internos para gestión administrativa y judicial.",
+      "Implementación de nuevas funcionalidades y mejoras sobre aplicaciones existentes.",
+      "Relevamiento de requerimientos y trabajo directo con usuarios finales no técnicos.",
+      "Soporte técnico y mantenimiento de sistemas utilizados en entornos institucionales.",
+    ],
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Sistemas internos"],
+  },
+];
+---
+
+<section
+  id="experiencia"
+  class="page-bg py-28 px-6 md:px-12 section-lazy"
+  aria-labelledby="experience-title"
+>
+  <div class="max-w-7xl mx-auto">
+    <header class="text-center mb-10 md:mb-12">
+      <h2
+        id="experience-title"
+        class="text-4xl md:text-5xl font-extrabold text-surface fade-in-up"
+      >
+        Experiencia
+      </h2>
+    </header>
+
+    <div class="grid grid-cols-1 gap-8">
+      {
+        items.map((it, i) => (
+          <article
+            class="glass-box p-8 md:p-10 rounded-2xl space-y-6 fade-in-up"
+            style={`animation-delay:${i * 80}ms`}
+            data-reveal
+            aria-label={`${it.role} en ${it.company}`}
+          >
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+              <div class="space-y-1">
+                <h3 class="text-xl md:text-2xl font-extrabold text-surface">
+                  {it.company}
+                </h3>
+                <p class="text-surface-muted font-medium">{it.role}</p>
+              </div>
+
+              <div class="flex md:justify-end">
+                <span class="text-xs md:text-sm px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-surface">
+                  {it.period}
+                </span>
+              </div>
+            </div>
+
+            <ul class="space-y-2 text-left">
+              {it.bullets.map((b) => (
+                <li class="flex gap-3 text-base text-surface-muted leading-relaxed">
+                  <span
+                    class="mt-2 w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent flex-none"
+                    aria-hidden="true"
+                  />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <ul
+              class="flex flex-wrap gap-2 pt-2"
+              aria-label="Tecnologías usadas en la experiencia"
+            >
+              {it.tech.map((t) => (
+                <li class="text-xs px-2 py-1 rounded-full bg-primary/10 dark:bg-accent/10 text-primary dark:text-accent border border-primary/20 dark:border-accent/20 font-medium">
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
