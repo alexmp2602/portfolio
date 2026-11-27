@@ -62,7 +62,7 @@ const frames = [
                 <div class="sample-headline">
                   {frames.map((frame, position) => (
                     <p data-frame={position} aria-hidden={position !== 0 ? "true" : undefined}>
-                      <span>{frame.lines[0]}</span><span>{frame.lines[1]}</span>
+                      <span>{frame.lines[0]}</span>{" "}<span>{frame.lines[1]}</span>
                     </p>
                   ))}
                 </div>
@@ -97,7 +97,7 @@ const frames = [
       <dl>
         <div><dt>Adaptación</dt><dd>El título, la imagen y el botón se recomponen para cada medida.</dd></div>
         <div><dt>Animación</dt><dd>Una sola línea de tiempo mantiene el mismo ritmo en los dos formatos.</dd></div>
-        <div><dt>Revisión</dt><dd>Podés pausar, volver a una escena y cambiar de formato sin perder el punto de reproducción.</dd></div>
+        <div><dt>Revisión</dt><dd>Revisé el encuadre y los márgenes en cada escena para que el título, el producto y el botón mantengan su espacio.</dd></div>
       </dl>
     </section>
 
