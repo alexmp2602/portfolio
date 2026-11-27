@@ -4,7 +4,7 @@ import LabLayout from "../../layouts/LabLayout.astro";
 const scenes = [
   { label: "Presentación", text: "Tu primer robot.", detail: "Taller de robótica", time: 0.6 },
   { label: "Propuesta", text: "Construí. Programá.", detail: "Aprendé con un proyecto", time: 3.3 },
-  { label: "Cierre", text: "Dale vida a tu idea.", detail: "Explorá los talleres", time: 6 },
+  { label: "Cierre", text: "Dale vida a tu idea.", detail: "Robótica educativa", time: 6 },
 ];
 ---
 <LabLayout
@@ -25,6 +25,7 @@ const scenes = [
           <div class="creative-frame" data-scene={index} aria-hidden={index !== 0 ? "true" : undefined}>
             <p>{scene.detail}</p>
             <strong>{scene.text}</strong>
+            {index === 2 && <a class="creative-cta" href="/lab/explorador-de-talleres" tabindex="-1" data-creative-cta>Explorá los talleres</a>}
           </div>
         ))}
       </div>
@@ -64,6 +65,7 @@ const scenes = [
 
   if (demo && stage && slider && play && restart && time) {
     const frames = Array.from(stage.querySelectorAll<HTMLElement>("[data-scene]"));
+    const callToAction = stage.querySelector<HTMLAnchorElement>("[data-creative-cta]")!;
     const jumps = Array.from(demo.querySelectorAll<HTMLButtonElement>("[data-jump]"));
     const playback = demo.querySelectorAll<HTMLElement>("[data-playback]");
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -76,6 +78,7 @@ const scenes = [
       currentScene = active;
       frames.forEach((frame, index) => frame.setAttribute("aria-hidden", String(index !== active)));
       jumps.forEach((button, index) => button.setAttribute("aria-pressed", String(index === active)));
+      callToAction.tabIndex = active === 2 ? 0 : -1;
     }
 
     const sequence = gsap.timeline({ paused: true });

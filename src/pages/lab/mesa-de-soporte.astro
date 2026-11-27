@@ -28,16 +28,16 @@ import { statuses, tickets } from "../../data/support-demo";
       <div class="support-inbox" aria-label="Resultados">
         <p data-empty hidden>No hay incidencias con estos filtros.</p>
         {tickets.map((ticket, index) => (
-          <button class="support-ticket" type="button" data-ticket={ticket.id} aria-pressed={index === 0 ? "true" : "false"} disabled>
+          <button class="support-ticket" type="button" data-ticket={ticket.id} aria-controls="ticket-detail" aria-pressed={index === 0 ? "true" : "false"} disabled>
             <span class="support-ticket-meta"><span>{ticket.id}</span><span class="ticket-status" data-status={ticket.status}>{ticket.status}</span></span>
             <strong>{ticket.title}</strong>
             <span>{ticket.team}</span>
           </button>
         ))}
       </div>
-      <div class="support-detail" data-detail>
+      <div class="support-detail" id="ticket-detail" data-detail>
         <p class="eyebrow" data-detail-id>{tickets[0].id} · {tickets[0].category}</p>
-        <h3 data-detail-title>{tickets[0].title}</h3>
+        <h3 data-detail-title tabindex="-1">{tickets[0].title}</h3>
         <p data-detail-description>{tickets[0].description}</p>
         <dl><dt>Equipo</dt><dd data-detail-team>{tickets[0].team}</dd><dt>Prioridad</dt><dd data-detail-priority>{tickets[0].priority}</dd></dl>
         <label data-support-controls hidden>Actualizar estado
@@ -63,6 +63,8 @@ import { statuses, tickets } from "../../data/support-demo";
     const update = app.querySelector<HTMLSelectElement>("#ticket-status")!;
     const rows = Array.from(app.querySelectorAll<HTMLButtonElement>("[data-ticket]"));
     const detail = app.querySelector<HTMLElement>("[data-detail]")!;
+    const detailTitle = detail.querySelector<HTMLElement>("[data-detail-title]")!;
+    const stacked = window.matchMedia("(max-width: 700px)");
     const empty = app.querySelector<HTMLElement>("[data-empty]")!;
     const feedback = app.querySelector<HTMLElement>("[data-support-feedback]")!;
     const counter = Array.from(app.querySelectorAll<HTMLElement>("[data-count]"));
@@ -109,7 +111,7 @@ import { statuses, tickets } from "../../data/support-demo";
       if (!current) return;
 
       detail.querySelector("[data-detail-id]")!.textContent = `${current.id} · ${current.category}`;
-      detail.querySelector("[data-detail-title]")!.textContent = current.title;
+      detailTitle.textContent = current.title;
       detail.querySelector("[data-detail-description]")!.textContent = current.description;
       detail.querySelector("[data-detail-team]")!.textContent = current.team;
       detail.querySelector("[data-detail-priority]")!.textContent = current.priority;
@@ -122,6 +124,7 @@ import { statuses, tickets } from "../../data/support-demo";
         selected = row.dataset.ticket;
         feedback.textContent = "";
         render();
+        if (stacked.matches) detailTitle.focus();
       });
     });
     [query, filter].forEach(control => control.addEventListener("input", () => {
