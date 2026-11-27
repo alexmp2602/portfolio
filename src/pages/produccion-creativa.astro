@@ -10,14 +10,14 @@ const formats = [
 ];
 
 const frames = [
-  { name: "Apertura", lines: ["Aire", "libre."], time: 0 },
-  { name: "Producto", lines: ["Todo a", "mano."], time: 2.65 },
-  { name: "Cierre", lines: ["Mochila", "24 L."], time: 5.35 },
+  { name: "Apertura", first: "Subí el", second: "pulso.", time: 0 },
+  { name: "Órbita", first: "Sonido en", second: "movimiento.", time: 3.75 },
+  { name: "Cierre", first: "Órbita", second: "01.", time: 7.75 },
 ];
 ---
 <Layout
   title="Producción creativa HTML5 · Alex Pereyra"
-  description="Ejemplos de producción creativa en HTML5 y GSAP. Una campaña ficticia en dos formatos para mostrar el tipo de trabajo que hacía en Hogarth."
+  description="Órbita 01, una muestra de producción creativa con animación 3D, HTML5 y adaptación a dos formatos."
 >
   <PortfolioHeader />
   <main class="wrap inner-page creative-page" id="content" tabindex="-1">
@@ -25,14 +25,14 @@ const frames = [
 
     <header class="inner-header creative-header">
       <h1>Producción creativa</h1>
-      <p class="lead">En Hogarth convertía diseños de campaña en piezas HTML5 animadas con GSAP. Adaptaba el layout a distintos formatos y revisaba el encuadre, los tiempos y el peso de cada entrega.</p>
+      <p class="lead">En Hogarth convertía diseños de campaña en piezas HTML5 animadas. Adaptaba la composición a distintos formatos y revisaba los márgenes, los tiempos y el peso de cada entrega.</p>
     </header>
 
     <section class="production-preview" data-production aria-labelledby="sample-title">
       <header class="production-heading">
         <div>
-          <h2 id="sample-title">Mochila 24 L</h2>
-          <p>Campaña ficticia creada para el portafolio.</p>
+          <h2 id="sample-title">Órbita 01</h2>
+          <p>Campaña ficticia de lanzamiento para el portafolio.</p>
         </div>
         <fieldset class="production-formats" data-enhanced hidden>
           <legend>Formato de la pieza</legend>
@@ -45,32 +45,24 @@ const frames = [
       </header>
 
       <div class="production-stage">
-        {formats.map((format, index) => (
-          <div
-            class:list={["sample-viewport", `sample-viewport-${format.id}`]}
-            data-artboard={format.id}
-            role="group"
-            aria-label={`Pieza HTML5 de ${format.label} píxeles`}
-            hidden={index !== 0}
-          >
-            <div class="sample-artwork">
-              <div class="sample-field">
-                <img src="/redesign/mochila-campana.webp" alt="Mochila de senderismo naranja" width="470" height="620" decoding="async" />
-              </div>
-              <div class="sample-copy">
-                <p class="sample-category">Colección de montaña</p>
-                <div class="sample-headline">
-                  {frames.map((frame, position) => (
-                    <p data-frame={position} aria-hidden={position !== 0 ? "true" : undefined}>
-                      <span>{frame.lines[0]}</span>{" "}<span>{frame.lines[1]}</span>
-                    </p>
-                  ))}
-                </div>
-                <button class="sample-action" data-product type="button" hidden>Ver detalles</button>
+        <div class="orbit-stage orbit-stage-wide" data-artboard data-format="wide" aria-label="Pieza de 970 × 250 píxeles">
+          <div class="orbit-artwork">
+            <div class="orbit-media" role="img" aria-label="Dos auriculares de color violeta salen del estuche, giran y vuelven a encajar.">
+              <div class="orbit-scene">
+                <div class="orbit-poster" aria-hidden="true"><span></span></div>
               </div>
             </div>
+            <p class="orbit-brand"><span aria-hidden="true"></span> ÓRBITA</p>
+            <div class="orbit-copy">
+              {frames.map((frame, index) => (
+                <p data-frame={index} aria-hidden={index !== 0 ? "true" : undefined} hidden={index !== 0}>
+                  <span>{frame.first}</span>{" "}<strong>{frame.second}</strong>
+                </p>
+              ))}
+            </div>
+            <button class="orbit-action" data-product type="button" hidden>Ver ficha</button>
           </div>
-        ))}
+        </div>
       </div>
 
       <div class="production-controls" data-enhanced hidden>
@@ -79,7 +71,7 @@ const frames = [
           <button class="button button-outline" type="button" data-reset>Reiniciar</button>
           <div class="production-scrub">
             <label for="sample-time">Tiempo</label>
-            <input id="sample-time" type="range" min="0" max="6.5" step=".05" value="0" />
+            <input id="sample-time" type="range" min="0" max="8.5" step=".05" value="0" />
             <output for="sample-time" data-time aria-hidden="true">0,0 s</output>
           </div>
         </div>
@@ -89,22 +81,22 @@ const frames = [
           ))}
         </div>
       </div>
-      <noscript><p>Activá JavaScript para reproducir la pieza y cambiar de formato.</p></noscript>
+      <noscript><p>Activá JavaScript para ver la animación en 3D.</p></noscript>
     </section>
 
     <section class="production-notes" aria-labelledby="production-notes-title">
-      <h2 id="production-notes-title">Qué muestra la pieza</h2>
+      <h2 id="production-notes-title">Cómo está hecha</h2>
       <dl>
-        <div><dt>Adaptación</dt><dd>El título, la imagen y el botón se recomponen para cada medida.</dd></div>
-        <div><dt>Animación</dt><dd>Una sola línea de tiempo mantiene el mismo ritmo en los dos formatos.</dd></div>
-        <div><dt>Revisión</dt><dd>Revisé el encuadre y los márgenes en cada escena para que el título, el producto y el botón mantengan su espacio.</dd></div>
+        <div><dt>Coreografía 3D</dt><dd>El estuche abre sobre su bisagra. Los auriculares recorren dos trayectorias y vuelven a sus cavidades antes del cierre de la pieza.</dd></div>
+        <div><dt>Adaptación de formatos</dt><dd>La composición horizontal coloca el texto al lado del producto. El rectángulo lo centra y distribuye la marca, el titular y el botón en altura.</dd></div>
+        <div><dt>Control de la animación</dt><dd>GSAP sincroniza el texto con la escena en Three.js. Podés saltar a cada momento y cambiar de formato sin perder el tiempo de reproducción.</dd></div>
       </dl>
     </section>
 
     <dialog class="production-dialog" data-dialog aria-labelledby="product-title">
       <div>
-        <h2 id="product-title">Mochila 24 L</h2>
-        <p>Concepto de producto para una campaña de senderismo. Esta ficha representa el destino del botón de la pieza.</p>
+        <h2 id="product-title">Órbita 01</h2>
+        <p>Concepto de auriculares inalámbricos con estuche de carga. El producto, la marca y la animación fueron creados para esta muestra.</p>
         <form method="dialog"><button class="button button-dark" type="submit" autofocus>Cerrar</button></form>
       </div>
     </dialog>
@@ -116,11 +108,13 @@ const frames = [
   import { gsap } from "gsap";
 
   const preview = document.querySelector<HTMLElement>("[data-production]");
+  const duration = 8.5;
 
   if (preview) {
-    const artboards = [...preview.querySelectorAll<HTMLElement>("[data-artboard]")];
-    const frameGroups = [0, 1, 2].map(index => [...preview.querySelectorAll<HTMLElement>(`[data-frame="${index}"]`)]);
-    const products = [...preview.querySelectorAll<HTMLButtonElement>("[data-product]")];
+    const board = preview.querySelector<HTMLElement>("[data-artboard]")!;
+    const media = board.querySelector<HTMLElement>(".orbit-scene")!;
+    const frames = [...board.querySelectorAll<HTMLElement>("[data-frame]")];
+    const product = board.querySelector<HTMLButtonElement>("[data-product]")!;
     const scenes = [...preview.querySelectorAll<HTMLButtonElement>("[data-seek]")];
     const play = preview.querySelector<HTMLButtonElement>("[data-play]")!;
     const motionControls = preview.querySelector<HTMLElement>("[data-motion-controls]")!;
@@ -129,78 +123,123 @@ const frames = [
     const dialog = document.querySelector<HTMLDialogElement>("[data-dialog]")!;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const formatTime = new Intl.NumberFormat("es", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-    const sequence = gsap.timeline({ paused: true });
+    const clock = { time: 0 };
     let scene = -1;
-
-    sequence
-      .set(frameGroups.slice(1).flat(), { autoAlpha: 0 }, 0)
-      .to(frameGroups[0], { autoAlpha: 0, duration: .26 }, 1.9)
-      .to(frameGroups[1], { autoAlpha: 1, duration: .34 }, 2.16)
-      .to(frameGroups[1], { autoAlpha: 0, duration: .26 }, 4.3)
-      .to(frameGroups[2], { autoAlpha: 1, duration: .36 }, 4.56)
-      .to({}, { duration: 1.58 }, 4.92);
-
-    function updateScene(time: number) {
-      const active = time < 2.16 ? 0 : time < 4.56 ? 1 : 2;
-      products.forEach(button => button.hidden = time < 4.92);
-      if (scene === active) return;
-      scene = active;
-      frameGroups.forEach((frames, index) => {
-        frames.forEach(frame => frame.setAttribute("aria-hidden", String(index !== active)));
-        scenes[index].setAttribute("aria-pressed", String(index === active));
-      });
-    }
+    let manual = false;
+    let observer: IntersectionObserver | undefined;
+    let model: { render: (time: number) => void } | undefined;
 
     function syncTime() {
-      const time = sequence.time();
+      const time = clock.time;
+      const next = time < 2.56 ? 0 : time < 5.94 ? 1 : 2;
+      const elapsed = time - [0, 2.56, 5.94][next];
+      const remaining = [2.56, 5.94, duration + .35][next] - time;
+      const visibility = reduced.matches || next === 0
+        ? Math.min(1, remaining / .22)
+        : Math.min(1, elapsed / .24, remaining / .22);
+
+      if (scene !== next) {
+        scene = next;
+        frames.forEach((frame, index) => {
+          frame.hidden = index !== next;
+          frame.setAttribute("aria-hidden", String(index !== next));
+          scenes[index].setAttribute("aria-pressed", String(index === next));
+        });
+      }
+
+      frames[next].style.opacity = String(Math.max(0, visibility));
+      frames[next].style.transform = reduced.matches ? "" : `translateY(${Math.max(0, 1 - visibility) * 8}px)`;
+      product.hidden = time < 6.6;
+      board.style.setProperty("--energy", String(Math.max(0, 1 - Math.abs(time - 6.42) / .8)));
       const label = `${formatTime.format(time)} s`;
+      if (output.value !== label) {
+        range.setAttribute("aria-valuetext", label);
+        output.value = label;
+      }
       range.value = String(time);
-      range.setAttribute("aria-valuetext", label);
-      output.value = label;
-      updateScene(time);
+      model?.render(time);
     }
 
-    function pauseAt(time: number) {
-      sequence.pause(time, false);
-      play.textContent = time === 0 ? "Reproducir" : time >= sequence.duration() ? "Repetir" : "Continuar";
+    const playback = gsap.to(clock, {
+      time: duration,
+      duration,
+      paused: true,
+      ease: "none",
+      onUpdate: syncTime,
+      onComplete: () => { play.textContent = "Repetir"; },
+    });
+
+    const pauseAt = (time: number) => {
+      playback.pause(time, false);
+      play.textContent = time === 0 ? "Reproducir" : time >= duration ? "Repetir" : "Continuar";
       syncTime();
-    }
+    };
 
-    function syncMotion() {
-      motionControls.hidden = reduced.matches;
-      if (reduced.matches) pauseAt(Number(scenes[Math.max(scene, 0)].dataset.seek));
-    }
+    const resume = () => {
+      if (playback.progress() === 1) playback.restart();
+      else playback.resume();
+      play.textContent = "Pausar";
+    };
 
-    sequence.eventCallback("onUpdate", syncTime);
-    sequence.eventCallback("onComplete", () => { play.textContent = "Repetir"; });
+    const markManual = () => {
+      manual = true;
+      observer?.disconnect();
+    };
 
     play.addEventListener("click", () => {
-      if (sequence.isActive()) pauseAt(sequence.time());
-      else {
-        if (sequence.progress() === 1) sequence.restart();
-        else sequence.resume();
-        play.textContent = "Pausar";
-      }
+      markManual();
+      if (playback.isActive()) pauseAt(clock.time);
+      else resume();
     });
-    preview.querySelector("[data-reset]")!.addEventListener("click", () => pauseAt(0));
-    range.addEventListener("input", () => pauseAt(Number(range.value)));
-    scenes.forEach(button => button.addEventListener("click", () => pauseAt(Number(button.dataset.seek))));
-    products.forEach(button => button.addEventListener("click", () => dialog.showModal()));
-
-    function setFormat(format: string) {
-      artboards.forEach(board => board.hidden = board.dataset.artboard !== format);
-    }
+    preview.querySelector("[data-reset]")!.addEventListener("click", () => {
+      markManual();
+      pauseAt(0);
+    });
+    range.addEventListener("input", () => {
+      markManual();
+      pauseAt(Number(range.value));
+    });
+    scenes.forEach(button => button.addEventListener("click", () => {
+      markManual();
+      pauseAt(Number(button.dataset.seek));
+    }));
+    product.addEventListener("click", () => {
+      markManual();
+      if (playback.isActive()) pauseAt(clock.time);
+      dialog.showModal();
+    });
 
     const initialFormat = window.matchMedia("(max-width: 650px)").matches ? "rectangle" : "wide";
+    board.dataset.format = initialFormat;
     preview.querySelectorAll<HTMLInputElement>("[name='sample-format']").forEach(input => {
       input.checked = input.value === initialFormat;
-      input.addEventListener("change", () => { if (input.checked) setFormat(input.value); });
+      input.addEventListener("change", () => {
+        if (input.checked) board.dataset.format = input.value;
+      });
     });
 
-    setFormat(initialFormat);
+    const syncMotion = () => {
+      motionControls.hidden = reduced.matches;
+      if (reduced.matches) pauseAt(Number(scenes[Math.max(scene, 0)].dataset.seek));
+    };
+    reduced.addEventListener("change", syncMotion);
     syncTime();
     syncMotion();
-    reduced.addEventListener("change", syncMotion);
     preview.querySelectorAll<HTMLElement>("[data-enhanced]").forEach(control => control.hidden = false);
+
+    import("../scripts/orbita.js").then(({ mountOrbita }) => {
+      model = mountOrbita(media);
+      media.dataset.live = "true";
+      syncTime();
+      if (manual || reduced.matches) return;
+      observer = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        observer?.disconnect();
+        if (!manual && !reduced.matches) resume();
+      }, { threshold: .6 });
+      observer.observe(board);
+    }).catch(() => {
+      media.dataset.live = "false";
+    });
   }
 </script>
