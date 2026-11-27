@@ -15,7 +15,7 @@
   --line: #c8cdc2;
   --accent: #d5f66a;
   --deep: #28342a;
-  --display: min(8.3vw, 7.6rem);
+  --display: min(8vw, 7.3rem);
   background: var(--paper);
   color: var(--ink);
   font-synthesis: none;
@@ -44,7 +44,7 @@ button { font: inherit; }
 .site-header nav a:hover, .site-footer a:hover { text-decoration: underline; text-underline-offset: .25em; }
 .site-header .nav-contact { padding-inline: 1.05rem; border: 1px solid var(--ink); border-radius: .35rem; }
 
-.hero { min-height: 32.5rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, .64fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); padding-block: clamp(2.8rem, 4vw, 4.65rem); }
+.hero { min-height: 31rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, .64fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); padding-block: clamp(2.6rem, 3.4vw, 4.45rem); }
 .eyebrow { font-size: .78rem; font-weight: 750; line-height: 1.4; letter-spacing: .105em; text-transform: uppercase; }
 .location { display: inline-flex; align-items: center; gap: .58rem; margin-bottom: 1.15rem; }
 .location span { width: .65rem; height: .65rem; border: 1px solid var(--ink); border-radius: 50%; background: var(--accent); }
@@ -62,7 +62,7 @@ button { font: inherit; }
 .button-dark:hover { background: var(--deep); }
 .portrait { display: grid; align-items: end; background: #e3e0d8; max-width: 25.5rem; width: 100%; justify-self: end; aspect-ratio: .99; position: relative; isolation: isolate; border: 1px solid #bbbcb0; border-radius: .45rem; }
 .portrait::after { content: ""; z-index: -1; position: absolute; inset: .6rem -.6rem -.6rem .6rem; border: 1px solid #afba98; border-radius: .45rem; }
-.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 44%; border-radius: inherit; }
+.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 44%; border-radius: inherit; }
 
 .work-section { background: #e6eadd; border-block: 1px solid var(--line); padding-block: clamp(3.2rem, 7vw, 6.4rem); }
 .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 1rem 3rem; margin-bottom: clamp(1.8rem, 4vw, 3.4rem); }
@@ -144,7 +144,7 @@ button { font: inherit; }
   .hero, .project-featured, .project-grid, .experience-list li, .contact-inner, .case-detail { grid-template-columns: 1fr; }
   .hero { padding-block: 2.65rem 3.15rem; }
   .portrait { justify-self: start; width: min(100% - .55rem, 24rem); aspect-ratio: 1.06; }
-  .portrait img { position: absolute; object-position: center 35%; }
+  .portrait img { object-position: center 35%; }
   .section-heading { display: grid; align-items: start; }
   .header-row { min-height: 4.4rem; }
   .site-header .nav-contact { padding-inline: .55rem; }
