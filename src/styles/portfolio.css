@@ -31,14 +31,14 @@ button { font: inherit; }
 [hidden] { display: none !important; }
 [id] { scroll-margin-top: 1.4rem; }
 .wrap { width: min(100% - clamp(2.4rem, 8vw, 8rem), 82rem); margin-inline: auto; }
-.skip-link { position: fixed; z-index: 5; top: 1rem; left: 1rem; transform: translateY(-200%); padding: .8rem 1rem; color: white; background: var(--ink); }
-.skip-link:focus { transform: none; }
+.skip-link { position: fixed; z-index: 5; top: 1rem; left: 1rem; clip-path: inset(50%); padding: .8rem 1rem; color: white; background: var(--ink); }
+.skip-link:focus { clip-path: none; }
 
 .site-header { border-bottom: 1px solid var(--line); }
 .header-row, .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .header-row { min-height: 4.9rem; }
 .brand { display: inline-flex; align-items: center; gap: .7rem; font-weight: 750; letter-spacing: -.045em; font-size: 1.16rem; text-decoration: none; white-space: nowrap; }
-.brand img { border-radius: .52rem; }
+.brand img { flex: none; }
 .site-header nav { display: flex; align-items: center; gap: clamp(.8rem, 3vw, 2.75rem); }
 .site-header nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; font-size: .92rem; font-weight: 650; }
 .site-header nav a:hover, .site-footer a:hover { text-decoration: underline; text-underline-offset: .25em; }
@@ -71,8 +71,8 @@ button { font: inherit; }
 .project-featured.project-secondary { grid-template-columns: .72fr 1fr; margin-top: clamp(1rem, 2.5vw, 2rem); }
 .visual-link { display: block; min-width: 0; }
 .visual-link:focus-visible { outline-offset: -5px; position: relative; z-index: 1; }
-.project-visual { display: grid; place-items: center; min-height: 100%; aspect-ratio: 1.67; overflow: hidden; }
-.project-visual img { width: 100%; height: 100%; min-height: 0; object-fit: cover; }
+.project-visual { position: relative; width: 100%; height: 100%; min-height: 12rem; aspect-ratio: 5 / 3; overflow: hidden; }
+.project-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .project-visual.robotics { background: #f4ca53; }
 .project-visual.studio { background: #fff; }
 .project-visual.studio img { object-fit: contain; }
@@ -84,9 +84,9 @@ button { font: inherit; }
 .text-link:hover { text-decoration-thickness: 2px; }
 .tags { display: flex; flex-wrap: wrap; gap: .45rem; padding: 0; list-style: none; }
 .tags li { font-size: .8rem; font-weight: 600; border: 1px solid #b7bfb3; border-radius: .25rem; padding: .2rem .5rem; }
-.lab-strip { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .6rem 2rem; margin-top: clamp(2rem, 4vw, 3.2rem); padding-block: 1rem; border-top: 1px solid #aeb7a9; }
-.lab-strip h3 { font-size: clamp(1.18rem, 3vw, 1.6rem); letter-spacing: -.04em; }
-.lab-strip p { color: var(--muted); }
+.creative-strip { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .6rem 2rem; margin-top: clamp(2rem, 4vw, 3.2rem); padding-block: 1rem; border-top: 1px solid #aeb7a9; }
+.creative-strip h3 { font-size: clamp(1.18rem, 3vw, 1.6rem); letter-spacing: -.04em; }
+.creative-strip p { color: var(--muted); }
 
 .experience-section { padding-block: clamp(3.3rem, 8vw, 7rem); }
 .experience-list { list-style: none; padding: 0; }
@@ -108,8 +108,9 @@ button { font: inherit; }
 .inner-header, .case-header { display: grid; justify-items: start; gap: 1rem; margin-block: 1rem 2.5rem; }
 .case-header h1, .inner-header h1 { font-size: clamp(2.7rem, 8vw, 7.1rem); overflow-wrap: anywhere; }
 .lead { max-width: 54ch; font-size: clamp(1.12rem, 2vw, 1.36rem); color: var(--muted); }
-.case-cover { border-radius: .5rem; overflow: hidden; border: 1px solid var(--line); }
-.case-cover .project-visual { max-height: 36rem; }
+.case-cover { width: 100%; height: clamp(13rem, 50vw, 36rem); overflow: hidden; border: 1px solid var(--line); border-radius: .5rem; }
+.case-cover .project-visual { min-height: 0; aspect-ratio: auto; }
+.case-cover .robotics img { object-position: center 53%; }
 .case-detail { display: grid; grid-template-columns: minmax(12rem, .55fr) 1fr; gap: 2rem clamp(2rem, 6vw, 6rem); margin-block: 2.5rem; }
 .case-meta { display: grid; gap: 1.15rem; align-content: start; }
 .case-meta h2, .case-story h2, .cv-section h2 { font-size: 1.4rem; line-height: 1.15; letter-spacing: -.045em; margin-bottom: .45rem; }

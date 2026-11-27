@@ -13,7 +13,7 @@ const { project, eager = false } = Astro.props;
     src={project.image}
     alt={project.alt}
     width="1200"
-    height="720"
+    height={project.theme === "robotics" ? 900 : 720}
     loading={eager ? "eager" : "lazy"}
     decoding="async"
   />
