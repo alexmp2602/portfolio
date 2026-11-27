@@ -1,0 +1,206 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PortfolioHeader from "../components/PortfolioHeader.astro";
+import PortfolioFooter from "../components/PortfolioFooter.astro";
+import "../styles/produccion-creativa.css";
+
+const formats = [
+  { id: "wide", label: "970 × 250" },
+  { id: "rectangle", label: "300 × 250" },
+];
+
+const frames = [
+  { name: "Apertura", lines: ["Aire", "libre."], time: 0 },
+  { name: "Producto", lines: ["Todo a", "mano."], time: 2.65 },
+  { name: "Cierre", lines: ["Mochila", "24 L."], time: 5.35 },
+];
+---
+<Layout
+  title="Producción creativa HTML5 · Alex Pereyra"
+  description="Ejemplos de producción creativa en HTML5 y GSAP. Una campaña ficticia en dos formatos para mostrar el tipo de trabajo que hacía en Hogarth."
+>
+  <PortfolioHeader />
+  <main class="wrap inner-page creative-page" id="content" tabindex="-1">
+    <a class="text-link" href="/#laboratorio">Volver al portafolio</a>
+
+    <header class="inner-header creative-header">
+      <h1>Producción creativa</h1>
+      <p class="lead">En Hogarth convertía diseños de campaña en piezas HTML5 animadas con GSAP. Adaptaba el layout a distintos formatos y revisaba el encuadre, los tiempos y el peso de cada entrega.</p>
+    </header>
+
+    <section class="production-preview" data-production aria-labelledby="sample-title">
+      <header class="production-heading">
+        <div>
+          <h2 id="sample-title">Mochila 24 L</h2>
+          <p>Campaña ficticia creada para el portafolio.</p>
+        </div>
+        <fieldset class="production-formats" data-enhanced hidden>
+          <legend>Formato de la pieza</legend>
+          <div>
+            {formats.map((format, index) => (
+              <label><input type="radio" name="ad-format" value={format.id} checked={index === 0} /> {format.label}</label>
+            ))}
+          </div>
+        </fieldset>
+      </header>
+
+      <div class="production-stage">
+        {formats.map((format, index) => (
+          <div
+            class:list={["ad-viewport", `ad-viewport-${format.id}`]}
+            data-artboard={format.id}
+            role="group"
+            aria-label={`Pieza HTML5 de ${format.label} píxeles`}
+            hidden={index !== 0}
+          >
+            <div class="ad-artwork">
+              <div class="ad-field">
+                <img src="/redesign/mochila-campana.webp" alt="Mochila de senderismo naranja" width="470" height="620" decoding="async" />
+              </div>
+              <div class="ad-copy">
+                <p class="ad-category">Colección de montaña</p>
+                <div class="ad-headline">
+                  {frames.map((frame, position) => (
+                    <p data-frame={position} aria-hidden={position !== 0 ? "true" : undefined}>
+                      <span>{frame.lines[0]}</span><span>{frame.lines[1]}</span>
+                    </p>
+                  ))}
+                </div>
+                <button class="ad-action" data-product type="button" hidden>Ver detalles</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="production-controls" data-enhanced hidden>
+        <div class="production-playback" data-motion-controls>
+          <button class="button button-dark" type="button" data-play>Reproducir</button>
+          <button class="button button-outline" type="button" data-reset>Reiniciar</button>
+          <div class="production-scrub">
+            <label for="ad-time">Tiempo</label>
+            <input id="ad-time" type="range" min="0" max="6.5" step=".05" value="0" />
+            <output for="ad-time" data-time aria-hidden="true">0,0 s</output>
+          </div>
+        </div>
+        <div class="production-scenes" role="group" aria-label="Escenas de la pieza">
+          {frames.map((frame, index) => (
+            <button class="button button-outline" type="button" data-seek={frame.time} aria-pressed={index === 0 ? "true" : "false"}>{frame.name}</button>
+          ))}
+        </div>
+      </div>
+      <noscript><p>Activá JavaScript para reproducir la pieza y cambiar de formato.</p></noscript>
+    </section>
+
+    <section class="production-notes" aria-labelledby="production-notes-title">
+      <h2 id="production-notes-title">Qué muestra la pieza</h2>
+      <dl>
+        <div><dt>Adaptación</dt><dd>El título, la imagen y el botón se recomponen para cada medida.</dd></div>
+        <div><dt>Animación</dt><dd>Una sola línea de tiempo mantiene el mismo ritmo en los dos formatos.</dd></div>
+        <div><dt>Revisión</dt><dd>Podés pausar, volver a una escena y cambiar de formato sin perder el punto de reproducción.</dd></div>
+      </dl>
+    </section>
+
+    <dialog class="production-dialog" data-dialog aria-labelledby="product-title">
+      <div>
+        <h2 id="product-title">Mochila 24 L</h2>
+        <p>Concepto de producto para una campaña de senderismo. Esta ficha representa el destino del botón de la pieza.</p>
+        <form method="dialog"><button class="button button-dark" type="submit" autofocus>Cerrar</button></form>
+      </div>
+    </dialog>
+  </main>
+  <PortfolioFooter />
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+
+  const preview = document.querySelector<HTMLElement>("[data-production]");
+
+  if (preview) {
+    const artboards = [...preview.querySelectorAll<HTMLElement>("[data-artboard]")];
+    const frameGroups = [0, 1, 2].map(index => [...preview.querySelectorAll<HTMLElement>(`[data-frame="${index}"]`)]);
+    const products = [...preview.querySelectorAll<HTMLButtonElement>("[data-product]")];
+    const scenes = [...preview.querySelectorAll<HTMLButtonElement>("[data-seek]")];
+    const play = preview.querySelector<HTMLButtonElement>("[data-play]")!;
+    const motionControls = preview.querySelector<HTMLElement>("[data-motion-controls]")!;
+    const range = preview.querySelector<HTMLInputElement>("#ad-time")!;
+    const output = preview.querySelector<HTMLOutputElement>("[data-time]")!;
+    const dialog = document.querySelector<HTMLDialogElement>("[data-dialog]")!;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const formatTime = new Intl.NumberFormat("es", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    const sequence = gsap.timeline({ paused: true });
+    let scene = -1;
+
+    sequence
+      .set(frameGroups.slice(1).flat(), { autoAlpha: 0 }, 0)
+      .to(frameGroups[0], { autoAlpha: 0, duration: .26 }, 1.9)
+      .to(frameGroups[1], { autoAlpha: 1, duration: .34 }, 2.16)
+      .to(frameGroups[1], { autoAlpha: 0, duration: .26 }, 4.3)
+      .to(frameGroups[2], { autoAlpha: 1, duration: .36 }, 4.56)
+      .to({}, { duration: 1.58 }, 4.92);
+
+    function updateScene(time: number) {
+      const active = time < 2.16 ? 0 : time < 4.56 ? 1 : 2;
+      products.forEach(button => button.hidden = time < 4.92);
+      if (scene === active) return;
+      scene = active;
+      frameGroups.forEach((frames, index) => {
+        frames.forEach(frame => frame.setAttribute("aria-hidden", String(index !== active)));
+        scenes[index].setAttribute("aria-pressed", String(index === active));
+      });
+    }
+
+    function syncTime() {
+      const time = sequence.time();
+      const label = `${formatTime.format(time)} s`;
+      range.value = String(time);
+      range.setAttribute("aria-valuetext", label);
+      output.value = label;
+      updateScene(time);
+    }
+
+    function pauseAt(time: number) {
+      sequence.pause(time, false);
+      play.textContent = time === 0 ? "Reproducir" : time >= sequence.duration() ? "Repetir" : "Continuar";
+      syncTime();
+    }
+
+    function syncMotion() {
+      motionControls.hidden = reduced.matches;
+      if (reduced.matches) pauseAt(Number(scenes[Math.max(scene, 0)].dataset.seek));
+    }
+
+    sequence.eventCallback("onUpdate", syncTime);
+    sequence.eventCallback("onComplete", () => { play.textContent = "Repetir"; });
+
+    play.addEventListener("click", () => {
+      if (sequence.isActive()) pauseAt(sequence.time());
+      else {
+        if (sequence.progress() === 1) sequence.restart();
+        else sequence.resume();
+        play.textContent = "Pausar";
+      }
+    });
+    preview.querySelector("[data-reset]")!.addEventListener("click", () => pauseAt(0));
+    range.addEventListener("input", () => pauseAt(Number(range.value)));
+    scenes.forEach(button => button.addEventListener("click", () => pauseAt(Number(button.dataset.seek))));
+    products.forEach(button => button.addEventListener("click", () => dialog.showModal()));
+
+    function setFormat(format: string) {
+      artboards.forEach(board => board.hidden = board.dataset.artboard !== format);
+    }
+
+    const initialFormat = window.matchMedia("(max-width: 650px)").matches ? "rectangle" : "wide";
+    preview.querySelectorAll<HTMLInputElement>("[name='ad-format']").forEach(input => {
+      input.checked = input.value === initialFormat;
+      input.addEventListener("change", () => { if (input.checked) setFormat(input.value); });
+    });
+
+    setFormat(initialFormat);
+    syncTime();
+    syncMotion();
+    reduced.addEventListener("change", syncMotion);
+    preview.querySelectorAll<HTMLElement>("[data-enhanced]").forEach(control => control.hidden = false);
+  }
+</script>
