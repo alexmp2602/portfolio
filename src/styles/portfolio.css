@@ -31,8 +31,8 @@ button { font: inherit; }
 [hidden] { display: none !important; }
 [id] { scroll-margin-top: 1.4rem; }
 .wrap { width: min(100% - clamp(2.4rem, 8vw, 8rem), 82rem); margin-inline: auto; }
-.skip-link { position: fixed; z-index: 5; top: 1rem; left: 1rem; transform: translateY(-200%); padding: .8rem 1rem; color: white; background: var(--ink); }
-.skip-link:focus { transform: none; }
+.skip-link { position: fixed; z-index: 5; top: 1rem; left: 1rem; clip-path: inset(50%); padding: .8rem 1rem; color: white; background: var(--ink); }
+.skip-link:focus { clip-path: none; }
 
 .site-header { border-bottom: 1px solid var(--line); }
 .header-row, .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }

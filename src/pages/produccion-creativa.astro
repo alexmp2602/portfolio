@@ -38,7 +38,7 @@ const frames = [
           <legend>Formato de la pieza</legend>
           <div>
             {formats.map((format, index) => (
-              <label><input type="radio" name="ad-format" value={format.id} checked={index === 0} /> {format.label}</label>
+              <label><input type="radio" name="sample-format" value={format.id} checked={index === 0} /> {format.label}</label>
             ))}
           </div>
         </fieldset>
@@ -47,26 +47,26 @@ const frames = [
       <div class="production-stage">
         {formats.map((format, index) => (
           <div
-            class:list={["ad-viewport", `ad-viewport-${format.id}`]}
+            class:list={["sample-viewport", `sample-viewport-${format.id}`]}
             data-artboard={format.id}
             role="group"
             aria-label={`Pieza HTML5 de ${format.label} píxeles`}
             hidden={index !== 0}
           >
-            <div class="ad-artwork">
-              <div class="ad-field">
+            <div class="sample-artwork">
+              <div class="sample-field">
                 <img src="/redesign/mochila-campana.webp" alt="Mochila de senderismo naranja" width="470" height="620" decoding="async" />
               </div>
-              <div class="ad-copy">
-                <p class="ad-category">Colección de montaña</p>
-                <div class="ad-headline">
+              <div class="sample-copy">
+                <p class="sample-category">Colección de montaña</p>
+                <div class="sample-headline">
                   {frames.map((frame, position) => (
                     <p data-frame={position} aria-hidden={position !== 0 ? "true" : undefined}>
                       <span>{frame.lines[0]}</span><span>{frame.lines[1]}</span>
                     </p>
                   ))}
                 </div>
-                <button class="ad-action" data-product type="button" hidden>Ver detalles</button>
+                <button class="sample-action" data-product type="button" hidden>Ver detalles</button>
               </div>
             </div>
           </div>
@@ -78,9 +78,9 @@ const frames = [
           <button class="button button-dark" type="button" data-play>Reproducir</button>
           <button class="button button-outline" type="button" data-reset>Reiniciar</button>
           <div class="production-scrub">
-            <label for="ad-time">Tiempo</label>
-            <input id="ad-time" type="range" min="0" max="6.5" step=".05" value="0" />
-            <output for="ad-time" data-time aria-hidden="true">0,0 s</output>
+            <label for="sample-time">Tiempo</label>
+            <input id="sample-time" type="range" min="0" max="6.5" step=".05" value="0" />
+            <output for="sample-time" data-time aria-hidden="true">0,0 s</output>
           </div>
         </div>
         <div class="production-scenes" role="group" aria-label="Escenas de la pieza">
@@ -124,7 +124,7 @@ const frames = [
     const scenes = [...preview.querySelectorAll<HTMLButtonElement>("[data-seek]")];
     const play = preview.querySelector<HTMLButtonElement>("[data-play]")!;
     const motionControls = preview.querySelector<HTMLElement>("[data-motion-controls]")!;
-    const range = preview.querySelector<HTMLInputElement>("#ad-time")!;
+    const range = preview.querySelector<HTMLInputElement>("#sample-time")!;
     const output = preview.querySelector<HTMLOutputElement>("[data-time]")!;
     const dialog = document.querySelector<HTMLDialogElement>("[data-dialog]")!;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -192,7 +192,7 @@ const frames = [
     }
 
     const initialFormat = window.matchMedia("(max-width: 650px)").matches ? "rectangle" : "wide";
-    preview.querySelectorAll<HTMLInputElement>("[name='ad-format']").forEach(input => {
+    preview.querySelectorAll<HTMLInputElement>("[name='sample-format']").forEach(input => {
       input.checked = input.value === initialFormat;
       input.addEventListener("change", () => { if (input.checked) setFormat(input.value); });
     });
