@@ -1,0 +1,151 @@
+---
+import LabLayout from "../../layouts/LabLayout.astro";
+import { statuses, tickets } from "../../data/support-demo";
+---
+<LabLayout
+  title="Mesa de soporte"
+  description="Prototipo inspirado en mi experiencia en soporte IT. Reúne la búsqueda, la revisión y el seguimiento de incidencias de un equipo."
+>
+  <section class="lab-panel support-app" data-support aria-label="Mesa de soporte interactiva">
+    <div class="support-bar">
+      <div><p class="eyebrow">Datos de ejemplo</p><h2>Incidencias</h2></div>
+      <ul class="support-counts" aria-label="Incidencias por estado">
+        {statuses.map(status => (
+          <li><strong data-count={status}>{tickets.filter(ticket => ticket.status === status).length}</strong> {status === "Nuevo" ? "Nuevas" : status === "Resuelto" ? "Resueltas" : status}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="support-filters" data-support-controls hidden>
+      <label>Buscar <input type="search" id="ticket-query" placeholder="ID, incidencia o equipo" /></label>
+      <label>Estado
+        <select id="ticket-filter">
+          <option value="">Todos</option>
+          {statuses.map(status => <option value={status}>{status}</option>)}
+        </select>
+      </label>
+    </div>
+    <div class="support-workspace">
+      <div class="support-inbox" aria-label="Resultados">
+        <p data-empty hidden>No hay incidencias con estos filtros.</p>
+        {tickets.map((ticket, index) => (
+          <button class="support-ticket" type="button" data-ticket={ticket.id} aria-controls="ticket-detail" aria-pressed={index === 0 ? "true" : "false"} disabled>
+            <span class="support-ticket-meta"><span>{ticket.id}</span><span class="ticket-status" data-status={ticket.status}>{ticket.status}</span></span>
+            <strong>{ticket.title}</strong>
+            <span>{ticket.team}</span>
+          </button>
+        ))}
+      </div>
+      <div class="support-detail" id="ticket-detail" data-detail>
+        <p class="eyebrow" data-detail-id>{tickets[0].id} · {tickets[0].category}</p>
+        <h3 data-detail-title tabindex="-1">{tickets[0].title}</h3>
+        <p data-detail-description>{tickets[0].description}</p>
+        <dl><dt>Equipo</dt><dd data-detail-team>{tickets[0].team}</dd><dt>Prioridad</dt><dd data-detail-priority>{tickets[0].priority}</dd></dl>
+        <label data-support-controls hidden>Actualizar estado
+          <select id="ticket-status">
+            {statuses.map(status => <option value={status}>{status}</option>)}
+          </select>
+        </label>
+      </div>
+    </div>
+    <p class="lab-feedback" role="status" data-support-feedback></p>
+    <noscript>Activá JavaScript para buscar y actualizar incidencias.</noscript>
+  </section>
+  <p class="lab-footnote">Las incidencias son ficticias. Los cambios de estado se guardan en este navegador.</p>
+</LabLayout>
+
+<script>
+  import { statuses, tickets, type TicketStatus } from "../../data/support-demo";
+
+  const app = document.querySelector<HTMLElement>("[data-support]");
+  if (app) {
+    const query = app.querySelector<HTMLInputElement>("#ticket-query")!;
+    const filter = app.querySelector<HTMLSelectElement>("#ticket-filter")!;
+    const update = app.querySelector<HTMLSelectElement>("#ticket-status")!;
+    const rows = Array.from(app.querySelectorAll<HTMLButtonElement>("[data-ticket]"));
+    const detail = app.querySelector<HTMLElement>("[data-detail]")!;
+    const detailTitle = detail.querySelector<HTMLElement>("[data-detail-title]")!;
+    const stacked = window.matchMedia("(max-width: 700px)");
+    const empty = app.querySelector<HTMLElement>("[data-empty]")!;
+    const feedback = app.querySelector<HTMLElement>("[data-support-feedback]")!;
+    const counter = Array.from(app.querySelectorAll<HTMLElement>("[data-count]"));
+    const storageKey = "portfolio-lab-support";
+    const changes = new Map<string, TicketStatus>();
+    let selected: string | undefined = tickets[0].id;
+
+    const isStatus = (value: unknown): value is TicketStatus => statuses.some(status => value === status);
+    const normalize = (value: string) => value.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+    const getStatus = (ticket: (typeof tickets)[number]) => changes.get(ticket.id) ?? ticket.status;
+
+    try {
+      const stored = JSON.parse(localStorage.getItem(storageKey) ?? "{}");
+      tickets.forEach(ticket => {
+        if (isStatus(stored?.[ticket.id])) changes.set(ticket.id, stored[ticket.id]);
+      });
+    } catch {
+      // The demo still works with storage disabled.
+    }
+
+    function render() {
+      const term = normalize(query.value.trim());
+      const visible = tickets.filter(ticket => (
+        (!filter.value || getStatus(ticket) === filter.value) &&
+        normalize(`${ticket.id} ${ticket.title} ${ticket.team} ${ticket.category}`).includes(term)
+      ));
+      const current = visible.find(ticket => ticket.id === selected) ?? visible[0];
+      selected = current?.id;
+
+      rows.forEach((row, index) => {
+        const ticket = tickets[index];
+        const status = getStatus(ticket);
+        const badge = row.querySelector<HTMLElement>(".ticket-status")!;
+        badge.textContent = status;
+        badge.dataset.status = status;
+        row.hidden = !visible.includes(ticket);
+        row.setAttribute("aria-pressed", String(ticket.id === selected));
+      });
+      counter.forEach(item => {
+        item.textContent = String(tickets.filter(ticket => getStatus(ticket) === item.dataset.count).length);
+      });
+      empty.hidden = Boolean(visible.length);
+      detail.hidden = !current;
+      if (!current) return;
+
+      detail.querySelector("[data-detail-id]")!.textContent = `${current.id} · ${current.category}`;
+      detailTitle.textContent = current.title;
+      detail.querySelector("[data-detail-description]")!.textContent = current.description;
+      detail.querySelector("[data-detail-team]")!.textContent = current.team;
+      detail.querySelector("[data-detail-priority]")!.textContent = current.priority;
+      update.value = getStatus(current);
+    }
+
+    rows.forEach(row => {
+      row.disabled = false;
+      row.addEventListener("click", () => {
+        selected = row.dataset.ticket;
+        feedback.textContent = "";
+        render();
+        if (stacked.matches) detailTitle.focus();
+      });
+    });
+    [query, filter].forEach(control => control.addEventListener("input", () => {
+      feedback.textContent = "";
+      render();
+    }));
+    update.addEventListener("change", () => {
+      const status = update.value;
+      if (!selected || !isStatus(status)) return;
+      const id = selected;
+      changes.set(id, status);
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(Object.fromEntries(changes)));
+      } catch {
+        // Changes remain available for this page view.
+      }
+      render();
+      feedback.textContent = `${id} pasó a «${status}».`;
+      if (selected !== id) (rows.find(row => row.dataset.ticket === selected) ?? filter).focus();
+    });
+    app.querySelectorAll<HTMLElement>("[data-support-controls]").forEach(control => control.hidden = false);
+    render();
+  }
+</script>
