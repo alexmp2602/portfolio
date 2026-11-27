@@ -1,0 +1,17 @@
+{
+  "redirects": [
+    { "source": "/projects/minuto-de-silencio", "destination": "/#proyectos", "permanent": true },
+    { "source": "/projects/sigj", "destination": "/#proyectos", "permanent": true },
+    { "source": "/projects/saae", "destination": "/#proyectos", "permanent": true },
+    { "source": "/projects/delfos", "destination": "/#proyectos", "permanent": true },
+    { "source": "/projects/gallinas", "destination": "/#proyectos", "permanent": true },
+    { "source": "/projects/domus", "destination": "/#proyectos", "permanent": true },
+    { "source": "/projects/apri", "destination": "/#proyectos", "permanent": true },
+    { "source": "/lab", "destination": "/lab/gsap", "permanent": true },
+    { "source": "/assets/cv/ES-Alex-Pereyra-Frontend-Engineer.pdf", "destination": "/cv/es", "permanent": true },
+    { "source": "/assets/cv/ES-Alex-Pereyra-Frontend-Fullstack.pdf", "destination": "/cv/es", "permanent": true },
+    { "source": "/assets/cv/EN-Alex-Pereyra-Frontend-Fullstack.pdf", "destination": "/cv/en", "permanent": true },
+    { "source": "/assets/cv/EN-Alex-Pereyra-Frontend-Engineer.pdf", "destination": "/cv/en", "permanent": true },
+    { "source": "/thanks", "destination": "/#contacto", "permanent": true }
+  ]
+}

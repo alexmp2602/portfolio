@@ -1,166 +1,61 @@
 ---
-// src/layouts/Layout.astro
-import "../styles/global.css";
+import "../styles/portfolio.css";
 
-type Props = {
+interface Props {
   title?: string;
   description?: string;
-  canonical?: string;
   ogImage?: string;
-  locale?: string;
-};
+  lang?: "es" | "en";
+  noindex?: boolean;
+}
 
 const {
-  title = "Alex Pereyra | Frontend Engineer",
-  description =
-    "Portafolio de Alex Pereyra, Frontend Engineer enfocado en React, Next.js y TypeScript. Arquitectura, performance, accesibilidad y UX escalable. Conocimientos complementarios en Node.js, SQL y APIs.",
-  canonical = "https://www.alexpereyra.dev",
-  ogImage = "https://www.alexpereyra.dev/assets/logo/opengraph-preview.png",
-  locale = "es_AR",
-} = Astro.props as Props;
-
-// Structured data básico (Person)
-const jsonLd = {
+  title = "Alex Pereyra · Frontend Developer en Málaga",
+  description = "Frontend Developer en Málaga y cofundador de Nodra Studio. Proyectos con React, Next.js y TypeScript, experiencia y contacto.",
+  ogImage = "/redesign/compartir.jpg",
+  lang = "es",
+  noindex = false,
+} = Astro.props;
+const origin = "https://www.alexpereyra.dev";
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const canonical = new URL(path, origin).href;
+const socialImage = new URL(ogImage, origin).href;
+const profile = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Alex Pereyra",
-  jobTitle: "Frontend Engineer",
-  url: canonical,
-  sameAs: [
-    "https://www.linkedin.com/in/alex-pereyra-dev",
-    "https://github.com/",
-  ],
+  jobTitle: "Frontend Developer",
+  url: origin,
+  image: new URL("/redesign/alex-pereyra.webp", origin).href,
+  sameAs: ["https://www.linkedin.com/in/alex-pereyra-dev/", "https://github.com/alexmp2602"],
 };
 ---
-
 <!doctype html>
-<html
-  lang="es"
-  class="scroll-smooth bg-light text-dark dark:bg-dark dark:text-light transition-colors duration-500 font-sans antialiased"
->
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-
-    <!-- Meta -->
     <meta name="description" content={description} />
-    <meta name="robots" content="index,follow" />
-    <meta name="color-scheme" content="light dark" />
-
-    <!-- Theme color por modo -->
-    <meta
-      name="theme-color"
-      content="#256340"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#0b1110"
-      media="(prefers-color-scheme: dark)"
-    />
-
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#f7f7f0" />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/redesign/icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Icons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:locale" content={locale.replace("_", "-")} />
+    <link rel="apple-touch-icon" href="/redesign/touch.png" />
+    <link rel="preload" href="/redesign/inter.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_GB"} />
+    <meta property="og:site_name" content="Alex Pereyra" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
-
-    <!-- Twitter -->
+    <meta property="og:image" content={socialImage} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      as="style"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Variables base + helpers -->
-    <style>
-      :root {
-        --color-primary: #256340;
-        --color-accent: #60a98f;
-        --color-light: #fafafa;
-        --color-dark: #1f1f1f;
-      }
-
-      /* Accesibilidad: salto al contenido */
-      .skip-link {
-        position: absolute;
-        left: -999px;
-        top: auto;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-      }
-      .skip-link:focus {
-        position: fixed;
-        left: 1rem;
-        top: 1rem;
-        width: auto;
-        height: auto;
-        padding: 0.5rem 0.75rem;
-        background: var(--color-primary);
-        color: white;
-        border-radius: 0.5rem;
-        z-index: 1000;
-      }
-
-      /* Respeto a usuarios con reducción de movimiento */
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-        * {
-          animation: none !important;
-          transition: none !important;
-        }
-      }
-    </style>
-
-    <!-- JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {path === "/" && <script type="application/ld+json" set:html={JSON.stringify(profile)} />}
   </head>
-
-  <body class="bg-light dark:bg-dark">
-    <a href="#content" class="skip-link">Saltar al contenido</a>
-
-    <main
-      id="content"
-      role="main"
-      aria-label="Contenido principal"
-      class="relative z-10"
-    >
-      <slot />
-    </main>
-
-    <!-- Scripts globales -->
-    <script type="module" src="/scripts/setup-global.js" defer></script>
+  <body>
+    <a class="skip-link" href="#content">{lang === "es" ? "Saltar al contenido" : "Skip to content"}</a>
+    <slot />
   </body>
 </html>
