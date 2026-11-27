@@ -32,7 +32,11 @@ const alternate = english ? "es" : "en";
       <ul class="experience-list">
         {copy.experience.map((entry) => (
           <li>
-            <div><h3>{entry.organization}</h3><p class="role">{entry.role}</p></div>
+            <div>
+              <h3>{entry.organization}</h3>
+              <p class="role">{entry.role}</p>
+              <p class="period">{entry.period}</p>
+            </div>
             <p>{entry.detail}</p>
           </li>
         ))}
@@ -52,7 +56,7 @@ const alternate = english ? "es" : "en";
     </section>
     <section class="cv-section">
       <h2>{copy.educationTitle}</h2>
-      <p>{copy.education}</p>
+      <ul class="cv-projects">{copy.education.map((programme) => <li>{programme}</li>)}</ul>
     </section>
   </main>
   <PortfolioFooter {english} />

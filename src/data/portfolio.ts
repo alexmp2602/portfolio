@@ -59,21 +59,37 @@ export const experience = [
   {
     organization: "Nodra Studio",
     role: "Cofundador",
+    period: "Ago. 2026 – actualidad",
     detail: "Defino el alcance de proyectos web y trabajo en su diseño y desarrollo junto a mi socio.",
+  },
+  {
+    organization: "Freelance",
+    role: "Frontend Developer",
+    period: "Mar. 2020 – actualidad",
+    detail: "Diseño y desarrollo webs e interfaces con React, Next.js y Astro, e integro APIs y flujos de datos según lo que necesita cada proyecto.",
   },
   {
     organization: "Hogarth Argentina · WPP",
     role: "Producción frontend freelance",
+    period: "May. 2025 – oct. 2026",
     detail: "Desarrollé piezas HTML5 animadas con GSAP para campañas digitales, con límites de peso y requisitos de entrega específicos.",
+  },
+  {
+    organization: "Infomac Soluciones IT",
+    role: "Técnico de soporte microinformático",
+    period: "May. 2026 – nov. 2026",
+    detail: "Diagnostiqué y reparé portátiles, reinstalé sistemas y preparé equipos para sus usuarios.",
   },
   {
     organization: "IABOT Robótica Educativa",
     role: "Profesor y coordinador",
+    period: "Mar. 2022 – oct. 2026",
     detail: "Di clases y coordiné talleres de robótica y programación. También diseñé y desarrollé la nueva web.",
   },
   {
     organization: "Municipalidad de Mercedes",
-    role: "Desarrollo full stack y soporte IT",
+    role: "Desarrollo frontend · Sistemas internos",
+    period: "Ago. 2023 – mar. 2024",
     detail: "Desarrollé y mantuve sistemas internos y trabajé con sus usuarios para entender problemas de uso y resolver incidencias.",
   },
 ];
