@@ -1,5 +1,7 @@
 {
   "redirects": [
+    { "source": "/projects/minuto-de-silencio", "destination": "/#proyectos", "permanent": true },
+    { "source": "/projects/sigj", "destination": "/#proyectos", "permanent": true },
     { "source": "/projects/saae", "destination": "/#proyectos", "permanent": true },
     { "source": "/projects/delfos", "destination": "/#proyectos", "permanent": true },
     { "source": "/projects/gallinas", "destination": "/#proyectos", "permanent": true },

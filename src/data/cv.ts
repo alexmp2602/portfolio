@@ -2,7 +2,7 @@ import { experience } from "./portfolio";
 
 export const resume = {
   es: {
-    summary: "Frontend Developer con experiencia en sitios web, interfaces para sistemas internos y producción de piezas HTML5. Trabajo con React, Next.js y TypeScript. Mi experiencia en soporte IT complementa el desarrollo.",
+    summary: "Frontend Developer y cofundador de Nodra Studio. Desarrollo webs e interfaces con React, Next.js y TypeScript. También tengo experiencia en sistemas internos, producción creativa y soporte IT.",
     experienceTitle: "Experiencia",
     skillsTitle: "Tecnologías",
     educationTitle: "Formación",
@@ -11,14 +11,14 @@ export const resume = {
     switchLabel: "Read in English",
     experience,
     projects: [
-      ["IABOT 4.0", "Rediseño y desarrollo en Next.js de una web educativa con cursos y sedes."],
-      ["Minuto de Silencio", "Experiencia interactiva con React Three Fiber y Supabase."],
-      ["SIGJ", "Demo en React y TypeScript de una aplicación de gestión judicial."],
+      ["nodra-studio", "Nodra Studio", "Estudio de diseño y desarrollo digital que cofundé con Nico."],
+      ["iabot", "IABOT 4.0", "Rediseño y desarrollo en Next.js de una web educativa con cursos y sedes."],
+      ["armonia-y-bienestar", "Armonía y Bienestar", "Web en Astro para un centro de bienestar, publicada en el portafolio de Nodra."],
     ],
     education: ["Tecnicatura Universitaria en Programación · UTN San Nicolás (desde 2025)", "Formación Front End · Oracle Next Education / Alura (2023)"],
   },
   en: {
-    summary: "Frontend Developer with experience building websites, interfaces for internal systems and animated HTML5 creatives. I work with React, Next.js and TypeScript, with a background in IT support.",
+    summary: "Frontend Developer and co-founder of Nodra Studio. I build websites and interfaces with React, Next.js and TypeScript. My background includes internal systems, creative production and IT support.",
     experienceTitle: "Experience",
     skillsTitle: "Technologies",
     educationTitle: "Education",
@@ -34,9 +34,9 @@ export const resume = {
       { organization: "Municipality of Mercedes", role: "Frontend development · Internal systems", period: "Aug 2023 – Mar 2024", detail: "Built and maintained internal systems and worked with their users to understand usability issues and resolve incidents." },
     ],
     projects: [
-      ["IABOT 4.0", "Designed and built an educational website in Next.js, with pages for courses and locations."],
-      ["Minuto de Silencio", "Interactive web experience built with React Three Fiber and Supabase."],
-      ["SIGJ", "Judicial case management demo built with React and TypeScript."],
+      ["nodra-studio", "Nodra Studio", "Digital design and development studio I co-founded with Nico."],
+      ["iabot", "IABOT 4.0", "Designed and built an educational website in Next.js, with pages for courses and locations."],
+      ["armonia-y-bienestar", "Armonía y Bienestar", "Astro website for a wellness centre, featured in Nodra’s portfolio."],
     ],
     education: ["University Technical Degree in Programming · UTN San Nicolás (since 2025)", "Front End programme · Oracle Next Education / Alura (2023)"],
   },

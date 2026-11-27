@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import PortfolioHeader from "../../components/PortfolioHeader.astro";
 import PortfolioFooter from "../../components/PortfolioFooter.astro";
 import { resume, skills } from "../../data/cv";
-import { links, work } from "../../data/portfolio";
+import { links } from "../../data/portfolio";
 
 export function getStaticPaths() {
   return (["es", "en"] as const).map((lang) => ({ params: { lang }, props: { lang } }));
@@ -45,8 +45,8 @@ const alternate = english ? "es" : "en";
     <section class="cv-section">
       <h2>{copy.projectsTitle}</h2>
       <ul class="cv-projects">
-        {copy.projects.map(([title, detail], index) => (
-          <li><a href={`/projects/${work[index].slug}`}>{title}</a> · {detail}</li>
+        {copy.projects.map(([slug, title, detail]) => (
+          <li><a href={`/projects/${slug}`}>{title}</a> · {detail}</li>
         ))}
       </ul>
     </section>
