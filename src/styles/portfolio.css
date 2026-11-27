@@ -112,18 +112,9 @@ button { font: inherit; }
 .case-cover .project-visual { max-height: 36rem; }
 .case-detail { display: grid; grid-template-columns: minmax(12rem, .55fr) 1fr; gap: 2rem clamp(2rem, 6vw, 6rem); margin-block: 2.5rem; }
 .case-meta { display: grid; gap: 1.15rem; align-content: start; }
-.case-meta h2, .case-story h2, .demo-notes h2, .cv-section h2 { font-size: 1.4rem; line-height: 1.15; letter-spacing: -.045em; margin-bottom: .45rem; }
+.case-meta h2, .case-story h2, .cv-section h2 { font-size: 1.4rem; line-height: 1.15; letter-spacing: -.045em; margin-bottom: .45rem; }
 .case-story { display: grid; gap: 1.7rem; }
-.case-story p, .demo-notes p { max-width: 62ch; color: var(--muted); }
-
-.demo-preview { background: #e6eadd; border: 1px solid #aeb7a9; border-radius: .5rem; padding: clamp(1.2rem, 4vw, 2rem); display: grid; gap: 1rem; }
-.demo-control { display: grid; gap: 1rem; justify-items: start; }
-.demo-stage { width: 100%; display: grid; min-height: 10rem; align-items: center; padding: 1rem; background: #f7f7f0; border: 1px solid var(--line); border-radius: .35rem; }
-.demo-card { width: min(14rem, 60%); padding: .8rem; background: var(--deep); color: white; border-radius: .3rem; transition: transform .45s cubic-bezier(.2,.7,.25,1), background-color .45s; }
-.demo-stage[data-open="true"] .demo-card { transform: translateX(clamp(1rem, 13vw, 10rem)); background: var(--accent); color: var(--ink); }
-.demo-card p { font-size: .83rem; }
-.demo-notes { margin-block: 2rem 1rem; }
-.demo-links { list-style: none; display: flex; flex-wrap: wrap; gap: .55rem 1.4rem; padding: 0; margin-block: .45rem; }
+.case-story p { max-width: 62ch; color: var(--muted); }
 
 .cv-page { max-width: 58rem; }
 .cv-section { border-top: 1px solid var(--line); padding-block: 1.25rem; }
@@ -156,10 +147,6 @@ button { font: inherit; }
 }
 @media (max-width: 355px) {
   .brand span { display: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .demo-card { transition: none; }
-  .demo-stage[data-open="true"] .demo-card { transform: none; }
 }
 @media print {
   :root { background: white; }

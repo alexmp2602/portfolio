@@ -1,0 +1,55 @@
+---
+import LabLayout from "../../layouts/LabLayout.astro";
+---
+<LabLayout
+  title="Laboratorio frontend"
+  description="Tres prototipos interactivos inspirados en mi trabajo en producción creativa, soporte IT y robótica educativa."
+  index
+>
+  <div class="lab-projects">
+    <article class="lab-project lab-project-wide">
+      <div class="lab-cover lab-cover-creative" aria-hidden="true">
+        <img src="/redesign/iabot.webp" alt="" width="1200" height="720" />
+        <span>Tu primer<br />robot.</span>
+      </div>
+      <div class="lab-project-body">
+        <p class="eyebrow">Creatividad digital · GSAP</p>
+        <h2>Pieza de campaña HTML5</h2>
+        <p>Pasá de un banner horizontal a uno rectangular, recorré la secuencia y probá los controles de reproducción.</p>
+        <a class="text-link" href="/lab/creativa-html5">Probar la pieza</a>
+      </div>
+    </article>
+    <article class="lab-project">
+      <div class="lab-cover lab-cover-support" aria-hidden="true">
+        <div class="lab-mini-window">
+          <strong>Bandeja de incidencias</strong>
+          <span><i></i> Portátil sin conexión</span>
+          <span><i></i> Acceso a carpetas</span>
+          <span><i></i> Reinstalación de equipo</span>
+        </div>
+      </div>
+      <div class="lab-project-body">
+        <p class="eyebrow">Interfaces de gestión · TypeScript</p>
+        <h2>Mesa de soporte</h2>
+        <p>Buscá incidencias, filtrá por estado y actualizá un ticket. Los cambios se guardan en el navegador.</p>
+        <a class="text-link" href="/lab/mesa-de-soporte">Abrir la mesa de soporte</a>
+      </div>
+    </article>
+    <article class="lab-project">
+      <div class="lab-cover lab-cover-robot" aria-hidden="true">
+        <div class="lab-mini-window">
+          <strong>¿Qué querés aprender?</strong>
+          <span><i></i> Construir robots</span>
+          <span><i></i> Programar</span>
+          <span><i></i> Un poco de todo</span>
+        </div>
+      </div>
+      <div class="lab-project-body">
+        <p class="eyebrow">Robótica educativa · UX</p>
+        <h2>Explorador de talleres</h2>
+        <p>Elegí edad, intereses y modalidad para descubrir talleres de ejemplo en un formulario de tres pasos.</p>
+        <a class="text-link" href="/lab/explorador-de-talleres">Probar el explorador</a>
+      </div>
+    </article>
+  </div>
+</LabLayout>

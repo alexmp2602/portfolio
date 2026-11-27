@@ -1,0 +1,130 @@
+---
+import LabLayout from "../../layouts/LabLayout.astro";
+
+const questions = [
+  { name: "age", title: "¿Qué edad tiene?", choices: [["6-8", "6 a 8 años"], ["9-11", "9 a 11 años"], ["12-15", "12 a 15 años"]] },
+  { name: "interest", title: "¿Qué le gustaría aprender?", choices: [["build", "Construir robots"], ["code", "Programar"], ["any", "Un poco de todo"]] },
+  { name: "mode", title: "¿Qué modalidad prefieren?", choices: [["onsite", "Presencial"], ["online", "En línea"], ["any", "Cualquiera"]] },
+];
+
+const workshops = [
+  { title: "Robots en movimiento", age: "6-8", interest: "build", mode: "onsite", label: "6 a 8 años · Presencial", detail: "Ensamblar un robot sencillo y hacer que se mueva con una secuencia de bloques." },
+  { title: "Animá tu historia", age: "6-8", interest: "code", mode: "online", label: "6 a 8 años · En línea", detail: "Crear una historia interactiva y programar personajes con bloques." },
+  { title: "Reto de sensores", age: "9-11", interest: "build", mode: "onsite", label: "9 a 11 años · Presencial", detail: "Construir un robot que detecte obstáculos y decida cómo esquivarlos." },
+  { title: "Tu primer videojuego", age: "9-11", interest: "code", mode: "online", label: "9 a 11 años · En línea", detail: "Programar un juego con niveles, reglas y un sistema de puntuación." },
+  { title: "Robot autónomo", age: "12-15", interest: "build", mode: "onsite", label: "12 a 15 años · Presencial", detail: "Diseñar un robot que usa sensores para recorrer un circuito." },
+  { title: "Python para robots", age: "12-15", interest: "code", mode: "online", label: "12 a 15 años · En línea", detail: "Programar el comportamiento de un robot simulado con funciones, condiciones y bucles." },
+];
+---
+<LabLayout
+  title="Explorador de talleres"
+  description="Un recorrido para familias, inspirado en mi trabajo dando clases y desarrollando la web de IABOT. El catálogo usa talleres ficticios."
+>
+  <div class="lab-panel workshop-app" data-workshop>
+    <form data-workshop-form hidden>
+      <div class="workshop-progress">
+        <span id="workshop-progress-label" data-step-label>Paso 1 de 3</span>
+        <progress aria-labelledby="workshop-progress-label" value="1" max="3"></progress>
+      </div>
+      {questions.map((question, index) => (
+        <fieldset data-question hidden={index !== 0} disabled={index !== 0}>
+          <legend tabindex="-1">{question.title}</legend>
+          <div class="workshop-options">
+            {question.choices.map(([value, label]) => (
+              <label class="lab-choice"><input type="radio" name={question.name} value={value} required /> {label}</label>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+      <div class="actions workshop-actions">
+        <button class="button button-outline" data-previous type="button" hidden>Atrás</button>
+        <button class="button button-primary" data-next type="submit">Continuar</button>
+      </div>
+    </form>
+    <section data-workshop-results hidden aria-labelledby="workshop-results-title">
+      <h2 id="workshop-results-title" tabindex="-1">Talleres recomendados</h2>
+      <p data-workshop-summary></p>
+      <div class="workshop-results">
+        {workshops.map(workshop => (
+          <article data-result data-age={workshop.age} data-interest={workshop.interest} data-mode={workshop.mode} hidden>
+            <p class="eyebrow">{workshop.label}</p>
+            <h3>{workshop.title}</h3>
+            <p>{workshop.detail}</p>
+          </article>
+        ))}
+      </div>
+      <button class="button button-outline" type="button" data-edit>Cambiar respuestas</button>
+    </section>
+    <noscript>Activá JavaScript para explorar el catálogo de ejemplo.</noscript>
+  </div>
+</LabLayout>
+
+<script>
+  const wizard = document.querySelector<HTMLElement>("[data-workshop]");
+  if (wizard) {
+    const form = wizard.querySelector<HTMLFormElement>("form")!;
+    const fields = Array.from(form.querySelectorAll<HTMLFieldSetElement>("[data-question]"));
+    const previous = form.querySelector<HTMLButtonElement>("[data-previous]")!;
+    const next = form.querySelector<HTMLButtonElement>("[data-next]")!;
+    const label = form.querySelector<HTMLElement>("[data-step-label]")!;
+    const progress = form.querySelector<HTMLProgressElement>("progress")!;
+    const results = wizard.querySelector<HTMLElement>("[data-workshop-results]")!;
+    const resultTitle = results.querySelector<HTMLElement>("h2")!;
+    const summary = results.querySelector<HTMLElement>("[data-workshop-summary]")!;
+    const cards = Array.from(results.querySelectorAll<HTMLElement>("[data-result]"));
+    let step = 0;
+
+    function showStep(moveFocus = true) {
+      results.hidden = true;
+      form.hidden = false;
+      fields.forEach((field, index) => {
+        field.hidden = index !== step;
+        field.disabled = index !== step;
+      });
+      label.textContent = `Paso ${step + 1} de ${fields.length}`;
+      progress.value = step + 1;
+      previous.hidden = step === 0;
+      next.textContent = step === fields.length - 1 ? "Ver talleres" : "Continuar";
+      if (moveFocus) fields[step].querySelector<HTMLElement>("legend")?.focus();
+    }
+
+    function showResults() {
+      const answer = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value;
+      const age = answer("age");
+      const interest = answer("interest");
+      const mode = answer("mode");
+      const exact = cards.filter(card => (
+        card.dataset.age === age &&
+        (interest === "any" || card.dataset.interest === interest) &&
+        (mode === "any" || card.dataset.mode === mode)
+      ));
+      const visible = exact.length ? exact : cards.filter(card => card.dataset.age === age);
+      cards.forEach(card => card.hidden = !visible.includes(card));
+      resultTitle.textContent = exact.length ? "Talleres recomendados" : "Otras opciones para su edad";
+      summary.textContent = exact.length
+        ? (exact.length === 1 ? "Encontramos 1 taller de ejemplo que coincide." : `Encontramos ${exact.length} talleres de ejemplo que coinciden.`)
+        : "No hay talleres que coincidan con el interés y la modalidad elegidos. Estas opciones mantienen el rango de edad.";
+      form.hidden = true;
+      results.hidden = false;
+      resultTitle.focus();
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      if (step === fields.length - 1) showResults();
+      else {
+        step += 1;
+        showStep();
+      }
+    });
+    previous.addEventListener("click", () => {
+      step -= 1;
+      showStep();
+    });
+    results.querySelector("[data-edit]")!.addEventListener("click", () => {
+      step = 0;
+      showStep();
+    });
+    showStep(false);
+  }
+</script>

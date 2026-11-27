@@ -1,0 +1,142 @@
+---
+import LabLayout from "../../layouts/LabLayout.astro";
+
+const scenes = [
+  { label: "Presentación", text: "Tu primer robot.", detail: "Taller de robótica", time: 0.6 },
+  { label: "Propuesta", text: "Construí. Programá.", detail: "Aprendé con un proyecto", time: 3.3 },
+  { label: "Cierre", text: "Dale vida a tu idea.", detail: "Explorá los talleres", time: 6 },
+];
+---
+<LabLayout
+  title="Pieza de campaña HTML5"
+  description="Una campaña de ejemplo para un taller de robótica. Recrea el tipo de pieza que desarrollé para producción creativa, con dos formatos y una línea de tiempo en GSAP."
+>
+  <section class="lab-panel creative-panel" data-creative aria-label="Vista previa de la pieza">
+    <fieldset class="creative-formats" data-creative-controls hidden>
+      <legend>Formato</legend>
+      <label class="lab-choice"><input type="radio" name="format" value="wide" checked /> 970 × 250</label>
+      <label class="lab-choice"><input type="radio" name="format" value="compact" /> 300 × 250</label>
+    </fieldset>
+
+    <div class="creative-stage" data-format="wide">
+      <img src="/redesign/iabot.webp" alt="" width="1200" height="720" />
+      <div class="creative-copy">
+        {scenes.map((scene, index) => (
+          <div class="creative-frame" data-scene={index} aria-hidden={index !== 0 ? "true" : undefined}>
+            <p>{scene.detail}</p>
+            <strong>{scene.text}</strong>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="creative-playback" data-creative-controls hidden>
+      <div class="actions" data-playback>
+        <button class="button button-primary" type="button" data-play>Reproducir</button>
+        <button class="button button-outline" type="button" data-restart>Volver al inicio</button>
+      </div>
+      <div class="creative-scrub" data-playback>
+        <label for="creative-time">Línea de tiempo</label>
+        <input id="creative-time" type="range" min="0" max="7.5" step=".05" value="0" />
+        <output for="creative-time" data-time aria-hidden="true">0,0 s</output>
+      </div>
+      <div class="creative-scenes" aria-label="Escenas" role="group">
+        {scenes.map((scene, index) => (
+          <button class="button button-outline" type="button" data-jump={scene.time} aria-pressed={index === 0 ? "true" : "false"}>{scene.label}</button>
+        ))}
+      </div>
+      <p data-reduced hidden>Podés recorrer cada escena mediante sus botones.</p>
+    </div>
+    <noscript>Activá JavaScript para probar los formatos y la animación.</noscript>
+  </section>
+  <p class="lab-footnote">El formato de la pieza cambia sin reiniciar la secuencia. La animación arranca cuando la reproducís y permite saltar directamente a cada escena.</p>
+</LabLayout>
+
+<script>
+  import { gsap } from "gsap";
+
+  const demo = document.querySelector<HTMLElement>("[data-creative]");
+  const stage = demo?.querySelector<HTMLElement>(".creative-stage");
+  const slider = demo?.querySelector<HTMLInputElement>("#creative-time");
+  const play = demo?.querySelector<HTMLButtonElement>("[data-play]");
+  const restart = demo?.querySelector<HTMLButtonElement>("[data-restart]");
+  const time = demo?.querySelector<HTMLOutputElement>("[data-time]");
+
+  if (demo && stage && slider && play && restart && time) {
+    const frames = Array.from(stage.querySelectorAll<HTMLElement>("[data-scene]"));
+    const jumps = Array.from(demo.querySelectorAll<HTMLButtonElement>("[data-jump]"));
+    const playback = demo.querySelectorAll<HTMLElement>("[data-playback]");
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const format = window.matchMedia("(max-width: 650px)").matches ? "compact" : "wide";
+    const formatter = new Intl.NumberFormat("es", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    let currentScene = -1;
+
+    function renderScene(active: number) {
+      if (currentScene === active) return;
+      currentScene = active;
+      frames.forEach((frame, index) => frame.setAttribute("aria-hidden", String(index !== active)));
+      jumps.forEach((button, index) => button.setAttribute("aria-pressed", String(index === active)));
+    }
+
+    const sequence = gsap.timeline({ paused: true });
+    sequence
+      .set(frames.slice(1), { autoAlpha: 0, y: 18 }, 0)
+      .to(frames[0], { autoAlpha: 0, y: -12, duration: 0.38 }, 2.25)
+      .to(frames[1], { autoAlpha: 1, y: 0, duration: 0.42 }, 2.48)
+      .to(frames[1], { autoAlpha: 0, y: -12, duration: 0.38 }, 4.85)
+      .to(frames[2], { autoAlpha: 1, y: 0, duration: 0.42 }, 5.08)
+      .to(stage, { "--creative-zoom": 1.12, duration: 7.5, ease: "none" }, 0);
+
+    const syncTime = () => {
+      const seconds = sequence.time();
+      const label = formatter.format(seconds) + " s";
+      slider.value = String(seconds);
+      slider.setAttribute("aria-valuetext", label);
+      time.value = label;
+      renderScene(seconds < 2.48 ? 0 : seconds < 5.08 ? 1 : 2);
+    };
+
+    const syncMotion = () => {
+      sequence.pause();
+      playback.forEach(control => control.hidden = motion.matches);
+      demo.querySelector<HTMLElement>("[data-reduced]")!.hidden = !motion.matches;
+      play.textContent = "Reproducir";
+      if (motion.matches) sequence.seek(Number(jumps[Math.max(currentScene, 0)].dataset.jump), false);
+    };
+
+    sequence.eventCallback("onUpdate", syncTime);
+    sequence.eventCallback("onComplete", () => { play.textContent = "Repetir"; });
+
+    play.addEventListener("click", () => {
+      if (sequence.isActive()) {
+        sequence.pause();
+        play.textContent = "Continuar";
+      } else {
+        if (sequence.progress() === 1) sequence.restart();
+        else sequence.resume();
+        play.textContent = "Pausar";
+      }
+    });
+    restart.addEventListener("click", () => {
+      sequence.pause(0, false);
+      play.textContent = "Reproducir";
+    });
+    slider.addEventListener("input", () => {
+      sequence.pause(Number(slider.value), false);
+      play.textContent = sequence.progress() === 1 ? "Repetir" : "Continuar";
+    });
+    jumps.forEach(button => button.addEventListener("click", () => {
+      sequence.pause(Number(button.dataset.jump), false);
+      play.textContent = "Continuar";
+    }));
+    demo.querySelectorAll<HTMLInputElement>("[name='format']").forEach(input => {
+      input.checked = input.value === format;
+      input.addEventListener("change", () => { if (input.checked) stage.dataset.format = input.value; });
+    });
+    stage.dataset.format = format;
+    motion.addEventListener("change", syncMotion);
+    syncMotion();
+    syncTime();
+    demo.querySelectorAll<HTMLElement>("[data-creative-controls]").forEach(control => control.hidden = false);
+  }
+</script>
