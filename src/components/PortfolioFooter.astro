@@ -1,0 +1,10 @@
+---
+const { english = false } = Astro.props;
+---
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <p>© {new Date().getFullYear()} Alex Pereyra</p>
+    <a href="https://github.com/alexmp2602/portfolio">{english ? "Source code" : "Código del sitio"}</a>
+    <a href="#inicio">{english ? "Back to top" : "Volver arriba"}</a>
+  </div>
+</footer>

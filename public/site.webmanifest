@@ -1,34 +1,15 @@
 {
-    "name": "Alex Pereyra | Frontend Engineer",
-    "short_name": "Alex Pereyra",
-    "description": "Portafolio de Alex Pereyra, Frontend Engineer enfocado en React, Next.js y TypeScript, con énfasis en arquitectura, performance, accesibilidad y UX escalable. Conocimientos complementarios: Node.js, SQL y APIs.",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#fafafa",
-    "theme_color": "#256340",
-    "orientation": "portrait",
-    "scope": "/",
-    "dir": "ltr",
-    "lang": "es-AR",
-    "categories": [
-        "portfolio",
-        "web development",
-        "frontend",
-        "software engineering"
-    ],
-    "prefer_related_applications": false,
-    "icons": [
-        {
-            "src": "/icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "/icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any maskable"
-        }
-    ]
+  "name": "Alex Pereyra · Frontend Developer",
+  "short_name": "Alex Pereyra",
+  "description": "Portfolio de Alex Pereyra, Frontend Developer en Málaga.",
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/",
+  "lang": "es",
+  "background_color": "#f7f7f0",
+  "theme_color": "#f7f7f0",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
 }

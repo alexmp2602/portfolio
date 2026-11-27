@@ -1,0 +1,20 @@
+---
+import type { work } from "../data/portfolio";
+
+interface Props {
+  project: (typeof work)[number];
+  eager?: boolean;
+}
+
+const { project, eager = false } = Astro.props;
+---
+<div class:list={["project-visual", project.theme]}>
+  <img
+    src={project.image}
+    alt={project.alt}
+    width="1200"
+    height="720"
+    loading={eager ? "eager" : "lazy"}
+    decoding="async"
+  />
+</div>

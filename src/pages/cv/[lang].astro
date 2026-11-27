@@ -1,0 +1,66 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PortfolioHeader from "../../components/PortfolioHeader.astro";
+import PortfolioFooter from "../../components/PortfolioFooter.astro";
+import { resume, skills } from "../../data/cv";
+import { links, work } from "../../data/portfolio";
+
+export function getStaticPaths() {
+  return (["es", "en"] as const).map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const { lang } = Astro.props;
+const english = lang === "en";
+const copy = resume[lang];
+const alternate = english ? "es" : "en";
+---
+<Layout title="Alex Pereyra · CV Frontend Developer" description={copy.summary} {lang}>
+  <PortfolioHeader {english} />
+  <main class="wrap inner-page cv-page" id="content" tabindex="-1">
+    <header class="inner-header">
+      <p class="eyebrow">Frontend Developer · {english ? "Málaga, Spain" : "Málaga, España"}</p>
+      <h1>Alex Pereyra</h1>
+      <p class="lead">{copy.summary}</p>
+      <p><a href={links.email}>alexmp.2602@gmail.com</a> · <a href={links.linkedin}>LinkedIn</a> · <a href={links.github}>GitHub</a></p>
+      <div class="actions">
+        <button class="button button-primary" type="button" id="print-cv" hidden>{copy.printLabel}</button>
+        <a class="button button-outline" href={`/cv/${alternate}`} hreflang={alternate} lang={alternate}>{copy.switchLabel}</a>
+      </div>
+    </header>
+    <section class="cv-section">
+      <h2>{copy.experienceTitle}</h2>
+      <ul class="experience-list">
+        {copy.experience.map((entry) => (
+          <li>
+            <div><h3>{entry.organization}</h3><p class="role">{entry.role}</p></div>
+            <p>{entry.detail}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+    <section class="cv-section">
+      <h2>{copy.projectsTitle}</h2>
+      <ul class="cv-projects">
+        {copy.projects.map(([title, detail], index) => (
+          <li><a href={`/projects/${work[index].slug}`}>{title}</a> · {detail}</li>
+        ))}
+      </ul>
+    </section>
+    <section class="cv-section">
+      <h2>{copy.skillsTitle}</h2>
+      <p>{skills.join(" · ")}</p>
+    </section>
+    <section class="cv-section">
+      <h2>{copy.educationTitle}</h2>
+      <p>{copy.education}</p>
+    </section>
+  </main>
+  <PortfolioFooter {english} />
+</Layout>
+<script>
+  const button = document.querySelector<HTMLButtonElement>("#print-cv");
+  if (button) {
+    button.hidden = false;
+    button.addEventListener("click", () => window.print());
+  }
+</script>
