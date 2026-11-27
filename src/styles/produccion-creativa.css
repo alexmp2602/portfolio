@@ -1,6 +1,7 @@
-.creative-header { gap: .8rem; }
-.creative-header h1 { font-size: clamp(2.55rem, 6.8vw, 5.9rem); letter-spacing: -.075em; }
-.creative-header .lead { max-width: 62ch; }
+.creative-page.inner-page { padding-block-start: clamp(1.8rem, 3.55vw, 3.1rem); }
+.creative-header { gap: .7rem; margin-block: .65rem 1.8rem; }
+.creative-header h1 { font-size: clamp(2.55rem, 6.05vw, 5.25rem); letter-spacing: -.075em; }
+.creative-header .lead { max-width: 75ch; }
 .production-preview { display: grid; gap: 1.1rem; padding: clamp(1rem, 3vw, 2rem); border: 1px solid var(--line); border-radius: .55rem; background: #fffef9; }
 .production-heading { display: flex; flex-wrap: wrap; gap: .9rem 2rem; justify-content: space-between; align-items: end; }
 .production-heading h2, .production-notes h2, .production-dialog h2 { font-size: clamp(1.45rem, 3.2vw, 2.1rem); letter-spacing: -.05em; line-height: 1.1; }
