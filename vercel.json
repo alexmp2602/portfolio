@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/projects/armonia-y-bienestar", "destination": "https://www.nodrastudio.com/#proyectos", "permanent": true },
     { "source": "/projects/minuto-de-silencio", "destination": "/#proyectos", "permanent": true },
     { "source": "/projects/sigj", "destination": "/#proyectos", "permanent": true },
     { "source": "/projects/saae", "destination": "/#proyectos", "permanent": true },
