@@ -46,11 +46,12 @@
 .focus-camera img { width: 100%; height: auto; display: block; }
 .focus-reticle {
   position: absolute;
-  width: calc(75 * var(--u));
-  height: calc(64 * var(--u));
-  left: 54.5%;
-  top: 63%;
-  translate: -50% -50%;
+  --reticle-width: calc(75 * var(--u));
+  --reticle-height: calc(64 * var(--u));
+  width: var(--reticle-width);
+  height: var(--reticle-height);
+  left: calc(51.2% - var(--reticle-width) / 2);
+  top: calc(68% - var(--reticle-height) / 2);
   visibility: hidden;
 }
 .focus-reticle i {
@@ -77,12 +78,12 @@
   line-height: 1.1;
 }
 .focus-print {
+  --print-height: calc(129 * var(--u));
   position: absolute;
-  top: 50%;
+  top: calc(50% - var(--print-height) / 2);
   left: 63%;
   width: calc(103 * var(--u));
-  aspect-ratio: 4 / 5;
-  translate: 0 -50%;
+  height: var(--print-height);
   padding: calc(5 * var(--u)) calc(5 * var(--u)) calc(11 * var(--u));
   background: #fff9ea;
   border: calc(1 * var(--u)) solid #dfc8a9;
@@ -122,6 +123,7 @@
   line-height: .98;
   white-space: nowrap;
 }
+.focus-stage[data-format="wide"] .focus-copy [data-frame="2"] { font-size: calc(46 * var(--u)); line-height: calc(51 * var(--u)); }
 .focus-copy :is(span, strong) { display: block; }
 .focus-copy strong { color: var(--orange); font-weight: inherit; }
 .focus-footer { bottom: calc(19 * var(--u)); display: grid; align-items: center; height: calc(35 * var(--u)); }
@@ -152,8 +154,8 @@
 .focus-stage[data-format="rectangle"] .focus-artwork { --u: calc(100cqw / 300); --text-edge: calc(12 * var(--u)); }
 .focus-stage[data-format="rectangle"] .focus-media { inset: calc(64 * var(--u)) var(--text-edge) calc(53 * var(--u)); }
 .focus-stage[data-format="rectangle"] .focus-camera { width: calc(146 * var(--u)); }
-.focus-stage[data-format="rectangle"] .focus-reticle { width: calc(47 * var(--u)); height: calc(40 * var(--u)); }
-.focus-stage[data-format="rectangle"] .focus-print { left: 62%; width: calc(67 * var(--u)); }
+.focus-stage[data-format="rectangle"] .focus-reticle { --reticle-width: calc(47 * var(--u)); --reticle-height: calc(40 * var(--u)); }
+.focus-stage[data-format="rectangle"] .focus-print { --print-height: calc(84 * var(--u)); left: 62%; width: calc(67 * var(--u)); }
 .focus-stage[data-format="rectangle"] .focus-brand { left: 50%; top: calc(12 * var(--u)); translate: -50% 0; font-size: calc(9 * var(--u)); }
 .focus-stage[data-format="rectangle"] .focus-brand span { width: calc(8 * var(--u)); }
 .focus-stage[data-format="rectangle"] .focus-copy { inset-inline: var(--text-edge); top: calc(31 * var(--u)); text-align: center; }
@@ -182,4 +184,9 @@
 
 @media (max-width: 600px) {
   .production-notes dl { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 440px) {
+  .production-preview { padding-inline: .75rem; }
+  .production-stage { padding-inline: .35rem; margin-inline: -.4rem; }
 }

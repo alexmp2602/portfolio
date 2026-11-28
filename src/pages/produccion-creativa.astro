@@ -59,8 +59,8 @@ const streetPhoto = "/redesign/habana-sd1000.webp";
                 <i></i><i></i><i></i><i></i>
               </div>
               <div class="focus-shutter" aria-hidden="true">
-                <img src={streetPhoto} alt="" width="660" height="880" decoding="async" />
-                <span>La Habana</span>
+                <img src={streetPhoto} alt="Auto rojo estacionado en una calle de La Habana" width="660" height="880" decoding="async" />
+                <span aria-hidden="true">La Habana</span>
               </div>
               <div class="focus-print" data-photo aria-hidden="true">
                 <img src={streetPhoto} alt="Auto rojo estacionado en una calle de La Habana" width="660" height="880" decoding="async" />
@@ -154,7 +154,7 @@ const streetPhoto = "/redesign/habana-sd1000.webp";
 
     // The same sequence drives both layouts. CSS sets the resting positions.
     gsap.set([copy[1], copy[2], detail[1], product, photo, reticle, shutter], { autoAlpha: 0 });
-    gsap.set(shutter, { clipPath: "circle(0% at 54.5% 63%)" });
+    gsap.set(shutter, { clipPath: "circle(0% at 51.2% 68%)" });
     product.hidden = false;
 
     const playback = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
@@ -168,13 +168,13 @@ const streetPhoto = "/redesign/habana-sd1000.webp";
       .addLabel("captura", 2.6)
       .to([copy[0], detail[0]], { autoAlpha: 0, yPercent: -18, duration: .25 }, "captura")
       .set(shutter, { autoAlpha: 1 }, "captura")
-      .to(shutter, { clipPath: "circle(100% at 54.5% 63%)", duration: .67 }, "captura")
+      .to(shutter, { clipPath: "circle(100% at 51.2% 68%)", duration: .67 }, "captura")
       .to(reticle, { autoAlpha: 0, duration: .21 }, "captura+=0.15")
       .fromTo(capture, { scale: 1.15 }, { scale: 1, ease: "power2.out", duration: 2 }, "captura")
       .fromTo([copy[1], detail[1]], { yPercent: 24, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, stagger: .12, duration: .48 }, "captura+=0.24")
       .addLabel("cierre", 5.75)
       .to([copy[1], detail[1]], { autoAlpha: 0, yPercent: -18, duration: .28 }, "cierre")
-      .to(shutter, { clipPath: "circle(0% at 54.5% 63%)", duration: .57, ease: "power2.inOut" }, "cierre")
+      .to(shutter, { clipPath: "circle(0% at 51.2% 68%)", duration: .57, ease: "power2.inOut" }, "cierre")
       .to(camera, { xPercent: -23, rotation: -7, scale: .83, duration: .62 }, "cierre+=0.18")
       .fromTo(photo, { xPercent: -74, yPercent: -10, rotation: -16, scale: .48, autoAlpha: 0 }, { xPercent: 0, yPercent: 0, rotation: 7, scale: 1, autoAlpha: 1, duration: .68 }, "cierre+=0.38")
       .fromTo([copy[2], product], { yPercent: 22, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, stagger: .15, duration: .48 }, "cierre+=0.28")
@@ -190,6 +190,7 @@ const streetPhoto = "/redesign/habana-sd1000.webp";
           detail[index]?.setAttribute("aria-hidden", String(index !== next));
           scenes[index].setAttribute("aria-pressed", String(index === next));
         });
+        shutter.setAttribute("aria-hidden", String(next !== 1));
         photo.setAttribute("aria-hidden", String(next !== 2));
         camera.setAttribute("aria-hidden", String(next === 1));
         product.tabIndex = next === 2 ? 0 : -1;
