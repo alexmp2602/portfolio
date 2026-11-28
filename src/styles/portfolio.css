@@ -149,6 +149,7 @@ button { font: inherit; }
 }
 @media (max-width: 355px) {
   .brand span { display: none; }
+  .hero { padding-block-start: 1.85rem; }
 }
 @media print {
   :root { background: white; }
