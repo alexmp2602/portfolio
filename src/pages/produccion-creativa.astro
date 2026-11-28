@@ -10,14 +10,18 @@ const formats = [
 ];
 
 const frames = [
-  { name: "Apertura", first: "Subí el", second: "pulso.", time: 0 },
-  { name: "Órbita", first: "Sonido en", second: "movimiento.", time: 3.75 },
-  { name: "Cierre", first: "Órbita", second: "01.", time: 7.75 },
+  { name: "Enfoque", first: "Todo empieza", second: "con un clic.", detail: "Compacta digital · Zoom óptico 3×", time: 1.45 },
+  { name: "Captura", first: "La calle,", second: "en un instante.", detail: "La Habana · Tomada con la SD1000", time: 4.35 },
+  { name: "Cierre", first: "Canon PowerShot", second: "SD1000", time: 8.5 },
 ];
+
+const productPhoto = "/redesign/canon-sd1000.webp";
+const streetPhoto = "/redesign/habana-sd1000.webp";
 ---
+
 <Layout
   title="Producción creativa HTML5 · Alex Pereyra"
-  description="Órbita 01, una muestra de producción creativa con animación 3D, HTML5 y adaptación a dos formatos."
+  description="Muestra de animación HTML5 con GSAP, fotografía de producto y adaptación a dos formatos publicitarios."
 >
   <PortfolioHeader />
   <main class="wrap inner-page creative-page" id="content" tabindex="-1">
@@ -31,8 +35,8 @@ const frames = [
     <section class="production-preview" data-production aria-labelledby="sample-title">
       <header class="production-heading">
         <div>
-          <h2 id="sample-title">Órbita 01</h2>
-          <p>Campaña ficticia de lanzamiento para el portafolio.</p>
+          <h2 id="sample-title">En foco</h2>
+          <p>Ejercicio de portafolio con una Canon PowerShot SD1000 y una foto tomada con esa cámara.</p>
         </div>
         <fieldset class="production-formats" data-enhanced hidden>
           <legend>Formato de la pieza</legend>
@@ -45,22 +49,37 @@ const frames = [
       </header>
 
       <div class="production-stage">
-        <div class="orbit-stage" data-artboard data-format="wide" aria-label="Pieza de 970 × 250 píxeles">
-          <div class="orbit-artwork">
-            <div class="orbit-media" role="img" aria-label="Dos auriculares de color violeta salen del estuche, giran y vuelven a encajar.">
-              <div class="orbit-scene">
-                <div class="orbit-poster" aria-hidden="true"><span></span></div>
+        <div class="focus-stage" data-artboard data-format="wide" role="group" aria-label="Pieza de 970 × 250 píxeles">
+          <div class="focus-artwork">
+            <div class="focus-media">
+              <div class="focus-camera">
+                <img src={productPhoto} alt="Cámara compacta Canon PowerShot SD1000 plateada" width="832" height="702" decoding="async" />
+              </div>
+              <div class="focus-reticle" aria-hidden="true">
+                <i></i><i></i><i></i><i></i>
+              </div>
+              <div class="focus-shutter" aria-hidden="true">
+                <img src={streetPhoto} alt="Auto rojo estacionado en una calle de La Habana" width="660" height="880" decoding="async" />
+                <span aria-hidden="true">La Habana</span>
+              </div>
+              <div class="focus-print" data-photo aria-hidden="true">
+                <img src={streetPhoto} alt="Auto rojo estacionado en una calle de La Habana" width="660" height="880" decoding="async" />
               </div>
             </div>
-            <p class="orbit-brand"><span aria-hidden="true"></span> ÓRBITA</p>
-            <div class="orbit-copy">
+            <p class="focus-brand"><span aria-hidden="true"></span> DIGITAL ELPH</p>
+            <div class="focus-copy">
               {frames.map((frame, index) => (
-                <p data-frame={index} aria-hidden={index !== 0 ? "true" : undefined} hidden={index !== 0}>
+                <p data-frame={index} aria-hidden={index === 0 ? undefined : "true"}>
                   <span>{frame.first}</span>{" "}<strong>{frame.second}</strong>
                 </p>
               ))}
             </div>
-            <button class="orbit-action" data-product type="button" hidden>Ver ficha</button>
+            <div class="focus-footer">
+              {frames.slice(0, 2).map((frame, index) => (
+                <p data-detail={index} aria-hidden={index === 0 ? undefined : "true"}>{frame.detail}</p>
+              ))}
+              <button class="focus-action" data-product type="button" hidden>Ver la cámara <span aria-hidden="true">↗</span></button>
+            </div>
           </div>
         </div>
       </div>
@@ -71,7 +90,7 @@ const frames = [
           <button class="button button-outline" type="button" data-reset>Reiniciar</button>
           <div class="production-scrub">
             <label for="sample-time">Tiempo</label>
-            <input id="sample-time" type="range" min="0" max="8.5" step=".05" value="0" />
+            <input id="sample-time" type="range" min="0" max="8.8" step=".05" value="0" />
             <output for="sample-time" data-time aria-hidden="true">0,0 s</output>
           </div>
         </div>
@@ -81,22 +100,23 @@ const frames = [
           ))}
         </div>
       </div>
-      <noscript><p>Activá JavaScript para ver la animación en 3D.</p></noscript>
+      <noscript><p>Activá JavaScript para reproducir la secuencia de GSAP.</p></noscript>
     </section>
 
     <section class="production-notes" aria-labelledby="production-notes-title">
       <h2 id="production-notes-title">Cómo está hecha</h2>
       <dl>
-        <div><dt>Coreografía 3D</dt><dd>El estuche abre sobre su bisagra. Los auriculares recorren dos trayectorias y vuelven a sus cavidades antes del cierre de la pieza.</dd></div>
-        <div><dt>Adaptación de formatos</dt><dd>La composición horizontal coloca el texto al lado del producto. El rectángulo lo centra y distribuye la marca, el titular y el botón en altura.</dd></div>
-        <div><dt>Control de la animación</dt><dd>GSAP sincroniza el texto con la escena en Three.js. Podés saltar a cada momento y cambiar de formato sin perder el tiempo de reproducción.</dd></div>
+        <div><dt>Movimiento con GSAP</dt><dd>La cámara entra en cuadro y las marcas de enfoque se cierran sobre el lente. Una máscara circular revela la toma. En el cierre, la foto se convierte en una copia impresa al lado de la cámara.</dd></div>
+        <div><dt>Adaptación de formatos</dt><dd>El banner de 970 × 250 ubica el texto al lado de la imagen. En 300 × 250, el orden es titular, imagen y acción. Los dos formatos comparten la misma secuencia.</dd></div>
+        <div><dt>Fotografías</dt><dd><a href="https://commons.wikimedia.org/wiki/File:Canon-PowerShot-SD1000.jpg">Canon PowerShot SD1000 · Evan-Amos</a>, dominio público. <a href="https://commons.wikimedia.org/wiki/File:Havana_Street.jpg">Havana Street · Ya-Yin Ko</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, redimensionada y encuadrada en la pieza.</dd></div>
       </dl>
     </section>
 
     <dialog class="production-dialog" data-dialog aria-labelledby="product-title">
       <div>
-        <h2 id="product-title">Órbita 01</h2>
-        <p>Concepto de auriculares inalámbricos con estuche de carga. El producto, la marca y la animación fueron creados para esta muestra.</p>
+        <h2 id="product-title">Canon PowerShot SD1000</h2>
+        <p>Cámara digital compacta con sensor CCD de 7,1 megapíxeles y zoom óptico 3×. «En foco» es un ejercicio independiente para mi portafolio.</p>
+        <a class="text-link" href="https://global.canon/en/c-museum/product/dcc539.html">Ver ficha en el Museo Canon</a>
         <form method="dialog"><button class="button button-dark" type="submit" autofocus>Cerrar</button></form>
       </div>
     </dialog>
@@ -108,14 +128,19 @@ const frames = [
   import { gsap } from "gsap";
 
   const preview = document.querySelector<HTMLElement>("[data-production]");
-  const duration = 8.5;
+  const duration = 8.8;
 
   if (preview) {
     const board = preview.querySelector<HTMLElement>("[data-artboard]")!;
-    const media = board.querySelector<HTMLElement>(".orbit-scene")!;
-    const frames = [...board.querySelectorAll<HTMLElement>("[data-frame]")];
-    const product = board.querySelector<HTMLButtonElement>("[data-product]")!;
+    const camera = board.querySelector<HTMLElement>(".focus-camera")!;
+    const reticle = board.querySelector<HTMLElement>(".focus-reticle")!;
+    const shutter = board.querySelector<HTMLElement>(".focus-shutter")!;
+    const capture = shutter.querySelector("img")!;
+    const photo = board.querySelector<HTMLElement>("[data-photo]")!;
+    const copy = [...board.querySelectorAll<HTMLElement>("[data-frame]")];
+    const detail = [...board.querySelectorAll<HTMLElement>("[data-detail]")];
     const scenes = [...preview.querySelectorAll<HTMLButtonElement>("[data-seek]")];
+    const product = board.querySelector<HTMLButtonElement>("[data-product]")!;
     const play = preview.querySelector<HTMLButtonElement>("[data-play]")!;
     const motionControls = preview.querySelector<HTMLElement>("[data-motion-controls]")!;
     const range = preview.querySelector<HTMLInputElement>("#sample-time")!;
@@ -123,123 +148,138 @@ const frames = [
     const dialog = document.querySelector<HTMLDialogElement>("[data-dialog]")!;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const formatTime = new Intl.NumberFormat("es", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-    const clock = { time: 0 };
     let scene = -1;
-    let manual = false;
+    let atPoster = true;
     let observer: IntersectionObserver | undefined;
-    let model: { render: (time: number) => void } | undefined;
+
+    // The same sequence drives both layouts. CSS sets the resting positions.
+    gsap.set([copy[1], copy[2], detail[1], product, photo, reticle, shutter], { autoAlpha: 0 });
+    gsap.set(shutter, { clipPath: "circle(0% at 51.2% 68%)" });
+    product.hidden = false;
+
+    const playback = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+    playback
+      .addLabel("enfoque", 0)
+      .fromTo(camera, { xPercent: 44, yPercent: 9, rotation: 12, scale: .86 }, { xPercent: 0, yPercent: 0, rotation: 0, scale: 1, duration: .94 }, "enfoque")
+      .fromTo(copy[0].children, { yPercent: 42, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: .09, duration: .58 }, "enfoque")
+      .set(reticle, { autoAlpha: 1 }, .71)
+      .fromTo(reticle.children, { scale: 1.45, opacity: 0 }, { scale: 1, opacity: 1, duration: .36, stagger: .045 }, .71)
+      .to(reticle, { scale: .86, duration: .22 }, 1.16)
+      .addLabel("captura", 2.6)
+      .to([copy[0], detail[0]], { autoAlpha: 0, yPercent: -18, duration: .25 }, "captura")
+      .set(shutter, { autoAlpha: 1 }, "captura")
+      .to(shutter, { clipPath: "circle(100% at 51.2% 68%)", duration: .67 }, "captura")
+      .to(reticle, { autoAlpha: 0, duration: .21 }, "captura+=0.15")
+      .fromTo(capture, { scale: 1.15 }, { scale: 1, ease: "power2.out", duration: 2 }, "captura")
+      .fromTo([copy[1], detail[1]], { yPercent: 24, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, stagger: .12, duration: .48 }, "captura+=0.24")
+      .addLabel("cierre", 5.75)
+      .to([copy[1], detail[1]], { autoAlpha: 0, yPercent: -18, duration: .28 }, "cierre")
+      .to(shutter, { clipPath: "circle(0% at 51.2% 68%)", duration: .57, ease: "power2.inOut" }, "cierre")
+      .to(camera, { xPercent: -23, rotation: -7, scale: .83, duration: .62 }, "cierre+=0.18")
+      .fromTo(photo, { xPercent: -74, yPercent: -10, rotation: -16, scale: .48, autoAlpha: 0 }, { xPercent: 0, yPercent: 0, rotation: 7, scale: 1, autoAlpha: 1, duration: .68 }, "cierre+=0.38")
+      .fromTo([copy[2], product], { yPercent: 22, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, stagger: .15, duration: .48 }, "cierre+=0.28")
+      .set(photo, { autoAlpha: 1 }, duration);
 
     function syncTime() {
-      const time = clock.time;
-      const next = time < 2.56 ? 0 : time < 5.94 ? 1 : 2;
-      const elapsed = time - [0, 2.56, 5.94][next];
-      const remaining = [2.56, 5.94, duration + .35][next] - time;
-      const visibility = reduced.matches || next === 0
-        ? Math.min(1, remaining / .22)
-        : Math.min(1, elapsed / .24, remaining / .22);
-
+      const time = playback.time();
+      const next = time < playback.labels.captura + .24 ? 0 : time < playback.labels.cierre + .28 ? 1 : 2;
       if (scene !== next) {
         scene = next;
-        frames.forEach((frame, index) => {
-          frame.hidden = index !== next;
+        copy.forEach((frame, index) => {
           frame.setAttribute("aria-hidden", String(index !== next));
+          detail[index]?.setAttribute("aria-hidden", String(index !== next));
           scenes[index].setAttribute("aria-pressed", String(index === next));
         });
+        shutter.setAttribute("aria-hidden", String(next !== 1));
+        photo.setAttribute("aria-hidden", String(next !== 2));
+        camera.setAttribute("aria-hidden", String(next === 1));
+        product.tabIndex = next === 2 ? 0 : -1;
+        product.setAttribute("aria-hidden", String(next !== 2));
       }
-
-      frames[next].style.opacity = String(Math.max(0, visibility));
-      frames[next].style.transform = reduced.matches ? "" : `translateY(${Math.max(0, 1 - visibility) * 8}px)`;
-      product.hidden = time < 6.6;
-      board.style.setProperty("--energy", String(Math.max(0, 1 - Math.abs(time - 6.42) / .8)));
       const label = `${formatTime.format(time)} s`;
+      range.value = String(time);
       if (output.value !== label) {
         range.setAttribute("aria-valuetext", label);
         output.value = label;
       }
-      range.value = String(time);
-      model?.render(time);
     }
 
-    const playback = gsap.to(clock, {
-      time: duration,
-      duration,
-      paused: true,
-      ease: "none",
-      onUpdate: syncTime,
-      onComplete: () => { play.textContent = "Repetir"; },
-    });
+    playback.eventCallback("onUpdate", syncTime);
+    playback.eventCallback("onComplete", () => { play.textContent = "Repetir"; });
 
-    const pauseAt = (time: number) => {
-      playback.pause(time, false);
+    function pauseAt(time: number) {
+      atPoster = false;
+      playback.pause(time);
       play.textContent = time === 0 ? "Reproducir" : time >= duration ? "Repetir" : "Continuar";
       syncTime();
-    };
+    }
 
-    const resume = () => {
-      if (playback.progress() === 1) playback.restart();
+    function resume() {
+      if (atPoster || playback.progress() === 1) playback.restart();
       else playback.resume();
+      atPoster = false;
       play.textContent = "Pausar";
-    };
-
-    const markManual = () => {
-      manual = true;
-      observer?.disconnect();
-    };
+    }
 
     play.addEventListener("click", () => {
-      markManual();
-      if (playback.isActive()) pauseAt(clock.time);
+      observer?.disconnect();
+      if (playback.isActive()) pauseAt(playback.time());
       else resume();
     });
     preview.querySelector("[data-reset]")!.addEventListener("click", () => {
-      markManual();
+      observer?.disconnect();
       pauseAt(0);
     });
     range.addEventListener("input", () => {
-      markManual();
+      observer?.disconnect();
       pauseAt(Number(range.value));
     });
     scenes.forEach(button => button.addEventListener("click", () => {
-      markManual();
+      observer?.disconnect();
       pauseAt(Number(button.dataset.seek));
     }));
     product.addEventListener("click", () => {
-      markManual();
-      if (playback.isActive()) pauseAt(clock.time);
+      observer?.disconnect();
+      if (playback.isActive()) pauseAt(playback.time());
       dialog.showModal();
     });
 
+    function setFormat(format: string) {
+      board.dataset.format = format;
+      board.setAttribute("aria-label", `Pieza de ${format === "rectangle" ? "300" : "970"} × 250 píxeles`);
+    }
+
     const initialFormat = window.matchMedia("(max-width: 650px)").matches ? "rectangle" : "wide";
-    board.dataset.format = initialFormat;
+    setFormat(initialFormat);
     preview.querySelectorAll<HTMLInputElement>("[name='sample-format']").forEach(input => {
       input.checked = input.value === initialFormat;
       input.addEventListener("change", () => {
-        if (input.checked) board.dataset.format = input.value;
+        if (input.checked) setFormat(input.value);
       });
     });
 
-    const syncMotion = () => {
+    function syncMotion() {
       motionControls.hidden = reduced.matches;
-      if (reduced.matches) pauseAt(Number(scenes[Math.max(scene, 0)].dataset.seek));
-    };
+      if (!reduced.matches) return;
+      observer?.disconnect();
+      pauseAt(Number(scenes[Math.max(scene, 0)].dataset.seek));
+    }
+
     reduced.addEventListener("change", syncMotion);
-    syncTime();
+    // Show the completed opening until the viewer presses play or reaches the board.
+    pauseAt(Number(scenes[0].dataset.seek));
+    play.textContent = "Reproducir";
+    atPoster = true;
     syncMotion();
     preview.querySelectorAll<HTMLElement>("[data-enhanced]").forEach(control => control.hidden = false);
 
-    import("../scripts/orbita.js").then(({ mountOrbita }) => {
-      model = mountOrbita(media);
-      media.dataset.live = "true";
-      syncTime();
-      if (manual || reduced.matches) return;
+    if (!reduced.matches) {
       observer = new IntersectionObserver(entries => {
         if (!entries.some(entry => entry.isIntersecting)) return;
         observer?.disconnect();
-        if (!manual && !reduced.matches) resume();
+        resume();
       }, { threshold: .6 });
       observer.observe(board);
-    }).catch(() => {
-      media.dataset.live = "false";
-    });
+    }
   }
 </script>
