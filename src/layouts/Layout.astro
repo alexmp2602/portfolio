@@ -53,6 +53,14 @@ const profile = {
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    {process.env.VERCEL_ENV === "production" && (
+      <>
+        <script is:inline>
+          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        </script>
+        <script is:inline defer src="/_vercel/insights/script.js"></script>
+      </>
+    )}
     {path === "/" && <script type="application/ld+json" set:html={JSON.stringify(profile)} />}
   </head>
   <body>
